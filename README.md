@@ -24,12 +24,16 @@ Maintaining a high-authority technology brand requires consistent, high-value co
 
 ```mermaid
 flowchart TD
-    Cron(["⏰ Scheduled Cron Trigger\n(GitHub Actions)"]) --> History["📂 Deduplication Check\n(post_history.json)"]
-    History --> LLM["🧠 AI Content & Prompt Strategist\n(LLM Engine)"]
+    Cron(["⏰ Scheduled Cron Trigger
+(GitHub Actions)"]) --> History["📂 Deduplication Check
+(post_history.json)"]
+    History --> LLM["🧠 AI Content & Prompt Strategist
+(LLM Engine)"]
     LLM --> Visual["🎨 Automated Visual Asset Generator"]
     LLM --> Copy["✍️ High-Conversion Bengali Post Copy"]
     Visual & Copy --> Meta["🌐 Meta Graph API Publisher"]
-    Meta --> Page(["📱 Official Facebook Page\n(@besmartwithaipro)"])
+    Meta --> Page(["📱 Official Facebook Page
+(@besmartwithaipro)"])
     Meta --> Commit["🔄 Auto-Commit Updated History [skip ci]"]
 ```
 
