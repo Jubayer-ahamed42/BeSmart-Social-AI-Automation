@@ -1,0 +1,32 @@
+# Virtual Environment
+.venv/
+env/
+venv/
+ENV/
+
+# Environment Variables & Secrets
+.env
+.env.local
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Output images & temp
+temp/
+*.png
+*.jpg
+*.jpeg
+!assets/*.png
+!assets/*.jpg
+!assets/fonts/*
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

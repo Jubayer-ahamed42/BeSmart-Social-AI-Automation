@@ -1,57 +1,62 @@
-<div align="center">
+# 🤖 24/7 Autonomous Facebook Page Social Media Agent
 
-# 📢 Be Smart With AI — Autonomous Social Media Engine
+An autonomous, AI-powered social media manager that publishes high-engagement Bengali posts with authentic high-resolution visuals directly to a Facebook Page 4 times a day on schedule.
 
-**An event-driven, zero-touch AI content generation and publishing pipeline powered by Large Language Models, GitHub Actions, and the Meta Graph API.**
-
-<p align="center">
-  <img src="https://img.shields.io/badge/AI_Automation-Zero_Touch-7C3AED?style=for-the-badge&logo=openai&logoColor=white" />
-  <img src="https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" />
-  <img src="https://img.shields.io/badge/Meta_Graph_API-Auto_Publish-1877F2?style=for-the-badge&logo=facebook&logoColor=white" />
-</p>
-
-</div>
+Zero maintenance, zero server costs, and 100% cloud-hosted via **GitHub Actions**.
 
 ---
 
-## 🌟 Pipeline Overview
+## 🕒 Daily Schedule & Topic Themes (Bangladesh Standard Time - UTC+6)
 
-Maintaining a high-authority technology brand requires consistent, high-value content. The **Be Smart With AI Auto-Poster Engine** runs autonomously on a scheduled cron pipeline via **GitHub Actions**. It researches trending AI & business automation topics, checks historical state (`post_history.json`) to prevent duplication, synthesizes engaging Bengali/English educational posts with custom visuals, and publishes directly to the official Facebook Page.
+| Time (BST) | UTC | Theme | Description |
+| :--- | :--- | :--- | :--- |
+| **07:00 AM** | 01:00 UTC | 🤖 **Artificial Intelligence** | AI news, tools, machine learning, future impact & practical tips. |
+| **12:00 PM** | 06:00 UTC | 💻 **Technology & Gadgets** | Tech innovations, hardware, Apple Vision Pro/VR, smart gadgets. |
+| **04:00 PM** | 10:00 UTC | 🛡️ **Cybersecurity & Privacy** | Account protection, phishing scams, 2FA, Wi-Fi safety, tech hacks. |
+| **08:00 PM** | 14:00 UTC | 🔬 **Science & Deep Space** | James Webb telescope, astrophysics, quantum physics, discoveries. |
 
 ---
 
-## 🏗️ Autonomous Workflow
+## 🚀 Key Features
 
-```mermaid
-flowchart TD
-    Cron(["⏰ Scheduled Cron Trigger
-(GitHub Actions)"]) --> History["📂 Deduplication Check
-(post_history.json)"]
-    History --> LLM["🧠 AI Content & Prompt Strategist
-(LLM Engine)"]
-    LLM --> Visual["🎨 Automated Visual Asset Generator"]
-    LLM --> Copy["✍️ High-Conversion Bengali Post Copy"]
-    Visual & Copy --> Meta["🌐 Meta Graph API Publisher"]
-    Meta --> Page(["📱 Official Facebook Page
-(@besmartwithaipro)"])
-    Meta --> Commit["🔄 Auto-Commit Updated History [skip ci]"]
+- **100% Autonomous**: Runs on GitHub Actions scheduled cron. No PC, server, or manual triggers needed.
+- **Engaging Bangla Copywriting**: Structured posts with catchy headlines, hooks, clear bullet points, open questions, and hashtags.
+- **Multi-Tier Visual Engine**:
+  - **Tier 1 (NASA 4K)**: Real James Webb, Hubble & deep space photography.
+  - **Tier 2 (Wikipedia Editorial)**: Real high-res photos of hardware, robots & gadgets.
+  - **Tier 3 (Pollinations AI)**: Photorealistic storytelling scenes matching post topics.
+  - **Tier 4 (Dark Editorial Poster)**: Glassmorphism branded graphic card fallback.
+  - **Strict Filter**: 100% guarantee against female depictions.
+- **Smart Duplicate Prevention**: Stores previous topics in `post_history.json` and feeds past context into the LLM prompt with Jaccard similarity filtering to guarantee fresh, non-repeating content.
+- **Fallback Resilience**: Automatic fallback to text feed posts or branded graphic cards if image or network services fluctuate.
+- **Manual Trigger**: Supports one-click manual posting directly from GitHub Actions web interface.
+
+---
+
+## 📖 Setup Instructions
+
+Detailed Bengali instructions are available in:
+👉 **[SETUP_GUIDE_BANGLA.md](file:///c:/test/test-1/SETUP_GUIDE_BANGLA.md)**
+
+### Required Secrets
+1. `GEMINI_API_KEY`: Free Google AI Studio API key
+2. `FB_PAGE_ID`: Target Facebook Page numeric ID
+3. `FB_PAGE_ACCESS_TOKEN`: Long-lived Meta Graph API Page Access Token
+
+---
+
+## 💻 Local CLI Usage
+
+```bash
+# Verify credentials
+python main.py --verify
+
+# Dry run preview (does not publish to Facebook)
+python main.py --dry-run
+
+# Run morning AI slot preview
+python main.py --slot morning --dry-run
+
+# Run full post now
+python main.py
 ```
-
----
-
-## ✨ Key Engineering Highlights
-
-- **100% Serverless Execution:** Runs entirely on scheduled GitHub Actions runners with zero server maintenance overhead.
-- **Stateful Deduplication:** Tracks every published topic and timestamp in version-controlled JSON state so content is never repeated.
-- **Encrypted Secrets Management:** API keys and Meta Page Access Tokens are injected exclusively at runtime via GitHub Encrypted Secrets.
-
----
-
-## 👨‍💻 Architected By
-
-**Jubayer Ahamed**  
-*AI Automation & Software Solutions Specialist | Founder @ [Be Smart With AI](https://www.facebook.com/besmartwithaipro)*
-
-- 💬 **WhatsApp Direct:** [+880 1610-594042](https://wa.me/8801610594042)
-- 🌐 **Facebook Page:** [Be Smart With AI](https://www.facebook.com/besmartwithaipro)
-- 📧 **Email:** [sbmc4042@gmail.com](mailto:sbmc4042@gmail.com)

@@ -1,0 +1,818 @@
+[
+  {
+    "timestamp": "2026-09-17 21:01:08 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 জেমস ওয়েব টেলিস্কোপের চোখে জন্মাল নতুন তারা! আলোড়ল ফেলল মহাকাশ বিজ্ঞানীদের মাঝে 🚀",
+    "summary": "জেমস ওয়েব স্পেস টেলিস্কোপ দ্বারা নতুন নক্ষত্র ও আদি গ্যালাক্সি আবিষ্কারের মহাকাশ গবেষণা।",
+    "post_id": "1347013991822233_122105895093474277"
+  },
+  {
+    "timestamp": "2026-09-18 07:15:32 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🚀 মাত্র ২ ঘণ্টায় ৮ ঘণ্টার কাজ! দৈনন্দিন জীবনে কাজের গতি ১০ গুণ বাড়াতে সেরা ৪টি AI টুল 💡",
+    "summary": "দৈনন্দিন কাজের প্রডাক্টিভিটি ও গতি বাড়ানোর ৪টি দরকারী এআই টুলস।",
+    "post_id": "1347013991822233_122106378129474277"
+  },
+  {
+    "timestamp": "2026-09-18 12:10:37 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "👓 বাস্তব আর কল্পনার সীমানা মুছে দিচ্ছে AR ও VR হেডসেটের চমক! 🥽✨",
+    "summary": "অগমেন্টেড রিয়ালিটি (AR) ও ভার্চুয়াল রিয়ালিটি (VR) হেডসেটের প্রযুক্তিগত অগ্রগতি, ব্যবহার এবং ভবিষ্যতের প্রভাব।",
+    "post_id": "1347013991822233_122106590607474277"
+  },
+  {
+    "timestamp": "2026-09-18 20:20:25 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🔮 দুই জায়গায় একসাথে থাকা কি আসলেই সম্ভব? রহস্যময় 'কোয়ান্টাম এন্ট্যাঙ্গলমেন্ট' 🤯",
+    "summary": "কোয়ান্টাম এন্ট্যাঙ্গলমেন্টের রহস্য ও এর মাধ্যমে ফিউচার টেকনোলজি বা কোয়ান্টাম কম্পিউটিংয়ের বিপ্লব।",
+    "post_id": "1347013991822233_122107055997474277"
+  },
+  {
+    "timestamp": "2026-09-19 07:06:42 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🧠 ক্লান্তিকর কাজ আর নয়! নিজের জন্য একটি ‘AI সেকেন্ড ব্রেইন’ বানাবেন যেভাবে ⚡",
+    "summary": "দৈনন্দিন কাজে উৎপাদনশীলতা বাড়াতে 'AI সেকেন্ড ব্রেইন' তৈরির সেরা ৩টি আধুনিক টুল (NotebookLM, Perplexity, ইত্যাদি)।",
+    "post_id": "1347013991822233_122107546305474277"
+  },
+  {
+    "timestamp": "2026-09-19 12:10:11 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "💻 প্রতি সেকেন্ডে ১০০ কোটি কোটি গণনা! এক্সাস্কেল কম্পিউটিং কীভাবে বদলে দিচ্ছে ভবিষ্যৎ? 🚀",
+    "summary": "এক্সাস্কেল কম্পিউটিং এবং সুপারকম্পিউটারের অবিশ্বাস্য প্রসেসিং ক্ষমতা কীভাবে চিকিৎসা, এআই ও জলবায়ু গবেষণায় বিপ্লব আনছে।",
+    "post_id": "1347013991822233_122107748859474277"
+  },
+  {
+    "timestamp": "2026-09-19 20:14:21 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🕳️ আলোরও মুক্তি নেই যেখান থেকে! ব্ল্যাকহোলের অদৃশ্য 'ইভেন্ট হরাইজন' এবং মহাকর্ষীয় তরঙ্গের শিহরণ 🌌",
+    "summary": "ব্ল্যাকহোলের ইভেন্ট হরাইজন ও মহাকর্ষীয় তরঙ্গের রহস্য এবং আধুনিক মহাকাশ গবেষণায় এর প্রভাব।",
+    "post_id": "1347013991822233_122108240691474277"
+  },
+  {
+    "timestamp": "2026-09-20 07:08:00 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🤖 আদেশ দিতে হবে না, নিজেই সিদ্ধান্ত নিয়ে কাজ করবে 'এআই এজেন্ট'! প্রযুক্তির এক নতুন বিপ্লব 🚀",
+    "summary": "অটোনোমাস এআই এজেন্ট ও স্বয়ংক্রিয় ডিসিশন মেকিং সিস্টেমের প্রযুক্তিগত প্রভাব।",
+    "post_id": "1347013991822233_122108846067474277"
+  },
+  {
+    "timestamp": "2026-09-20 12:11:48 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "⚠️ আপনার ফেসবুক আইডি কি নিরাপদ? হ্যাকারদের নতুন ফাঁদ থেকে বাঁচবেন যেভাবে! 🛡️",
+    "summary": "ফিশিং আক্রমণ ও সোশ্যাল মিডিয়া অ্যাকাউন্ট সুরক্ষার উপায় এবং সাইবার সিকিউরিটি সচেতনতা।",
+    "post_id": "1347013991822233_122109125703474277"
+  },
+  {
+    "timestamp": "2026-09-20 16:05:13 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🔒 ভিপিএন কি আসলেই আপনার সব গোপন রাখে? জানুন আসল সত্য! 🌐",
+    "summary": "How VPNs work, limitations of free VPNs, and essential security tips for safe browsing in 2026.",
+    "post_id": "1347013991822233_122109357087474277"
+  },
+  {
+    "timestamp": "2026-09-20 20:14:37 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "⚛️ সময়ের কাঁটা কি পেছনে ঘোরানো সম্ভব? কোয়ান্টাম সিমুলেশনের অবিশ্বাস্য দুনিয়া! ⏳",
+    "summary": "কোয়ান্টাম সিমুলেশন ও রিভার্সাল টেকনোলজির মাধ্যমে কোয়ান্টাম স্তরে সময়ের গতিপথ বা কণার অবস্থানকে পেছনে নেওয়ার সাম্প্রতিক বৈজ্ঞানিক অগ্রগতি।",
+    "post_id": "1347013991822233_122109582921474277"
+  },
+  {
+    "timestamp": "2026-09-21 07:09:42 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🗣️💻 আর টাইপ করতে হবে না! স্ক্রিন দেখে ও কথা শুনে কাজ শেষ করে দেয় এমন ৪টি 'মাল্টিমোডাল AI' 🚀",
+    "summary": "কথা শুনে ও সরাসরি স্ক্রিন দেখে কাজ করে দেওয়া আধুনিক মাল্টিমোডাল এআই টুলস ও ওয়ার্কফ্লো।",
+    "post_id": "1347013991822233_122109870075474277"
+  },
+  {
+    "timestamp": "2026-09-21 12:11:38 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🏠 সুইচ টেপার দিন শেষ! আপনার ঘরই এখন বুঝবে আপনার মনের কথা: স্মার্ট আইওটি (IoT) প্রযুক্তির নতুন জাদু! ✨",
+    "summary": "স্মার্ট হোম ও অ্যাম্বিয়েন্ট আইওটি (IoT) সেন্সর প্রযুক্তি কীভাবে ডিভাইসগুলোর মেলবন্ধন ঘটিয়ে নো-টাচ অটোমেশন ও শক্তি সাশ্রয় করছে।",
+    "post_id": "1347013991822233_122109994845474277",
+    "image_source": "https://upload.wikimedia.org/wikipedia/commons/5/57/Marc_Andreessen-9_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+  },
+  {
+    "timestamp": "2026-09-21 16:04:53 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🕵️‍♂️ গুগলে যা খুঁজছেন তা কি নজরদারি হচ্ছে? সহজে মুছে ফেলুন আপনার ‘ডিজিটাল ফুটপ্রিন্ট’!",
+    "summary": "গুগল ও ব্রাউজারে ডিজিটাল ফুটপ্রিন্ট ট্র্যাকিং বন্ধ করার এবং ডেটা স্বয়ংক্রিয়ভাবে মুছে ফেলার কার্যকর প্রাইভেসি হ্যাকস।",
+    "post_id": "1347013991822233_122110094319474277",
+    "image_source": "ai_pollinations_flux_3006048"
+  },
+  {
+    "timestamp": "2026-09-21 20:14:24 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌊 সূর্যালোকে পৌঁছাতে পারে না যে আলোয়! সমুদ্রের ৪০০০ মিটার গভীরে লুকিয়ে থাকা এক অন্য পৃথিবী 🦑",
+    "summary": "গভীর সমুদ্রের ৪০০০ মিটার গভীরে সূর্যের আলোহীন পরিবেশে বায়োলুমিনেসেন্ট জীব এবং হাইড্রোথার্মাল ভেন্টের রহস্যময় জগত।",
+    "post_id": "1347013991822233_122110274163474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Davidgruber.jpg/1280px-Davidgruber.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-09-22 07:07:01 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🧠 উত্তর দেওয়ার আগে মানুষের মতো 'চিন্তা' করছে এআই! জেনারেটিভ এআই-এর সবচেয়ে বড় ব্রেকথ্রু 🚀",
+    "summary": "রিজনিং এলএলএম বা চিন্তাশীল এআই (Reasoning LLMs)-এর লজিক্যাল থিঙ্কিং ও সেলফ-কারেকশন ব্রেকথ্রু নিয়ে আলোচনা।",
+    "post_id": "1347013991822233_122110583577474277",
+    "image_source": "ai_pollinations_flux_2477834"
+  },
+  {
+    "timestamp": "2026-09-22 12:10:19 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "⌚ চামড়া না কেটেও রক্তের সব খবর জানাচ্ছে স্মার্টওয়াচ! কীভাবে কাজ করে এই অলৌকিক 'বায়ো-সেন্সর'? 🩺✨",
+    "summary": "স্মার্ট ওয়্যারেবল ও হেলথ ট্র্যাকিং ডিভাইসের বায়ো-সেন্সর (PPG, EDA, ECG) প্রযুক্তির বৈজ্ঞানিক কার্যপদ্ধতি ও মানবজীবনে এর প্রভাব।",
+    "post_id": "1347013991822233_122110771695474277",
+    "image_source": "ai_pollinations_flux_8367021"
+  },
+  {
+    "timestamp": "2026-09-22 16:06:26 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🔒 আপনার হোয়াটসঅ্যাপ ও মেসেঞ্জার কি আসলেই সুরক্ষিত? জানুন অজানা প্রাইভেসি হ্যাকস! 📱",
+    "summary": "WhatsApp and Messenger essential privacy settings, biometric locks, disappearing messages, and two-step verification for account security.",
+    "post_id": "1347013991822233_122110888197474277",
+    "image_source": "ai_pollinations_flux_5031727"
+  },
+  {
+    "timestamp": "2026-09-22 20:15:38 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "⏳ ঘড়ি কি উল্টো ঘোরে? মহাবিশ্বের রহস্যময় টাইম ডাইলেশন ও ভবিষ্যতের হাতছানি 🌌",
+    "summary": "আইনস্টাইনের আপেক্ষিকতা তত্ত্ব ও টাইম ডাইলেশনের মাধ্যমে সময়ের আপেক্ষিকতা এবং মহাবিশ্বের রহস্য।",
+    "post_id": "1347013991822233_122111000457474277",
+    "image_source": "ai_pollinations_flux_808381"
+  },
+  {
+    "timestamp": "2026-09-23 07:09:21 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🎬 শুধু টেক্সট নয়, এবার এক ক্লিকেই তৈরি হচ্ছে হলিউড মানের সিনেমা! মাল্টিমোডাল জেনারেটিভ এআই-এর অবিশ্বাস্য জাদুকরী রূপ 🚀",
+    "summary": "মাল্টিমোডাল জেনারেটিভ এআই এর মাধ্যমে একসাথে টেক্সট, অডিও, ইমেজ ও ভিডিও ইন্টিগ্রেশন করে সিনেমাটিক কনটেন্ট তৈরির ব্রেকথ্রু।",
+    "post_id": "1347013991822233_122111262603474277",
+    "image_source": "ai_pollinations_flux_4507278"
+  },
+  {
+    "timestamp": "2026-09-23 12:10:53 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🚦 ট্রাফিক জ্যাম আর লাইট দেখার দিন শেষ! শহরকে চালাবে এখন নিজস্ব 'এআই ব্রেইন' 🧠🏙️",
+    "summary": "স্মার্ট সিটি ও ডিজিটাল গভর্নেন্সের আধুনিক প্রযুক্তি, যেখানে এআই ব্রেইন ও আইওটি সেন্সরের মাধ্যমে পুরো শহরের ট্রাফিক ও পৌর পরিষেবা স্বয়ংক্রিয়ভাবে পরিচালিত হয়।",
+    "post_id": "1347013991822233_122111393265474277",
+    "image_source": "https://upload.wikimedia.org/wikipedia/commons/5/57/Smartphone_Use.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+  },
+  {
+    "timestamp": "2026-09-23 16:03:50 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "👨‍👩‍👧‍👦 সন্তানের হাতে স্মার্টফোন? এই ৪টি সিকিউরিটি সেটিংস অন না করলেই বিপদে পড়বেন!",
+    "summary": "শিশুদের জন্য ইন্টারনেট নিরাপদ রাখার ৪টি জরুরি প্যারেন্টাল কন্ট্রোল সেটিংস ও প্রাইভেসি গাইড।",
+    "post_id": "1347013991822233_122111482989474277",
+    "image_source": "ai_pollinations_flux_2322645"
+  },
+  {
+    "timestamp": "2026-09-23 20:15:25 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 মহাশূন্যের বুকে নতুন রহস্য! ডার্ক ম্যাটারের অদৃশ্য জালে ঘেরা আদিম গ্যালাক্সি 🔭",
+    "summary": "মহাবিশ্বের অদৃশ্য ডার্ক ম্যাটারের জাল এবং গ্যালাক্সি গঠনে এর ভূমিকা নিয়ে নতুন বৈজ্ঞানিক আবিষ্কার।",
+    "post_id": "1347013991822233_122111618313474277",
+    "image_source": "ai_pollinations_sana_2288625"
+  },
+  {
+    "timestamp": "2026-09-24 07:08:01 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🤖 শুধু কোড ছাড়াই এবার প্রম্পট দিয়েই সফটওয়্যার বা পুরো অ্যাপ বানিয়ে ফেলছে 'এআই কোডিং এজেন্ট'! 🚀",
+    "summary": "এআই কোডিং এজেন্ট ও প্রম্পটের মাধ্যমে কোডিং ছাড়াই সফটওয়্যার বা অ্যাপ তৈরির প্রযুক্তিগত বিপ্লব এবং তরুণদের ক্যারিয়ার সম্ভাবনা।",
+    "post_id": "1347013991822233_122111898441474277",
+    "image_source": "ai_pollinations_sana_1977992"
+  },
+  {
+    "timestamp": "2026-09-24 12:10:33 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "👓 স্পর্শ ছাড়া কেবল মন আর চোখের ইশারায় চলবে স্মার্ট এআর গ্লাস! 🧠✨",
+    "summary": "নিউরাল সেন্সিং ও রেটিনাল প্রজেকশনযুক্ত এআর স্মার্ট গ্লাস যা স্পর্শ ছাড়াই চোখ ও মস্তিষ্কের ইশারায় চলে।",
+    "post_id": "1347013991822233_122112020259474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Chelyabinsk_meteor_trace_15-02-2013.jpg/1280px-Chelyabinsk_meteor_trace_15-02-2013.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-09-24 16:05:20 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 ফোনে আসা ব্যাংক মেসেজটি আসল তো? ৩টি ট্রিক্সে ধরুন ওটিপি ও ফিশিং জালিয়াতি!",
+    "summary": "Practical guide and tricks to identify phishing links, OTP fraud, and fake bank messages to ensure financial security.",
+    "post_id": "1347013991822233_122112118491474277",
+    "image_source": "ai_pollinations_sana_168506"
+  },
+  {
+    "timestamp": "2026-09-24 20:15:06 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 মহাশূন্যে এলিয়েনদের পাঠানো সিগন্যাল কি তবে সত্যি? রহস্যময় 'ফাস্ট রেডিও ব্রাস্ট' (FRB) এর পেছনের অবিশ্বাস্য সত্য 📡",
+    "summary": "মহাশূন্য থেকে আসা রহস্যময় 'ফাস্ট রেডিও ব্রাস্ট' (FRB) ও ম্যাগনেটারের অজানা তথ্য নিয়ে মহাকাশ বিজ্ঞান।",
+    "post_id": "1347013991822233_122112224817474277",
+    "image_source": "ai_pollinations_sana_9161858"
+  },
+  {
+    "timestamp": "2026-09-25 07:09:09 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "📈 পলকের মধ্যেই কোটি ডলারের ট্রেড! শেয়ার বাজার ও ব্যাংকিং জগতকে বদলে দিচ্ছে 'ফিন্যান্সিয়াল AI অ্যালগরিদম' 🚀",
+    "summary": "শেয়ার মার্কেট, ব্যাংকিং নিরাপত্তা ও অর্থনৈতিক সিদ্ধান্ত গ্রহণে আল্ট্রা-ফাস্ট এআই অ্যালগরিদম এবং প্রেডিক্টিভ অ্যানালিটিক্সের বৈপ্লবিক ভূমিকা।",
+    "post_id": "1347013991822233_122112468033474277",
+    "image_source": "editorial_poster_morning"
+  },
+  {
+    "timestamp": "2026-09-25 12:10:11 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🌊 সমুদ্রের তলদেশে বিশাল 'ডেটা সিটি'! কীভাবে পুরো পৃথিবীকে সচল রাখছে এই অদৃশ্য ক্লাউড সাম্রাজ্য? 💻🚀",
+    "summary": "সমুদ্রের তলদেশে স্থাপিত হাইপারস্কেল ডেটা সেন্টার ও লিকুইড কুলিং ক্লাউড ইনফ্রাস্ট্রাকচারের বৈপ্লবিক প্রযুক্তি।",
+    "post_id": "1347013991822233_122112559797474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Data_Center_of_CNPC.jpg/1280px-Data_Center_of_CNPC.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-09-25 16:07:33 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "👁️ আপনার ফোনের ক্যামেরা বা মাইক কি গোপনে কেউ ব্যবহার করছে? জানুন রক্ষা পাওয়ার মোক্ষম উপায়!",
+    "summary": "Detecting spyware, managing camera/microphone permissions, and securing phone privacy from unauthorized background access.",
+    "post_id": "1347013991822233_122112644487474277",
+    "image_source": "ai_pollinations_sana_7088578"
+  },
+  {
+    "timestamp": "2026-09-25 20:15:46 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 মহাবিশ্বের ৯৫% রহস্য কি আসলেই আমাদের ধরাছোঁয়ার বাইরে? ডার্ক ম্যাটার ও ডার্ক এনার্জির অদ্ভুত খেলা! 🤯",
+    "summary": "মহাবিশ্বের ৯৫% অদৃশ্য উপাদান তথা ডার্ক ম্যাটার ও ডার্ক এনার্জির রহস্য এবং মহাজাগতিক প্রসারণ।",
+    "post_id": "1347013991822233_122112749523474277",
+    "image_source": "ai_pollinations_sana_1124579"
+  },
+  {
+    "timestamp": "2026-09-26 07:06:38 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "📈 কাস্টমার কেনার আগেই বুঝে ফেলবে AI! ব্যবসা ও মার্কেটিং অটোমেশনের সেরা ৩টি স্মার্ট স্ট্র্যাটেজি 🚀",
+    "summary": "ব্যবসা ও মার্কেটিং অটোমেশনে ব্যবহৃত প্রেডিক্টিভ এআই কাস্টমার বিহেভিয়ার অ্যানালিটিক্স এবং হাইপার-পার্সোনালাইজড ফানেল তৈরির স্ট্র্যাটেজি।",
+    "post_id": "1347013991822233_122113048491474277",
+    "image_source": "ai_pollinations_sana_7549302"
+  },
+  {
+    "timestamp": "2026-09-26 12:11:46 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🔐 পাসওয়ার্ড আর ওটিপি-র দিন শেষ! হ্যাকারদের থামাতে আসছে আপনার 'হার্টবিট' আর 'কোয়ান্টাম সিল্ড'! ⚡🛡️",
+    "summary": "পোস্ট-কোয়ান্টাম এনক্রিপশন ও হার্টবিট-ভিত্তিক বায়োমেট্রিক সিকিউরিটির মাধ্যমে সাইবার ক্রাইম প্রতিরোধের অত্যাধুনিক প্রযুক্তি।",
+    "post_id": "1347013991822233_122113145325474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Typing_example.ogv/330px--Typing_example.ogv.jpg"
+  },
+  {
+    "timestamp": "2026-09-26 16:04:29 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "👁️ আপনার অজান্তেই কি ব্রাউজার থেকে চুরি হচ্ছে পাসওয়ার্ড? হ্যাকারদের নতুন ফাঁদ থেকে বাঁচুন আজই! 🔒",
+    "summary": "Browser saved passwords security risks, infostealer malware prevention, and master password setup.",
+    "post_id": "1347013991822233_122113240869474277",
+    "image_source": "ai_pollinations_sana_1090796"
+  },
+  {
+    "timestamp": "2026-09-26 20:13:47 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "☀️ সূর্যের পেটেই তৈরি হচ্ছে অসীম শক্তির উৎস! কৃত্রিম সূর্য দিয়ে কীভাবে বদলে যাবে পৃথিবীর ভবিষ্যৎ? ⚡",
+    "summary": "নিউক্লিয়ার ফিউশন ও কৃত্রিম সূর্যের মাধ্যমে পরিচ্ছন্ন ও অফুরন্ত শক্তির ভবিষ্যৎ সম্ভাবনা।",
+    "post_id": "1347013991822233_122113355841474277",
+    "image_source": "ai_pollinations_sana_388357"
+  },
+  {
+    "timestamp": "2026-09-27 07:07:52 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🎤 ক্লিকেই তৈরি হচ্ছে সুপারহিট গান! এআই ভয়েস ক্লোনিং ও মিউজিক জেনারেশনের অবিশ্বাস্য বিপ্লব 🎶🚀",
+    "summary": "এআই ভয়েস ক্লোনিং, মিউজিক জেনারেশন ও ক্রিয়েটিভ অডিও মিডিয়ার আধুনিক ব্রেকথ্রু ও ভবিষ্যৎ সম্ভাবনা।",
+    "post_id": "1347013991822233_122113571583474277",
+    "image_source": "ai_pollinations_sana_7558471"
+  },
+  {
+    "timestamp": "2026-09-27 12:10:14 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🥽 কেবল চোখে দেখা নয়, এবার ভার্চুয়াল জগতে আলো, বাতাস ও বস্তুর আসল ‘স্পর্শ’ টের পাবেন শরীরে! 🖐️✨",
+    "summary": "মাইক্রোফ্লুইডিক হ্যাপটিক ভিআর স্যুট ও থার্মাল নিউরাল গ্লাভসের প্রযুক্তি যা ভার্চুয়াল জগতে স্পর্শ, তাপমাত্রা ও বস্তু ধরার প্রকৃত অনুভূতি প্রদান করে।",
+    "post_id": "1347013991822233_122113703277474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Chief_Master_Sgt._Mark_Umfleet%2C_317th_Airlift_Wing_command_chief%2C_tests_HaptX_Gloves_Development_Kit_2_at_Dyess_Air_Force_Base%2C_Texas%2C_May_10%2C_2021.jpg/1280px-Chief_Master_Sgt._Mark_Umfleet%2C_317th_Airlift_Wing_command_chief%2C_tests_HaptX_Gloves_Development_Kit_2_at_Dyess_Air_Force_Base%2C_Texas%2C_May_10%2C_2021.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-09-27 16:05:36 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🕵️‍♂️ ইনকগনিটো মোডেও নজরদারি? জেনে নিন 'ব্রাউজার ফিঙ্গারপ্রিন্টিং' থেকে বাঁচার গোপন ট্রিকস!",
+    "summary": "Browser fingerprinting tracking mechanisms and practical steps/browser settings to protect online privacy and digital footprint.",
+    "post_id": "1347013991822233_122113813701474277",
+    "image_source": "ai_pollinations_sana_7399960"
+  },
+  {
+    "timestamp": "2026-09-27 20:12:46 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌋 মহাশূন্যের গোপন কারখানা! মঙ্গল গ্রহের নিচে লুকিয়ে থাকা বিশাল ম্যাগমা সাগরের সন্ধান 🚀",
+    "summary": "মঙ্গল গ্রহের ভূগর্ভে লুকিয়ে থাকা তরল ম্যাগমা সাগর এবং এর অভ্যন্তরীণ সক্রিয়তা নিয়ে মহাকাশ গবেষণা।",
+    "post_id": "1347013991822233_122113922091474277",
+    "image_source": "ai_pollinations_sana_2408166"
+  },
+  {
+    "timestamp": "2026-09-28 07:08:00 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🏷️ কাস্টমারভেদে বদলে যাবে পণ্যের দাম ও অফার! বিজনেসে প্রফিট বাড়ানোর নতুন 'এআই ডায়নামিক প্রাইসিং' 🚀",
+    "summary": "ব্যবসা ও ই-কমার্সে কনভার্সন এবং মুনাফা বাড়াতে এআই ডায়নামিক প্রাইসিং, রিয়েল-টাইম অফার ও সেলস অটোমেশন স্ট্র্যাটেজি।",
+    "post_id": "1347013991822233_122114134437474277",
+    "image_source": "ai_pollinations_sana_9268151"
+  },
+  {
+    "timestamp": "2026-09-28 12:11:46 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "📱 নখের সমান চিপে ১৬ হাজার কোটি ট্রানজিস্টর! কীভাবে হাতের স্মার্টফোনটি হয়ে উঠছে সুপারকম্পিউটার? 🧠⚡",
+    "summary": "৩ ন্যানোমিটার (3nm) স্মার্টফোন চিপসেট ইনোভেশন এবং এর অবিশ্বাস্য কার্যক্ষমতা ও ভবিষ্যৎ প্রভাব।",
+    "post_id": "1347013991822233_122114214537474277",
+    "image_source": "https://upload.wikimedia.org/wikipedia/commons/2/22/Fuel_cell_NASA_p48600ac.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+  },
+  {
+    "timestamp": "2026-09-28 16:14:26 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 আপনার কণ্ঠস্বর নকল করে ফাঁদ পাতছে না তো প্রতারকরা? চিনে রাখুন এআই ডিপফেক ভয়েস স্ক্যাম ধরার ৪টি সহজ উপায়! 🎙️",
+    "summary": "Identifying and protecting against AI deepfake voice cloning scams using verification codes and behavior checks.",
+    "post_id": "1347013991822233_122114326569474277",
+    "image_source": "ai_pollinations_sana_6951832"
+  },
+  {
+    "timestamp": "2026-09-29 07:09:20 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "📱💸 মাস শেষে পকেটে টাকা থাকছে না? আপনার টাকা বাঁচিয়ে ইনভেস্ট করে দেবে 'AI পার্সোনাল ফাইনান্সিয়াল ম্যানেজার'! 🚀",
+    "summary": "ব্যক্তিগত আয়-ব্যয় ব্যবস্থাপনা, সঞ্চয় বৃদ্ধি এবং অটোমেটেড মাইক্রো-ইনভেস্টিংয়ে 'পার্সোনাল ফিন্যান্সিয়াল এআই'-এর বৈপ্লবিক ব্যবহার।",
+    "post_id": "1347013991822233_122114633637474277",
+    "image_source": "ai_pollinations_sana_5359760"
+  },
+  {
+    "timestamp": "2026-09-29 12:10:59 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "⌨️ আর টাইপ করার ঝামেলা শেষ! এবার শুধু চোখের ইশারাতেই লেখা হবে হাজার শব্দের ডকুমেন্ট! 🚀",
+    "summary": "চোখের ইশারা ও নিউরাল সেন্সিংয়ের মাধ্যমে কিবোর্ড ছাড়া স্বয়ংক্রিয়ভাবে টাইপিং ও ডকুমেন্ট তৈরির এআই প্রযুক্তি।",
+    "post_id": "1347013991822233_122114719647474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/NASA-Apollo8-Dec24-Earthrise.jpg/1280px-NASA-Apollo8-Dec24-Earthrise.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-09-29 16:06:55 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 ফোন হারিয়ে যাওয়ার আগেই করুন এই কাজ! রিমোটলি সব ডেটা ডিলিট করার জাদুকরী ট্রিকস 📱",
+    "summary": "Device loss emergency protocol: remote lock and factory reset data wiping techniques to prevent data theft.",
+    "post_id": "1347013991822233_122114812749474277",
+    "image_source": "ai_pollinations_sana_2600958"
+  },
+  {
+    "timestamp": "2026-09-29 20:15:06 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "⚡ পারমাণবিক শক্তির নতুন দিগন্ত: মহাকাশ অভিযানের চাবিকাঠি এখন 'ডার্ক ম্যাটার' ফিউশন!",
+    "summary": "মহাকাশ অভিযানে দীর্ঘ দূরত্বের যাত্রা সহজ করতে উন্নত নিউক্লিয়ার ফিউশন প্রপালশন ও প্লাজমা ইঞ্জিনের ব্যবহার।",
+    "post_id": "1347013991822233_122114927799474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/2023_interstellar_probes_NASA-JPL_eyes.png/1280px-2023_interstellar_probes_NASA-JPL_eyes.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-09-30 07:09:12 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🩺 লক্ষণ প্রকাশের আগেই রোগ ধরে ফেলছে AI! চিকিৎসা জগতে কৃত্রিম বুদ্ধিমত্তার লাইফ-সেভিং বিপ্লব 🚀",
+    "summary": "মেডিকেল ও চিকিৎসা বিজ্ঞানে এআই-এর প্রেডিক্টিভ রোগ নির্ণয়, ডিএনএ অ্যানালাইসিস এবং লাইফ-সেভিং প্রযুক্তিগত বিপ্লব।",
+    "post_id": "1347013991822233_122115130017474277",
+    "image_source": "ai_pollinations_sana_4838425"
+  },
+  {
+    "timestamp": "2026-09-30 12:11:40 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "📶 স্লো ওয়াইফাইয়ের যুগ শেষ! আধুনিক Wi-Fi 7 এবং ভবিষ্যতের 6G নেটওয়ার্ক কীভাবে বদলে দিচ্ছে দুনিয়া? 🚀",
+    "summary": "আধুনিক ওয়াইফাই ৭ (Wi-Fi 7) এবং ভবিষ্যতের ৬জি (6G) নেটওয়ার্কের অবিশ্বাস্য গতি ও কার্যকারিতা।",
+    "post_id": "1347013991822233_122115207615474277",
+    "image_source": "ai_pollinations_sana_3409261"
+  },
+  {
+    "timestamp": "2026-09-30 16:08:05 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 অনলাইনে কেনাকাটা করছেন? কার্ড ক্লোনিং ও স্ক্যাম থেকে বাঁচার ৪টি জাদুকরী ট্রিকস! 💳",
+    "summary": "অনলাইন কেনাকাটায় ডেবিট/ক্রেডিট কার্ড ক্লোনিং ও ই-কমার্স পেমেন্ট স্ক্যাম থেকে নিরাপদ থাকার ৪টি গুরুত্বপূর্ণ সাইবার নিরাপত্তা ট্রিকস।",
+    "post_id": "1347013991822233_122115280119474277",
+    "image_source": "editorial_poster_afternoon"
+  },
+  {
+    "timestamp": "2026-09-30 20:17:57 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 ঘড়ির কাঁটা কি সত্যি থেমে যেতে পারে? আইনস্টাইনের 'টাইম লুপ' ও মহাজাগতিক শর্টকাটের অবিশ্বাস্য রহস্য! ⏳",
+    "summary": "আইনস্টাইনের আপেক্ষিকতা তত্ত্ব অনুযায়ী স্পেস-টাইম কার্ভেচার এবং মহাজাগতিক ওয়ার্মহোল বা শর্টকাটের মাধ্যমে সময়ের পরিবর্তন ও মহাকাশ ভ্রমণের নতুন সম্ভাবনা।",
+    "post_id": "1347013991822233_122115388257474277",
+    "image_source": "ai_pollinations_sana_1259384"
+  },
+  {
+    "timestamp": "2026-10-01 07:10:18 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🌐 ভাষার দেয়াল ভেঙে দিচ্ছে AI! নিজের কণ্ঠ ও ঠোঁটের নড়াচড়া ঠিক রেখে ১৫০+ ভাষায় ভিডিও ডাবিংয়ের নতুন বিপ্লব 🚀",
+    "summary": "এআই রিয়েল-টাইম ভিডিও ট্রান্সলেশন, ভয়েস ক্লোনিং এবং নিখুঁত লিপ-সিঙ্কিং প্রযুক্তির মাধ্যমে বিশ্বব্যাপী ক্রিয়েটিভ মিডিয়া বিপ্লব।",
+    "post_id": "1347013991822233_122115579183474277",
+    "image_source": "ai_pollinations_sana_2491230"
+  },
+  {
+    "timestamp": "2026-10-01 12:12:53 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🤚 হাতের শিরা আর অদৃশ্যে কোডিং! সাইবার হামলা ঠেকাতে বাজারে এল ‘হোমোমর্ফিক সিকিউরিটি’! 🛡️⚡",
+    "summary": "ফুলি হোমোমর্ফিক এনক্রিপশন (FHE) এবং ইনফ্রারেড পাল্ম ভেইন (Palm Vein) বায়োমেট্রিক্সের মাধ্যমে সাইবার ক্রাইম প্রতিরোধের অত্যাধুনিক প্রযুক্তি।",
+    "post_id": "1347013991822233_122115688797474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Aerial_Microsoft_West_Campus_August_2009.jpg/1280px-Aerial_Microsoft_West_Campus_August_2009.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-01 16:07:03 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 আপনার হাতের ফোন সচল, কিন্তু সিম চলে গেছে হ্যাকারের দখলে? চিনে নিন 'সিম সোয়াপিং' ও রিমোট হ্যাকিং প্রতারণা! 📱🔒",
+    "summary": "SIM swapping scam detection, SMS OTP hijacking risks, and SIM lock / Authenticator security settings for remote phone protection.",
+    "post_id": "1347013991822233_122115774195474277",
+    "image_source": "ai_pollinations_sana_3238084"
+  },
+  {
+    "timestamp": "2026-10-02 07:10:58 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "📚 এবার প্রতিটি শিক্ষার্থীর জন্য নিজের ডেডিকেটেড ‘প্রাইভেট এআই টিউটর’! পড়ালেখা বদলে দিচ্ছে পারসোনালাইজড জেনারেটিভ এআই 🎓🚀",
+    "summary": "শিক্ষা ও গবেষণায় পারসোনালাইজড এআই টিউটরিং প্ল্যাটফর্ম ও অ্যাডাপ্টিভ লার্নিং সিস্টেমের ভূমিকা।",
+    "post_id": "1347013991822233_122116140129474277",
+    "image_source": "ai_pollinations_sana_1207665"
+  },
+  {
+    "timestamp": "2026-10-02 12:11:31 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🛡️ হ্যাকারদের এআই-কে বোকা বানাতে প্রতি সেকেন্ডে রূপ পাল্টাচ্ছে আপনার কোড! সাইবার জগতের নতুন ঢাল ‘MTD’! ⚡",
+    "summary": "Moving Target Defense (MTD) এবং পলিমরফিক সিকিউরিটি প্রযুক্তির মাধ্যমে সফটওয়্যারের কোড প্রতি মুহূর্তে পরিবর্তন করে হ্যাকিং প্রতিরোধের অভিনব কৌশল।",
+    "post_id": "1347013991822233_122116223817474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Gimbal_The_First_Official_UAP_Footage_from_the_USG_for_Public_Release.webm/500px--Gimbal_The_First_Official_UAP_Footage_from_the_USG_for_Public_Release.webm.jpg"
+  },
+  {
+    "timestamp": "2026-10-02 16:04:38 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🏃‍♂️ হাত থেকে ফোন টান মেরে নিলেই লক! চোরও খুলতে পারবে না আপনার ফোন! 📱🔒",
+    "summary": "AI-powered snatch detection and automatic anti-theft locking features to protect smartphones from physical theft.",
+    "post_id": "1347013991822233_122116319367474277",
+    "image_source": "ai_pollinations_sana_9840438"
+  },
+  {
+    "timestamp": "2026-10-02 20:15:29 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🛡️ ক্ষতিকারক কোষের বিরুদ্ধে চিকিৎসাবিজ্ঞানের 'স্মার্ট মিসাইল'! আধুনিক অ্যান্টিবডি থেরাপির অবিশ্বাস্য জয়যাত্রা 🧬",
+    "summary": "মানবদেহের রোগ প্রতিরোধ ব্যবস্থাকে কাজে লাগিয়ে আধুনিক বাইস্পেসিফিক অ্যান্টিবডি ও ন্যানোবডি থেরাপির মাধ্যমে ক্যান্সারসহ জটিল রোগের নিখুঁত বৈজ্ঞানিক চিকিৎসা।",
+    "post_id": "1347013991822233_122116429089474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/E._coli_Bacteria_%287316101966%29.jpg/1280px-E._coli_Bacteria_%287316101966%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-03 07:08:35 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🤖 মানুষ ছাড়াই ২৪ ঘণ্টা চলছে ফ্যাক্টরি! স্মার্ট ম্যানুফ্যাকচারিংয়ে ‘এআই হিউম্যানয়েড রোবটের’ অবিশ্বাস্য বিপ্লব 🚀",
+    "summary": "শিল্পকারখানা ও স্মার্ট ফ্যাক্টরিতে এআই চালিত অটোনোমাস হিউম্যানয়েড রোবটের ব্যবহার ও প্রভাব।",
+    "post_id": "1347013991822233_122116659969474277",
+    "image_source": "ai_pollinations_sana_465635"
+  },
+  {
+    "timestamp": "2026-10-03 12:18:58 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🔌 চার্জ ফুরোবে চোখের পলকে! সলিড স্টেট ব্যাটারি বদলে দিচ্ছে ইলেকট্রিক ভেহিকেল (EV) দুনিয়া! ⚡🚗",
+    "summary": "ইলেকট্রিক ভেহিকেল (EV) ও সলিড স্টেট ব্যাটারির দ্রুত চার্জিং এবং নিরাপত্তা প্রযুক্তি।",
+    "post_id": "1347013991822233_122116747887474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Chevrolet_Volt_D2UX_Switchblade_Silver_%2811%29.jpg/1280px-Chevrolet_Volt_D2UX_Switchblade_Silver_%2811%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-03 16:04:38 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 পাবলিক প্লেসে ইউএসবি পোর্টে ফোন চার্জ দিচ্ছেন? হতে পারেন 'জুস জ্যাকিং'-এর শিকার! 🔌🔒",
+    "summary": "Juice jacking risks at public USB charging ports and safety solutions like USB data blockers.",
+    "post_id": "1347013991822233_122116825083474277",
+    "image_source": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Baby_Keem_2022_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+  },
+  {
+    "timestamp": "2026-10-04 00:29:46 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 মহাকাশ থেকে সরাসরি পৃথিবীতে আসবে বিদ্যুৎ! অসীম শক্তির নতুন দিগন্ত 'স্পেস সোলার পাওয়ার' ⚡",
+    "summary": "মহাকাশে সোলার প্যানেল স্থাপন করে তারবিহীন মাইক্রোওয়েভ বা লেজার রশ্মির মাধ্যমে পৃথিবীতে নিরবচ্ছিন্ন ও পরিচ্ছন্ন বিদ্যুৎ পাঠানোর প্রযুক্তি (Space-Based Solar Power) নিয়ে বৈজ্ঞানিক আলোচনা।",
+    "post_id": "1347013991822233_122117030019474277",
+    "image_source": "https://images-assets.nasa.gov/image/PIA25563/PIA25563~medium.jpg"
+  },
+  {
+    "timestamp": "2026-10-04 09:58:27 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🎭 ভিডিও কলে ওপাশে আসল মানুষ তো? ডিপফেক জালিয়াতি রুখতে এল 'রিয়েল-টাইম এআই গার্ডিয়ান'! 🛡️🚀",
+    "summary": "ডিপফেক জালিয়াতি ও ভয়েস ক্লোনিং রুখতে রিয়েল-টাইম লাইভনেস ডিটেকশন ও ডিফেন্সিভ এআই-এর ভূমিকা।",
+    "post_id": "1347013991822233_122117195655474277",
+    "image_source": "ai_pollinations_sana_3371002"
+  },
+  {
+    "timestamp": "2026-10-04 17:19:23 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 আপনার ঘরের 'ওয়াইফাই রাউটার' দিয়ে হ্যাক হচ্ছে না তো বাকি সব ডিভাইস? জানুন ৪টি জরুরি সিকিউরিটি ট্রিকস! 🌐🔒",
+    "summary": "Wi-Fi router security hacks, DNS hijacking prevention, guest network isolation, and securing home IoT devices.",
+    "post_id": "1347013991822233_122117328849474277",
+    "image_source": "ai_pollinations_sana_266185"
+  },
+  {
+    "timestamp": "2026-10-04 21:02:37 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "⏳ আপনার পায়ের চেয়ে আপনার মাথার সময় দ্রুত চলে! আইনস্টাইনের আপেক্ষিকতা ও 'অপটিক্যাল ক্লক' এর অবিশ্বাস্য সত্য 🔬",
+    "summary": "আইনস্টাইনের গ্রাভিটেশনাল টাইম ডাইলেশন এবং আধুনিক 'অপটিক্যাল ল্যাটিস অ্যাটমিক ক্লক' এর মাধ্যমে মিলিমিটার স্কেলে সময়ের গতির পার্থক্য পরিমাপের বৈজ্ঞানিক সত্য।",
+    "post_id": "1347013991822233_122117461707474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Fizeau-Mascart2.png/1280px-Fizeau-Mascart2.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-05 00:02:00 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌋 মাটির নিচে লুকিয়ে আছে অসীম শক্তির মহাসমুদ্র! প্রযুক্তির নতুন বিপ্লব 'আল্ট্রা-ডিপ জিওথার্মাল এনার্জি' ⚡",
+    "summary": "মিলিমিটার-ওয়েভ ড্রিলিং প্রযুক্তির মাধ্যমে ২০ কিমি গভীরে পৃথিবীর ভূ-তাপীয় তাপ সংগ্রহ করে অসীম ও পরিচ্ছন্ন বিদ্যুৎ উৎপাদনের বৈজ্ঞানিক অগ্রগতি।",
+    "post_id": "1347013991822233_122117511537474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/District_heating_plant_spittelau_ssw_crop1.png/1280px-District_heating_plant_spittelau_ssw_crop1.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-05 12:30:25 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🎧 কানের ভেতরের ‘অদৃশ্য প্রতিধ্বনি’ আর ‘জিরো-নলেজ প্রুফ’! পাসওয়ার্ড ছাড়াই হ্যাকারদের রুখে দেবে আপনার হেডফোন! 🛡️⚡",
+    "summary": "ওটোঅ্যাকোস্টিক বায়োমেট্রিক্স (কান থেকে উৎপন্ন শব্দতরঙ্গের প্রতিধ্বনি) এবং জিরো-নলেজ প্রুফ এনক্রিপশনের মাধ্যমে পাসওয়ার্ড ও ওটিপি ছাড়াই সাইবার নিরাপত্তা নিশ্চিত করার আধুনিক প্রযুক্তি।",
+    "post_id": "1347013991822233_122117746599474277",
+    "image_source": "ai_pollinations_sana_4941246"
+  },
+  {
+    "timestamp": "2026-10-05 19:25:42 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌿 বাতাসে বিষ শুষে বানিয়ে দেবে অফুরন্ত বিদ্যুৎ! বিজ্ঞানের নতুন বিস্ময় 'কৃত্রিম পাতা' ⚡",
+    "summary": "কৃত্রিম সালোকসংশ্লেষণ বা বায়োনিক লিফ প্রযুক্তির মাধ্যমে বাতাস থেকে কার্বন ডাই অক্সাইড ও সূর্যালোক ব্যবহার করে পরিচ্ছন্ন জ্বালানি ও অক্সিজেন তৈরির বৈজ্ঞানিক আবিষ্কার।",
+    "post_id": "1347013991822233_122117921193474277",
+    "image_source": "ai_pollinations_sana_7280723"
+  },
+  {
+    "timestamp": "2026-10-06 00:58:27 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 মহাশূন্যের বুকে নতুন বিস্ময়! গ্যালাক্সির চারপাশে লুকিয়ে থাকা অদৃশ্য 'কোয়ান্টাম হ্যালো' 🔭",
+    "summary": "মহাকাশ গবেষণায় গ্যালাক্সির চারপাশে অদৃশ্য 'কোয়ান্টাম হ্যালো' আবিষ্কারের রহস্য।",
+    "post_id": "1347013991822233_122118033711474277",
+    "image_source": "ai_pollinations_sana_5459727"
+  },
+  {
+    "timestamp": "2026-10-06 03:25:45 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 মহাবিশ্বের নিজস্ব সুর! বিজ্ঞানীরা খুঁজে পেলেন বিলিয়ন বিলিয়ন ব্ল্যাকহোলের তৈরি 'মহাজাগতিক গুঞ্জন' 🎶",
+    "summary": "পালসার টাইমিং অ্যারের সাহায্যে মহাবিশ্বের লো-ফ্রিকোয়েন্সি গ্র্যাভিটেশনাল ওয়েভ ব্যাকগ্রাউন্ড (GWB) বা মহাজাগতিক গুঞ্জন আবিষ্কারের রহস্য।",
+    "post_id": "1347013991822233_122118080661474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Black_hole_-_Messier_87_crop_max_res.jpg/1280px-Black_hole_-_Messier_87_crop_max_res.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-06 13:06:32 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "📱 পাসওয়ার্ড তো দূর, আপনার ফোন ধরার ধরণই চিনে নেবে আপনাকে! হ্যাকারদের বিভ্রান্ত করতে আসছে ‘আচরণগত বায়োমেট্রিক’ ও ‘হানি এনক্রিপশন’! 🍯🛡️",
+    "summary": "আচরণগত বায়োমেট্রিক্স (Behavioral Biometrics) ও হানি এনক্রিপশন (Honey Encryption) প্রযুক্তির মাধ্যমে পাসওয়ার্ড ছাড়া সাইবার নিরাপত্তা নিশ্চিত করার আধুনিক কৌশল।",
+    "post_id": "1347013991822233_122118221865474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Xiaomi_13_front.jpg/1280px-Xiaomi_13_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-06 18:39:24 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "⚡ চার্জ হবে চোখের পলকে! কোয়ান্টাম ফিজিক্সের ম্যাজিকে আসছে সুপারফাস্ট 'কোয়ান্টাম ব্যাটারি' 🔋",
+    "summary": "কোয়ান্টাম এন্ট্যাঙ্গলমেন্ট ব্যবহার করে চোখের পলকে চার্জ হওয়ার ক্ষমতাসম্পন্ন কোয়ান্টাম ব্যাটারির বৈজ্ঞানিক সম্ভাবনা ও কার্যপ্রণালী।",
+    "post_id": "1347013991822233_122118337755474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/The_station_pictured_from_the_SpaceX_Crew_Dragon_5.jpg/1280px-The_station_pictured_from_the_SpaceX_Crew_Dragon_5.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-06 22:23:32 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🧠 মানব মস্তিষ্কের ভেতর সরাসরি কম্পিউটার চিপ! চিকিৎসা বিজ্ঞানে নিউরোট্রেড ও ব্রেন-কম্পিউটার ইন্টারফেসে অবিশ্বাস্য বিপ্লব ⚡",
+    "summary": "মানব মস্তিষ্কে উন্নত নিউরাল চিপ ও ব্রেন-কম্পিউটার ইন্টারফেস (BCI) প্রযুক্তির মাধ্যমে পক্ষাঘাতগ্রস্ত মানুষের জীবন বদলে দেওয়ার বৈজ্ঞানিক অগ্রগতি।",
+    "post_id": "1347013991822233_122118423585474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Feeding_a_laboratory_rat.jpg/1280px-Feeding_a_laboratory_rat.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-07 01:21:00 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🧬 আপনার দেহের ভেতরেই এবার ঘুরবে আলোর গতিতে চলা অণুবীক্ষণিক রোবট! চিকিৎসাবিজ্ঞানে এক অবিশ্বাস্য বিপ্লব 🤖",
+    "summary": "মানবদেহের রক্তনালীর ভেতরে কাজ করার জন্য উন্নত ন্যানো-বট ও মাইক্রো-রোবটিক্স প্রযুক্তির মাধ্যমে নিখুঁত চিকিৎসা।",
+    "post_id": "1347013991822233_122118483921474277",
+    "image_source": "https://upload.wikimedia.org/wikipedia/commons/1/12/Root_canalioso.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+  },
+  {
+    "timestamp": "2026-10-07 12:48:37 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "📶 ক্যামেরা ছাড়াই আপনাকে ‘দেখতে’ পাবে ঘরের ওয়াইফাই! আসছে ওয়াই-ফাই সেন্সিং ও ৬জি-র জাদুকরী প্রযুক্তি! 📡✨",
+    "summary": "Wi-Fi Sensing (IEEE 802.11bf) এবং 6G JCAS প্রযুক্তির মাধ্যমে ক্যামেরা ছাড়াই বেতার তরঙ্গের সাহায্যে ঘরের থ্রিডি ম্যাপিং, মোশন ও হেলথ ট্র্যাকিং করার বৈপ্লবিক উদ্ভাবন।",
+    "post_id": "1347013991822233_122118652863474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Plantronics_Voyager_Legend.JPG/1280px-Plantronics_Voyager_Legend.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-07 18:33:08 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "সমুদ্রের ১১,০০০ মিটার গভীরে যেখানে পিষে যায় লোহাও! সেখানে কীভাবে বেঁচে আছে অদ্ভুত এক প্রাণ? 🌊",
+    "summary": "মারিয়ানা ট্রেঞ্চের ১১,০০০ মিটার গভীর হাদাল জোনে মারিয়ানা স্নেইলফিশের টিকে থাকার বৈজ্ঞানিক রহস্য ও গভীর সমুদ্রের উচ্চ চাপ অভিযোজন।",
+    "post_id": "1347013991822233_122118756729474277",
+    "image_source": "https://upload.wikimedia.org/wikipedia/commons/b/b5/DSV_Bakunawa_descending_underwater_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+  },
+  {
+    "timestamp": "2026-10-07 23:06:00 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "⚛️ আলোর চেয়েও দ্রুত ছুটে চলা কণা! পদার্থবিজ্ঞানের চিরচেনা নিয়ম বদলে দিল সাব-অ্যাটমিক কণার অবিশ্বাস্য আবিষ্কার 🚀",
+    "summary": "সাব-অ্যাটমিক কণার আলোর চেয়ে দ্রুত গতি এবং পদার্থবিজ্ঞানের নতুন আবিষ্কার।",
+    "post_id": "1347013991822233_122118872523474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Cyclotron_motion_smaller_view.jpg/1280px-Cyclotron_motion_smaller_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-08 01:48:07 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "বিশ্বের সবচেয়ে দামি বস্তু এখন পোর্টেবল! CERN-এর বিজ্ঞানীরা তৈরি করলেন অবিশ্বাস্য 'অ্যান্টিম্যাটার বোতল'! ⚛️🧪",
+    "summary": "CERN-এর বিজ্ঞানীরা সফলভাবে পোর্টেবল ম্যাগনেটিক ট্র্যাপ বা পেনিং ট্র্যাপের মাধ্যমে চরম বিপজ্জনক ও মহামূল্যবান অ্যান্টিম্যাটার সংরক্ষণ এবং পরিবহনের প্রযুক্তি তৈরি করেছেন।",
+    "post_id": "1347013991822233_122118929835474277",
+    "image_source": "https://upload.wikimedia.org/wikipedia/commons/1/1a/EAST_Tokamak_plasma_image3.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+  },
+  {
+    "timestamp": "2026-10-08 12:57:54 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🍎 অ্যাপলেরও আগে ছিল যে 'ম্যাজিক বক্স'! স্টিভ জবসের সেই প্রথম হ্যাকিং ডিভাইসের গল্প! 📞✨",
+    "summary": "স্টিভ জবস ও ওজনিয়াকের তৈরি ব্লু বক্স (Blue Box) এবং ফোন ফ্রিকিংয়ের রোমাঞ্চকর টেক ইতিহাস।",
+    "post_id": "1347013991822233_122119096173474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg/1280px-Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-08 18:50:40 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 আইনস্টাইনের হিসাব কি ভুল ছিল? সময়ের সাথে রূপ পাল্টাচ্ছে মহাবিশ্বের রহস্যময় 'ডার্ক এনার্জি'! 🛰️",
+    "summary": "সময়ের সাথে ডার্ক এনার্জির রূপ পরিবর্তন বা ডাইনামিক ডার্ক এনার্জির সাম্প্রতিক বৈজ্ঞানিক আবিষ্কার ও এর ফলে মহাবিশ্বের পরিণতির নতুন সমীকরণ।",
+    "post_id": "1347013991822233_122119354449474277",
+    "image_source": "ai_pollinations_sana_2634587"
+  },
+  {
+    "timestamp": "2026-10-08 23:05:23 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🕳️ মহাবিশ্বের সবচেয়ে বড় 'সিনেমা হল'! ব্ল্যাকহোলের চারপাশের রহস্যময় 'ফোটন রিং' 🌌",
+    "summary": "ব্ল্যাকহোলের চারপাশের ফোটন রিং (Photon Ring) এবং মহাজাগতিক ইতিহাসের আর্কাইভ বা টাইম ক্যাপসুল হিসেবে এর ভূমিকা নিয়ে বৈজ্ঞানিক আলোচনা।",
+    "post_id": "1347013991822233_122119436211474277",
+    "image_source": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001538/GSFC_20171208_Archive_e001538~medium.jpg"
+  },
+  {
+    "timestamp": "2026-10-09 01:43:33 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🌌 পরমাণু নয়, ডার্ক ম্যাটার দিয়ে তৈরি! মহাবিশ্বের প্রথম 'ডার্ক স্টার' বা অন্ধকার নক্ষত্রের খোঁজ? 🚀",
+    "summary": "মহাবিশ্বের প্রথম অন্ধকার নক্ষত্র বা 'ডার্ক স্টার' (Dark Stars)-এর তাত্ত্বিক ধারণা এবং ডার্ক ম্যাটার অ্যানাইহিলেশনের মাধ্যমে শক্তি উৎপাদনের বৈজ্ঞানিক ব্যাখ্যা।",
+    "post_id": "1347013991822233_122119477563474277",
+    "image_source": "https://upload.wikimedia.org/wikipedia/commons/7/77/FamousFunniesNo211.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+  },
+  {
+    "timestamp": "2026-10-09 13:05:56 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "💻 কোডার, টেস্টার ও ডিজাইনার সবাই এআই! ওপেন সোর্স ‘মাল্টি-এজেন্ট’ সিস্টেমে সফটওয়্যার তৈরির নতুন যুগ! 🚀⚡",
+    "summary": "ওপেন সোর্স মাল্টি-এজেন্ট ফ্রেমওয়ার্ক এবং এআই কোডিং এজেন্টের মাধ্যমে স্বয়ংক্রিয়ভাবে সফটওয়্যার ডেভেলপমেন্টের আধুনিক ট্রেন্ড।",
+    "post_id": "1347013991822233_122119678857474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Keyboard_Construction.JPG/1280px-Keyboard_Construction.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-09 18:29:14 BST",
+    "slot": "night",
+    "theme": "Science & Space (বিজ্ঞান, মহাকাশ ও আবিষ্কার)",
+    "title": "🧬 আপনার দেহের নিজস্ব সৈন্যরাই এবার ধ্বংস করবে ক্যান্সার! চিকিৎসা বিজ্ঞানে বিপ্লব এনেছে জিন-এডিটেড 'CAR-T সেল' থেরাপি! 🩺",
+    "summary": "মানবদেহের রোগ প্রতিরোধ ব্যবস্থাকে কাজে লাগিয়ে জিন-এডিটেড CAR-T সেল থেরাপির মাধ্যমে ক্যান্সারের আধুনিক ও নিখুঁত চিকিৎসা পদ্ধতি।",
+    "post_id": "1347013991822233_122119772211474277",
+    "image_source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Synthetic_Biology_Research_at_NASA_Ames.jpg/1280px-Synthetic_Biology_Research_at_NASA_Ames.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+  },
+  {
+    "timestamp": "2026-10-10 10:07:10 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🧪 বিজ্ঞানের নতুন বিপ্লব! মানুষের সাহায্য ছাড়াই নতুন উপাদান ও ব্যাটারি আবিষ্কার করছে 'স্বয়ংক্রিয় এআই সায়েন্টিস্ট'! 🚀",
+    "summary": "বিজ্ঞান ও গবেষণায় অটোনোমাস এআই সায়েন্টিস্ট এবং রোবোটিক ল্যাবের মাধ্যমে স্বয়ংক্রিয়ভাবে নতুন উপাদান ও ব্যাটারি প্রযুক্তি আবিষ্কারের বৈপ্লবিক প্রভাব।",
+    "post_id": "1347013991822233_122120034267474277",
+    "image_source": "ai_pollinations_sana_9531841"
+  },
+  {
+    "timestamp": "2026-10-10 13:54:45 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🚗 প্লাগ গোঁজার দিন শেষ! এবার রাস্তায় চললেই স্বয়ংক্রিয়ভাবে চার্জ হবে আপনার ইলেকট্রিক গাড়ি! ⚡🛣️",
+    "summary": "ইনডাক্টিভ ডায়নামিক ওয়্যারলেস চার্জিং রোড প্রযুক্তির মাধ্যমে রাস্তায় চলন্ত অবস্থায় ইলেকট্রিক গাড়ি (EV) স্বয়ংক্রিয়ভাবে চার্জ করার বৈপ্লবিক উদ্ভাবন।",
+    "post_id": "1347013991822233_122120114859474277",
+    "image_source": "ai_pollinations_sana_1020774"
+  },
+  {
+    "timestamp": "2026-10-10 21:12:34 BST",
+    "slot": "night",
+    "theme": "Future Tech & Breakthrough Innovations (ভবিষ্যৎ প্রযুক্তি, এআই ও আধুনিক বিজ্ঞান)",
+    "title": "🌌 গ্রহাণুর বুক চিরে উঠে আসছে অফুরন্ত সোনা! মহাকাশ গবেষণার নতুন দিগন্ত 'অ্যাস্টেরয়েড মাইনিং' 🚀",
+    "summary": "মহাকাশ গবেষণায় গ্রহাণু থেকে খনিজ ও মূল্যবান ধাতু আহরণের প্রযুক্তি 'অ্যাস্টেরয়েড মাইনিং' (Asteroid Mining)।",
+    "post_id": "1347013991822233_122120273775474277",
+    "image_source": "ai_pollinations_sana_5257428"
+  },
+  {
+    "timestamp": "2026-10-11 07:00:40 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🌐 টেক্সট, অডিও ও ভিডিও মিলে তৈরি হচ্ছে জীবন্ত ৩ডি জগত! জেনে নিন ‘ওমনি-মাল্টিমোডাল এআই’-এর জাদুকরী প্রযুক্তি 🚀",
+    "summary": "নেটিভ ওমনি-মাল্টিমোডাল এআই আর্কিটেকচার যা একসাথে টেক্সট, অডিও, ভিডিও ও ৩ডি সেন্সরি ডেটা প্রসেস করে রিয়েল-টাইম ইন্টারঅ্যাক্টিভ ৩ডি সিমুলেশন তৈরি করে।",
+    "post_id": "1347013991822233_122120417817474277",
+    "image_source": "ai_pollinations_sana_2080722"
+  },
+  {
+    "timestamp": "2026-10-11 12:00:30 BST",
+    "slot": "noon",
+    "theme": "Technology & Innovation (প্রযুক্তি ও আধুনিক উদ্ভাবন)",
+    "title": "🔋 আর ব্যাটারি বদলাতে হবে না! ঘরের আলো আর ওয়াইফাই থেকেই শক্তি নিয়ে আজীবন চলবে স্মার্ট হোম ডিভাইস! ⚡🏠",
+    "summary": "ব্যাটারিবিহীন অ্যাম্বিয়েন্ট এনার্জি হার্ভেস্টিং ও জিরো-পাওয়ার আইওটি (Zero-Power IoT) প্রযুক্তি যা ঘরের আলো ও ওয়াইফাই তরঙ্গ থেকে সরাসরি বিদ্যুৎ তৈরি করে গ্যাজেট চালিত রাখে।",
+    "post_id": "1347013991822233_122120522445474277",
+    "image_source": "ai_pollinations_sana_9923312"
+  },
+  {
+    "timestamp": "2026-10-11 16:00:46 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 কফি খাওয়ার টেবিলে ফোন রাখলেই কি হ্যাক হয়? জেনে নিন 'একোস্টিক কীবোর্ড স্নিফিং' এর ভয়ংকর ফাঁদ! ⌨️🔒",
+    "summary": "Acoustic keyboard sniffing cyber threat prevention and protecting passwords from audio frequency AI analysis.",
+    "post_id": "1347013991822233_122120627925474277",
+    "image_source": "ai_pollinations_sana_2263026"
+  },
+  {
+    "timestamp": "2026-10-11 20:00:30 BST",
+    "slot": "night",
+    "theme": "Future Tech & Breakthrough Innovations (ভবিষ্যৎ প্রযুক্তি, এআই ও আধুনিক বিজ্ঞান)",
+    "title": "🤖 রোবটের শরীরেও এবার মানুষের মতো স্পর্শ অনুভূতি! 'ইলেকট্রনিক স্কিন' ও এমবডিড এআই-এর অবিশ্বাস্য বিপ্লব 🦾",
+    "summary": "হিউম্যানয়েড রোবটে এমবডিড এআই এবং সংবেদনশীল ইলেকট্রনিক স্কিন (E-Skin) প্রযুক্তির মাধ্যমে কৃত্রিম স্পর্শ অনুভূতি ও নিখুঁত অটোনোমাস কাজের বৈজ্ঞানিক অগ্রগতি।",
+    "post_id": "1347013991822233_122120732301474277",
+    "image_source": "ai_pollinations_sana_2275098"
+  },
+  {
+    "timestamp": "2026-10-12 07:00:34 BST",
+    "slot": "morning",
+    "theme": "Artificial Intelligence (কৃত্রিম বুদ্ধিমত্তা)",
+    "title": "🤖 একা নয়, এবার দলবেঁধে কাজ করছে ‘এআই সোওয়ার্ম’! নিজেরা মিটিং করে জটিল প্রজেক্ট শেষ করার নতুন বিপ্লব 🚀",
+    "summary": "মাল্টি-এজেন্ট সোওয়ার্ম ইন্টেলিজেন্স বা একাধিক এআই এজেন্ট মিলে স্বয়ংক্রিয় ভার্চুয়াল টিম গঠন করে জটিল প্রজেক্ট বাস্তবায়নের বৈপ্লবিক প্রযুক্তি।",
+    "post_id": "1347013991822233_122120880741474277",
+    "image_source": "editorial_poster_morning"
+  },
+  {
+    "timestamp": "2026-10-12 16:00:41 BST",
+    "slot": "afternoon",
+    "theme": "Cybersecurity & Smart Tech Hacks (সাইবার নিরাপত্তা, প্রাইভেসি ও স্মার্ট টেক ট্রিকস)",
+    "title": "🚨 রেস্টুরেন্ট বা পার্কিংয়ের QR Code স্ক্যান করছেন? জেনে নিন 'কুইশিং' প্রতারণার নতুন ফাঁদ! 📱🔒",
+    "summary": "QR code phishing (Quishing) scam mechanisms and practical safety steps to protect banking details and smartphones.",
+    "post_id": "1347013991822233_122121031143474277",
+    "image_source": "ai_pollinations_sana_9738887"
+  }
+]
