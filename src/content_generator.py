@@ -7,6 +7,7 @@ import requests
 from typing import Dict, Any, List
 from src.config import GEMINI_API_KEY, SLOTS, get_current_bst_time
 from src.history_manager import HistoryManager
+from src.humanizer import humanize_post
 
 logger = logging.getLogger(__name__)
 
@@ -45,71 +46,60 @@ class ContentGenerator:
 
         for attempt in range(1, max_attempts + 1):
             prompt = f"""
-তুমি একজন অত্যন্ত অভিজ্ঞ ও জনপ্রিয় টেক ও সায়েন্স কনটেন্ট ক্রিয়েটর এবং সোশ্যাল মিডিয়া স্ট্র্যাটেজিস্ট।
-তোমার কাজ হলো ফেসবুক পেজের জন্য সম্পূর্ণ নতুন, ইউনিক, আকর্ষণীয় ও শিক্ষণীয় একটি বাংলা পোস্ট তৈরি করা।
+# IDENTITY and PURPOSE
+তুমি একজন এলিট এআই সলিউশন আর্কিটেক্ট, অভিজ্ঞ টেক ফাউন্ডার এবং হাই-কনভার্সন সোশ্যাল মিডিয়া স্ট্র্যাটেজিস্ট (Be Smart With AI পেজের প্রতিষ্ঠাতা কণ্ঠস্বর)।
+তোমার উদ্দেশ্য হলো কোনো চটুল বা রোবোটিক মেকি কথা ছাড়া, বাস্তব জীবনের সমস্যা সমাধানকারী ও চরম তথ্যসমৃদ্ধ (High-Signal, Zero-Fluff) বাংলা ফেসবুক পোস্ট ও ফটোকার্ড ব্লুপ্রিন্ট তৈরি করা।
 
-【বর্তমান পোস্টের ক্যাটাগরি ও থিম】
-- সময় ও স্লট: {slot_info['name']}
-- মূল বিষয়বস্তু: {theme}
+# AUDIENCE & SLOT CONTEXT
+- সময় ও স্লট: {slot_info['name']} ({slot})
+- মূল ক্যাটাগরি: {theme}
 - ক্যাটাগরি বিবরণ: {description}
-- বিশেষ ফোকাস বিষয়: {chosen_focus}
-- বর্তমান সঠিক সাল: {current_year}
+- নির্দিষ্ট ফোকাস টপিক: {chosen_focus}
+- বর্তমান সঠিক ক্যালেন্ডার সাল: {current_year} (ভুল বা অতীত সাল উল্লেখ করা কঠোরভাবে নিষিদ্ধ)
 
-【পূর্ববর্তী কভার করা পোস্টসমূহ (এই বিষয়গুলো কোনোভাবেই পুনরাবৃত্তি করবে না)】:
+# PREVIOUS TOPICS (STRICT DEDUPLICATION)
 {recent_history_summary if recent_history_summary else "এখনো পূর্ববর্তী কোনো টপিক নেই। সম্পূর্ণ ইউনিক নতুন কিছু দিয়ে শুরু করো।"}
 
 {extra_warning}
 
-【পোস্ট লেখার গুরুত্বপূর্ণ নির্দেশনাবলী】:
-১. ইউনিকনেস (কঠোরভাবে বাধ্যতামূলক): পূর্বে কভার করা কোনো বিষয়, টুল বা আবিষ্কার নিয়ে পুনরাবৃত্তি পোস্ট তৈরি করা যাবে না। সবসময় সম্পূর্ণ নতুন কোনো উদ্ভাবন, চমকপ্রদ তথ্য বা ব্রেকথ্রু তুলে ধরবে।
-২. ভাষা: অত্যন্ত সহজ, সাবলীল, প্রাঞ্জল ও প্রমিত বাংলা। টেকনিক্যাল শব্দগুলো স্বাভাবিকভাবে বাংলা বা ইংরেজিতে রাখবে যাতে সাধারণ পাঠকও সহজে বুঝতে পারে।
-৩. সময় ও সাল সচেতনতা (কঠোর নিয়ম):
-   - বর্তমান সাল হচ্ছে {current_year}। কোনোভাবেই ভুল, ব্যাকডেটেড বা অতীত সাল (যেমন ২০২৪ বা ২০২৫) উল্লেখ করবে না।
-   - পোস্টের ভেতর অযথা নির্দিষ্ট কোনো সাল লেখার প্রয়োজন নেই। সালের পরিবর্তে "বর্তমানে", "আজকের দিনে", "এই যুগে" বা "আধুনিক প্রযুক্তির সময়ে" লিখবে।
-   - যদি একান্তই কোনো সাল উল্লেখ করতে হয়, তবে তা অবশ্যই বর্তমান সাল ({current_year}) হবে।
-৪. হুক লাইন (Hook): প্রথম ১-২ লাইনেই যেন পাঠকের তীব্র কৌতূহল বা পেইন-পয়েন্ট জেগে ওঠে (যাতে 'See More' ক্লিক করতে বাধ্য হয়)।
-৫. অডিয়েন্স ও কনটেন্ট স্ট্রাকচার:
-   - দুপুর ১২:০০ ('noon' স্লট): ছাত্র, চাকরিজীবী ও ফ্রিল্যান্সারদের দৈনন্দিন কাজের সময় বাঁচানো, এক্সেল/স্টাডি হ্যাকস এবং ফ্রি প্রোডাক্টিভিটি টিপস।
-   - রাত ০৮:০০ ('night' স্লট): ব্যবসায়ী, ই-কমার্স ও কো-ফাউন্ডারদের জন্য বি২বি অটোমেশন—খরচ কমানো, রাত ২টার সেলস মিস বন্ধ করা, কুরিয়ার/সিওডি অটোমেশন ও স্কেলিং।
-৬. বডি স্ট্রাকচার:
-   - আকর্ষণীয় শিরোনাম (উপযুক্ত ইমোজি সহ)।
-   - সহজ ভাষায় মূল সমস্যা ও তার এআই সমাধানের রূপরেখা।
-   - ৩ থেকে ৪টি স্পষ্ট বুলেট পয়েন্ট (বুলেট সাইন যেমন 🔹, 🚀, 💡, ⚡ ব্যবহার করবে)।
-   - বাস্তব জীবনে বা ব্যবসায় এর সুনির্দিষ্ট লাভ (ROI / সময় বাঁচানো)।
-৭. কল-টু-অ্যাকশন (CTA):
-   - দুপুর ১২:০০ ('noon' স্লট): পোস্টটি সেভ (Save 📌) করে রাখতে বা কমেন্টে মতামত জানানোর ফ্রেন্ডলি আহ্বান।
-   - রাত ০৮:০০ ('night' স্লট): সরাসরি ব্যবসায়ীদের ইনবাউন্ড মেসেজের আহ্বান (যেমন: "আপনার বিজনেসে এই অটোমেশন সেটআপ করতে কমেন্টে 'AUTOMATE' লিখুন অথবা আমাদের ইনবক্সে সরাসরি মেসেজ পাঠান।")।
-৮. হ্যাশট্যাগ: পোস্টের একদম শেষে উপযুক্ত ৫-৭টি হ্যাশট্যাগ অন্তর্ভুক্ত করবে (যেমন: {hashtags_list})।
-৮. ইমেজ ভিজ্যুয়াল ও হিরো কি-ওয়ার্ড নির্দেশিকা (সবচেয়ে গুরুত্বপূর্ণ - ১০০% প্রাসঙ্গিকতা বাধ্যতামূলক):
-   - পাঠক যেন ছবিটি দেখেই পোস্টের মূল বিষয়বস্তু ও অ্যাকশন তৎক্ষণাৎ অনুমান করতে পারে এবং ক্লিক করতে আগ্রহী হয়।
-    - পোস্টের বিষয়ের সাথে ছবির সরাসরি চাক্ষুষ মিল ও স্পর্শযোগ্য হিরো অবজেক্ট (Tangible Hero Object) থাকতে হবে:
-      * যেমন: সুপার এআই / এজিআই / নতুন এআই মডেল হলে -> নিখুঁত টাইটানিয়াম রোবোটিক মেকানিক্যাল হাত ৩ডি হলোগ্রাফিক নিউরাল নেটওয়ার্ক স্পর্শ করছে, অথবা হাই-টেক ল্যাবে স্বচ্ছ ক্রিস্টাল ক্যাসিংয়ের ভেতর উজ্জ্বল সোনালী কোয়ান্টাম প্রসেসর ও লেজার সার্কিট।
-      * যেমন: টাইপিং বা ভয়েস এআই পোস্ট হলে -> স্বয়ংক্রিয়ভাবে টাইপ হওয়া নিয়ন গ্লোয়িং মেকানিক্যাল কীবোর্ড বা সাউন্ডওয়েভ হলোগ্রাম।
-      * যেমন: সাইবার সিকিউরিটি/হ্যাকিং পোস্ট হলে -> ল্যাপটপের ওপর ভাসমান গ্লোয়িং সাইবার প্যাডলক বা ডিজিটাল সিকিউরিটি শিল্ড।
-      * যেমন: এআই এজেন্ট বা রোবোটিক্স পোস্ট হলে -> অত্যাধুনিক রোবোটিক মেকানিক্যাল হ্যান্ড বা অটোনোমাস এআই ইন্টারফেস।
-      * যেমন: ভিআর/এআর হেডসেট পোস্ট হলে -> প্রিমিয়াম আধুনিক স্মার্ট হেডসেট ও ভাসমান ৩ডি হলোগ্রাম।
-      * যেমন: মহাকাশ বা টেলিস্কোপ পোস্ট হলে -> রঙিন নেবুলা, গ্যালাক্সি বা তারার জন্মদৃশ্য।
-    - 🚨 কঠোর নিষেধাজ্ঞা (Strictly Forbidden):
-      * অন্ধকার শূন্যতায় কোনো বিমূর্ত আলোর বল, গোলক, ব্লব বা লেন্স ফ্লেয়ার (Strictly NO abstract glowing orb, NO plain light blob in dark void, NO generic lens flare) সম্পূর্ণ নিষিদ্ধ! ছবিতে অবশ্যই একটি স্পষ্ট স্পর্শযোগ্য বাস্তব সাবজেক্ট থাকতে হবে যা দেখলেই দর্শকের ডোপামিন রিলিজ হয় ও ক্লিক করতে ইচ্ছে করে।
-      * মহাকাশ বা নক্ষত্র সংক্রান্ত পোস্ট ছাড়া অন্য কোনো পোস্টের ছবিতে আকাশ, গ্যালাক্সি বা তারা দেওয়া সম্পূর্ণ নিষিদ্ধ!
-      * কোনো সাধারণ ফাঁকা অফিস রুম, তারের জটলা বা অন্ধকার অস্পষ্ট ব্লব দেওয়া সম্পূর্ণ নিষিদ্ধ।
-   - 🚨 কঠোর জেন্ডার ফিল্টার: ছবিতে কোনো নারী বা মহিলার অবয়ব (strictly NO female, no woman, no girl, no lady, no feminine figures) রাখা সম্পূর্ণ নিষিদ্ধ।
-   - ছবির শৈলী: হাইপার-রিয়েলিস্টিক এডিটোরিয়াল ফটোগ্রাফি (Wired, National Geographic বা TechCrunch কভারের মতো ঝকঝকে ও সিনেমাটিক)।
+# STEP-BY-STEP REASONING PROTOCOL (Fabric Thinking Flow)
+পোস্ট লেখার আগে নিচের ৫টি ধাপ নিখুঁতভাবে অনুসরণ করো:
+Step 1 [High-Signal Problem Isolation]: নির্বাচিত বিষয়ের ({chosen_focus}) সবচেয়ে বড় বাস্তব পেইন-পয়েন্ট বা কাউন্টার-ইনটুইটিভ সত্য চিহ্নিত করো। কোনোরকম সাধারণ তাত্ত্বিক ভূমিকা দেবে না।
+Step 2 [Psychological Hook Engineering]: প্রথম ২ লাইনেই তীব্র কৌতূহল বা পেইন-পয়েন্ট জাগিয়ে তোলো। নম্বর-ফার্স্ট ওপেনার (যেমন: "গত সপ্তাহে ৩টি ই-কমার্স শপের...", "প্রতিদিন মাত্র ২০ মিনিটে...") অথবা কন্ট্রোল্ড কনট্রাস্ট ব্যবহার করো। কখনোই গতানুগতিক প্রশ্ন ("আপনি কি অমুক সমস্যায় ভুগছেন?") দিয়ে শুরু করবে না।
+Step 3 [Audience-Specific Drip Architecture]:
+   - যদি 'noon' স্লট হয় (সাধারণ মানুষ/ছাত্র/চাকরিজীবী): বাস্তব জীবনের কাজের গতি বাড়ানো, এক্সেল/অফিস হ্যাকস বা ফ্রি টুলস ব্যবহারের ৩-৪টি ঝরঝরে বুলেট পয়েন্ট (🔹 বা ⚡) দাও।
+   - যদি 'night' স্লট হয় (ব্যবসা/কো-ফাউন্ডার/ই-কমার্স): খরচ বাঁচানো, রাত ২টায় কাস্টমার মেসেজ হ্যান্ডল করা, কুরিয়ার রিটার্ন কমানো ও সেলস কনভার্সনের কংক্রিট বিজনেস আরওআই (ROI) দেখাও।
+Step 4 [Frictionless Conversion CTA]:
+   - 'noon' স্লটের জন্য: ফ্রেন্ডলি ড্রাইভ—পোস্টটি সেভ (Save 📌) করে রাখা বা বন্ধুদের মেনশন দেওয়া।
+   - 'night' স্লটের জন্য: স্পষ্ট ও প্রফেশনাল ইনবাউন্ড লিড ম্যাগনেট—কমেন্টে 'AUTOMATE' লিখলে বা ইনবক্সে মেসেজ পাঠালে ফ্রি প্রসেস অডিট কনসালটেশন।
+Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্য ১-২ লাইনের হাইপার-ক্লিকেবল বাংলা হেডলাইন, একটি জ্বলজ্বলে হাইলাইট অংশ এবং এআই ইমেজের জন্য একটি স্পষ্ট বাস্তব স্পর্শযোগ্য অবজেক্টের (Tangible Hero Object) হাই-ডিটেইল ইংরেজি প্রম্পট নির্ধারণ করো।
 
-【আউটপুট ফরম্যাট】:
-অবশ্যই এবং শুধুমাত্র একটি ভ্যালিড JSON অবজেক্ট আউটপুট হিসেবে দাও, কোনো বাড়তি কথা ছাড়া:
+# STRICT CONSTRAINTS & NEGATIVE DIRECTIVES (LinkedIn Humanizer V3 & Anti-Glitch Rules)
+১. 🚫 নিষিদ্ধ রোবোটিক শব্দ (Forbidden AI Cliches): "In today's fast-paced digital world", "Delve into", "Revolutionize", "Tapestry", "Game changer", "Furthermore", "It is important to note", "ডিজিটাল যুগের এই সময়ে" ইত্যাদি ক্লিশে সম্পূর্ণ নিষিদ্ধ।
+২. 🚫 রিভিল ব্রিজ নিষিদ্ধ: "The result?", "The outcome?", "Plot twist:", "Here's what happened:", "ফলাফল কী?", "আসল ঘটনা কী?" জাতীয় মেকানিকাল লাইন লিখবে না। সরাসরি গল্প ও তথ্য বলবে।
+৩. 📱 মোবাইল ড্রিপ রিডাবিলিটি: কোনো বড় প্যারাগ্রাফ লিখবে না। ১ থেকে সর্বোচ্চ ২ লাইনের পর ডাবল লাইন ব্রেক দেবে।
+৪. 🎨 ইমেজ নির্দেশিকা ও স্পর্শযোগ্য হিরো অবজেক্ট (১০০% প্রাসঙ্গিকতা বাধ্যতামূলক):
+   - ছবিতে কোনো অন্ধকার শূন্যতায় বিমূর্ত আলোর গোলক, ব্লব বা সাধারণ লেন্স ফ্লেয়ার (Strictly NO abstract glowing orb, NO plain light blob) সম্পূর্ণ নিষিদ্ধ!
+   - মহাকাশ ছাড়া সাধারণ পোস্টে তারা বা গ্যালাক্সি দেওয়া সম্পূর্ণ নিষিদ্ধ।
+   - স্পর্শযোগ্য বাস্তব অবজেক্ট থাকতে হবে (যেমন: মেকানিক্যাল আরজিবি কীবোর্ড, টাইটানিয়াম রোবোটিক হ্যান্ড, নিওন ক্রিস্টাল প্রসেসর চিপ, ডিজিটাল সাইবার শিল্ড ইত্যাদি)।
+   - 🚨 কঠোর জেন্ডার ফিল্টার: ছবিতে কোনো নারী বা মহিলার অবয়ব (strictly NO female, no woman, no girl, no lady, no feminine figures) রাখা সম্পূর্ণ নিষিদ্ধ।
+   - ছবির কোয়ালিটি: 8k cinematic photography, editorial quality, strictly no text, no watermark.
+৫. 🏷️ হ্যাশট্যাগ: পোস্টের একদম শেষে উপযুক্ত ৫-৭টি হ্যাশট্যাগ (যেমন: {hashtags_list}) দেবে।
+
+# OUTPUT FORMAT (Strict JSON Only)
+অবশ্যই এবং শুধুমাত্র নিচের ভ্যালিড JSON অবজেক্ট আউটপুট হিসেবে দাও, কোনো প্রিঅ্যাম্বল বা বাড়তি কথা ছাড়া:
 {{
-  "title": "পোস্টের মূল আকর্ষণীয় শিরোনাম (ইমোজি সহ)",
-  "card_category": "Short 1-2 words category for the photo card badge (e.g. Artificial Intelligence, Cybersecurity, Deep Space, Tech Innovation)",
-  "card_headline": "ছবির ওপর ফটোকার্ডে লেখার মতো ১-২ লাইনের অত্যন্ত আকর্ষণীয় বাংলা সাবটাইটেল (যেমন: আর টাইপ করতে হবে না! স্ক্রিন দেখে কাজ করে দেয় এমন ৪টি এআই)",
-  "card_highlight": "সাবটাইটেলের যে অংশটুকু হলুদ রঙে জ্বলজ্বল করবে (যেমন: এমন ৪টি এআই)",
-  "content": "সম্পূর্ণ ফেসবুক পোস্টটি এখানে থাকবে (শিরোনাম, হুক, পয়েন্ট, প্রশ্ন এবং হ্যাশট্যাগ সহ সবকিছু সুন্দর লাইন ব্রেক দিয়ে সাজানো)",
-  "hero_keywords": ["পোস্টের মূল বিষয়ের ১টি নির্দিষ্ট ইংরেজি কীওয়ার্ড (যেমন: Mechanical keyboard typing RGB)", "আরেকটি সুনির্দিষ্ট ইংরেজি কীওয়ার্ড (যেমন: Computer workstation setup)"],
-  "image_prompt": "A hyper-realistic 8k photograph visually capturing the exact core action and hero object of this post in vivid detail. Cinematic studio lighting, sharp focus, 35mm photography, strictly NO female, no woman, no people, no text, no watermark.",
+  "title": "পোস্টের মূল আকর্ষণীয় শিরোনাম (উপযুক্ত ইমোজি সহ)",
+  "card_category": "Short 1-2 words category for the photo card badge (e.g. AI Productivity, Business Automation, E-Commerce AI)",
+  "card_headline": "ছবির ফটোকার্ডে লেখার মতো ১-২ লাইনের অত্যন্ত আকর্ষণীয় বাংলা হেডলাইন (যেমন: ম্যানুয়াল রিপ্লাই বন্ধ করুন: যেভাবে এআই ২৪ ঘণ্টা সেলস আনে)",
+  "card_highlight": "হেডলাইনের যে নির্দিষ্ট ১-৩টি শব্দ উজ্জ্বল হলুদ রঙে জ্বলজ্বল করবে (যেমন: ২৪ ঘণ্টা সেলস)",
+  "content": "সম্পূর্ণ ফেসবুক পোস্টটি এখানে থাকবে (হুক, গল্প/বাস্তবতা, বুলেট পয়েন্ট, সমাধান, কল-টু-অ্যাকশন এবং হ্যাশট্যাগ সহ সবকিছু সুন্দর লাইন ব্রেক দিয়ে সাজানো)",
+  "hero_keywords": ["পোস্টের মূল সাবজেক্টের ইংরেজি কীওয়ার্ড ১", "ইংরেজি কীওয়ার্ড ২"],
+  "image_prompt": "A hyper-realistic 8k photograph visually capturing the exact core action and tangible hero object of this post. Cinematic studio lighting, sharp focus, 35mm photography, strictly NO female, no woman, no people, no text, no watermark.",
   "topic_summary": "টপিকটির ১ লাইনের সংক্ষেপ (ভবিষ্যতে ডুপ্লিকেট রোধের জন্য)"
 }}
 """
-            logger.info(f"Generating unique content for slot '{slot}' ({theme}) [Attempt {attempt}/{max_attempts}]...")
+            logger.info(f"Generating unique content for slot '{slot}' ({theme}) using Hybrid Master Engine [Attempt {attempt}/{max_attempts}]...")
             parsed = {}
             try:
                 raw_response = self._call_gemini_api(prompt)
@@ -136,7 +126,14 @@ class ContentGenerator:
                     chosen_focus = random.choice(focus_areas)
                     continue
 
-            # Passed uniqueness check
+            # Passed uniqueness check - Apply LinkedIn Humanizer V3 & Fabric zero-fluff post-processing
+            if parsed and parsed.get("content"):
+                humanized = humanize_post(parsed["content"])
+                parsed["content"] = humanized["humanized_text"]
+                parsed["humanizer_audit"] = humanized
+                logger.info(f"Hybrid Humanizer Pass Complete: Final {humanized['word_count']} words, "
+                            f"{len(humanized['vocab_cleaned'])} AI markers sanitized.")
+
             return parsed
 
         return parsed
@@ -300,13 +297,16 @@ class ContentGenerator:
             "night": "B2B Business Automation"
         }
 
+        humanized = humanize_post(content)
+
         return {
             "title": title,
             "card_category": slot_names.get(slot, "AI Automation"),
             "card_headline": f"{focus_area}: স্মার্ট সলিউশন",
             "card_highlight": "স্মার্ট সলিউশন",
-            "content": content,
+            "content": humanized["humanized_text"],
+            "humanizer_audit": humanized,
             "hero_keywords": [focus_area, slot_info['theme']],
-            "image_prompt": f"Realistic editorial photograph representing {focus_area}, high detail, 8k resolution, cinematic lighting, photorealistic, no female, no woman, no text.",
+            "image_prompt": f"Realistic editorial photograph representing {focus_area}, high detail, 8k resolution, cinematic lighting, photorealistic, strictly no female, no woman, no people, no text.",
             "topic_summary": f"{slot_info['theme']} - {focus_area}"
         }
