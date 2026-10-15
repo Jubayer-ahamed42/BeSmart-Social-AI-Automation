@@ -119,7 +119,34 @@ class SocialPostHumanizer:
         paragraphs = [p.strip() for p in text.split("\n") if p.strip()]
         return "\n\n".join(paragraphs)
 
-    def humanize(self, text: str) -> Dict[str, Any]:
+    def enforce_strict_two_hashtags(self, text: str, default_topic_tag: str = "#BusinessAutomation") -> str:
+        """
+        Enforces Meta's optimal algorithm policy:
+        Strictly maximum 2 hashtags:
+        - 1st: #BeSmartWithAI
+        - 2nd: Topic hashtag (extracted from post or default_topic_tag)
+        Strips away any 3rd, 4th, 5th+ hashtags to protect organic reach.
+        """
+        tags = re.findall(r"#[A-Za-z0-9_\u0980-\u09FF]+", text)
+
+        # Remove trailing empty lines and trailing hashtag lines safely
+        lines = text.strip().splitlines()
+        while lines and (not lines[-1].strip() or lines[-1].strip().startswith("#")):
+            lines.pop()
+        clean_body = "\n".join(lines).strip()
+
+        primary_tag = "#BeSmartWithAI"
+        secondary_tag = default_topic_tag
+
+        # Find first non-primary tag to use as topic tag
+        for tag in tags:
+            if tag.lower() != primary_tag.lower():
+                secondary_tag = tag
+                break
+
+        return f"{clean_body}\n\n{primary_tag} {secondary_tag}"
+
+    def humanize(self, text: str, default_topic_tag: str = "#BusinessAutomation") -> Dict[str, Any]:
         """
         Executes complete multi-pass humanization pipeline on a Facebook post.
         Returns cleaned text, metadata, and audit summary.
@@ -131,6 +158,7 @@ class SocialPostHumanizer:
         text, vocab_cleaned = self.scrub_ai_vocabulary(text)
         text = self.calibrate_em_dashes(text)
         text = self.format_spacing(text)
+        text = self.enforce_strict_two_hashtags(text, default_topic_tag=default_topic_tag)
 
         char_count = len(text)
         word_count = len(text.split())
@@ -148,6 +176,6 @@ class SocialPostHumanizer:
 # Global singleton helper
 _humanizer = SocialPostHumanizer()
 
-def humanize_post(text: str) -> Dict[str, Any]:
+def humanize_post(text: str, default_topic_tag: str = "#BusinessAutomation") -> Dict[str, Any]:
     """Helper function to run the humanizer pipeline on post copy."""
-    return _humanizer.humanize(text)
+    return _humanizer.humanize(text, default_topic_tag=default_topic_tag)

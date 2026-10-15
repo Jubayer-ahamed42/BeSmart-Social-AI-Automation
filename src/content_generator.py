@@ -70,8 +70,8 @@ Step 3 [Audience-Specific Drip Architecture]:
    - যদি 'noon' স্লট হয় (সাধারণ মানুষ/ছাত্র/চাকরিজীবী): বাস্তব জীবনের কাজের গতি বাড়ানো, এক্সেল/অফিস হ্যাকস বা ফ্রি টুলস ব্যবহারের ৩-৪টি ঝরঝরে বুলেট পয়েন্ট (🔹 বা ⚡) দাও।
    - যদি 'night' স্লট হয় (ব্যবসা/কো-ফাউন্ডার/ই-কমার্স): খরচ বাঁচানো, রাত ২টায় কাস্টমার মেসেজ হ্যান্ডল করা, কুরিয়ার রিটার্ন কমানো ও সেলস কনভার্সনের কংক্রিট বিজনেস আরওআই (ROI) দেখাও।
 Step 4 [Frictionless Conversion CTA]:
-   - 'noon' স্লটের জন্য: ফ্রেন্ডলি ড্রাইভ—পোস্টটি সেভ (Save 📌) করে রাখা বা বন্ধুদের মেনশন দেওয়া।
-   - 'night' স্লটের জন্য: স্পষ্ট ও প্রফেশনাল ইনবাউন্ড লিড ম্যাগনেট—কমেন্টে 'AUTOMATE' লিখলে বা ইনবক্সে মেসেজ পাঠালে ফ্রি প্রসেস অডিট কনসালটেশন।
+   - 'noon' স্লটের জন্য: ফ্রেন্ডলি ড্রাইভ—পোস্টটি সেভ (Save 📌) করে রাখা, বন্ধুদের মেনশন দেওয়া অথবা পেজের WhatsApp বাটনে মেসেজ পাঠানোর স্পষ্ট আহ্বান।
+   - 'night' স্লটের জন্য: স্পষ্ট ও প্রফেশনাল ইনবাউন্ড লিড ম্যাগনেট—কমেন্টে 'AUTOMATE' লেখা অথবা আমাদের পেজের সরাসরি WhatsApp বাটনে মেসেজ পাঠাতে বলা (কোনো র-লিংক লিখবে না, ইউজার সরাসরি পেজের বাটন ব্যবহার করবে)।
 Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্য ১-২ লাইনের হাইপার-ক্লিকেবল বাংলা হেডলাইন, একটি জ্বলজ্বলে হাইলাইট অংশ এবং এআই ইমেজের জন্য একটি স্পষ্ট বাস্তব স্পর্শযোগ্য অবজেক্টের (Tangible Hero Object) হাই-ডিটেইল ইংরেজি প্রম্পট নির্ধারণ করো।
 
 # STRICT CONSTRAINTS & NEGATIVE DIRECTIVES (LinkedIn Humanizer V3 & Anti-Glitch Rules)
@@ -84,7 +84,7 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
    - স্পর্শযোগ্য বাস্তব অবজেক্ট থাকতে হবে (যেমন: মেকানিক্যাল আরজিবি কীবোর্ড, টাইটানিয়াম রোবোটিক হ্যান্ড, নিওন ক্রিস্টাল প্রসেসর চিপ, ডিজিটাল সাইবার শিল্ড ইত্যাদি)।
    - 🚨 কঠোর জেন্ডার ফিল্টার: ছবিতে কোনো নারী বা মহিলার অবয়ব (strictly NO female, no woman, no girl, no lady, no feminine figures) রাখা সম্পূর্ণ নিষিদ্ধ।
    - ছবির কোয়ালিটি: 8k cinematic photography, editorial quality, strictly no text, no watermark.
-৫. 🏷️ হ্যাশট্যাগ: পোস্টের একদম শেষে উপযুক্ত ৫-৭টি হ্যাশট্যাগ (যেমন: {hashtags_list}) দেবে।
+৫. 🏷️ হ্যাশট্যাগ কঠোর নিয়ম (Strict Max 2 Hashtags): পোস্টের একদম শেষে শুধুমাত্র এবং সর্বোচ্চ ২টি হ্যাশট্যাগ ({hashtags_list}) দেবে। কোনো অবস্থাতেই ২টি হ্যাশট্যাগের বেশি দেবে না।
 
 # OUTPUT FORMAT (Strict JSON Only)
 অবশ্যই এবং শুধুমাত্র নিচের ভ্যালিড JSON অবজেক্ট আউটপুট হিসেবে দাও, কোনো প্রিঅ্যাম্বল বা বাড়তি কথা ছাড়া:
@@ -128,7 +128,8 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
 
             # Passed uniqueness check - Apply LinkedIn Humanizer V3 & Fabric zero-fluff post-processing
             if parsed and parsed.get("content"):
-                humanized = humanize_post(parsed["content"])
+                default_topic_tag = slot_info["hashtags"][1] if len(slot_info.get("hashtags", [])) > 1 else "#BusinessAutomation"
+                humanized = humanize_post(parsed["content"], default_topic_tag=default_topic_tag)
                 parsed["content"] = humanized["humanized_text"]
                 parsed["humanizer_audit"] = humanized
                 logger.info(f"Hybrid Humanizer Pass Complete: Final {humanized['word_count']} words, "
@@ -276,9 +277,9 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
         title = f"🚀 {slot_info['theme']}: প্র্যাকটিক্যাল গাইড"
         
         if slot == "night":
-            cta_line = "আপনার বিজনেসে এই অটোমেশন সেটআপ করতে কমেন্টে 'AUTOMATE' লিখুন অথবা আমাদের ইনবক্সে সরাসরি মেসেজ পাঠান!"
+            cta_line = "আপনার বিজনেসে এই ফুল-অটোমেটেড সিস্টেম সেটআপ করতে কমেন্টে 'AUTOMATE' লিখুন অথবা আমাদের পেজের WhatsApp বাটনে সরাসরি মেসেজ পাঠান!"
         else:
-            cta_line = "আপনার মতামত কমেন্টে জানান এবং বন্ধুদের সাথে শেয়ার করে পোস্টটি সেইভ (Save 📌) রাখুন!"
+            cta_line = "আপনার মতামত কমেন্টে জানান, বন্ধুদের সাথে শেয়ার করে পোস্টটি সেইভ (Save 📌) রাখুন অথবা পেজের WhatsApp বাটনে আমাদের সাথে কানেক্ট হন!"
 
         content = f"""{title}
 
@@ -297,7 +298,8 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
             "night": "B2B Business Automation"
         }
 
-        humanized = humanize_post(content)
+        default_topic_tag = slot_info["hashtags"][1] if len(slot_info.get("hashtags", [])) > 1 else "#BusinessAutomation"
+        humanized = humanize_post(content, default_topic_tag=default_topic_tag)
 
         return {
             "title": title,
