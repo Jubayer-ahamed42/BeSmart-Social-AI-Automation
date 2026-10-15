@@ -47,8 +47,8 @@ def run_poster(slot: str = "auto", dry_run: bool = False, skip_image: bool = Fal
         slot = determine_current_slot()
     
     if slot not in SLOTS:
-        logger.warning(f"স্লট '{slot}' পাওয়া যায়নি, ডিফল্ট 'morning' নির্বাচন করা হলো।")
-        slot = "morning"
+        logger.warning(f"স্লট '{slot}' পাওয়া যায়নি, ডিফল্ট 'noon' নির্বাচন করা হলো।")
+        slot = "noon"
 
     slot_info = SLOTS[slot]
     logger.info(f"🎯 নির্বাচিত স্লট: {slot_info['name']}")
@@ -195,7 +195,7 @@ def verify_credentials() -> None:
         print("  🔑 GEMINI_API_KEY পাওয়া গেছে। টেস্ট কল করা হচ্ছে...")
         try:
             gen = ContentGenerator(api_key=GEMINI_API_KEY)
-            res = gen.generate_post(slot="morning", recent_history_summary="")
+            res = gen.generate_post(slot="noon", recent_history_summary="")
             print(f"  ✅ Gemini API সফলভাবে সংযুক্ত! শিরোনাম: {res.get('title')}")
         except Exception as e:
             print(f"  ❌ Gemini API ত্রুটি: {e}")
@@ -220,9 +220,9 @@ def main():
     parser = argparse.ArgumentParser(description="Autonomous 24/7 Facebook Page Poster")
     parser.add_argument(
         "--slot",
-        choices=["morning", "noon", "afternoon", "night", "auto"],
+        choices=["noon", "night", "auto"],
         default="auto",
-        help="পোস্টের স্লট নির্বাচন করুন (morning=AI, noon=Tech, afternoon=Cybersecurity, night=Science, auto=সময় অনুযায়ী)"
+        help="পোস্টের স্লট নির্বাচন করুন (noon=AI Productivity, night=B2B Business Automation, auto=সময় অনুযায়ী)"
     )
     parser.add_argument(
         "--dry-run",

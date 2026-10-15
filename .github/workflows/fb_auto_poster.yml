@@ -2,16 +2,10 @@ name: Facebook Page 24/7 Autonomous Poster
 
 on:
   schedule:
-    # Primary: 6:55 AM BST (00:55 UTC) & Catch-up: 7:15 AM BST (01:15 UTC) -> Morning AI (07:00 AM BST Target)
-    - cron: '55 0 * * *'
-    - cron: '15 1 * * *'
-    # Primary: 11:55 AM BST (05:55 UTC) & Catch-up: 12:15 PM BST (06:15 UTC) -> Noon Tech (12:00 PM BST Target)
+    # 1. Slot Noon: 11:55 AM BST (05:55 UTC) & Catch-up: 12:15 PM BST (06:15 UTC) -> AI Productivity (12:00 PM BST Target)
     - cron: '55 5 * * *'
     - cron: '15 6 * * *'
-    # Primary: 3:55 PM BST (09:55 UTC) & Catch-up: 4:15 PM BST (10:15 UTC) -> Afternoon Security (04:00 PM BST Target)
-    - cron: '55 9 * * *'
-    - cron: '15 10 * * *'
-    # Primary: 7:55 PM BST (13:55 UTC) & Catch-up: 8:15 PM BST (14:15 UTC) -> Night Science (08:00 PM BST Target)
+    # 2. Slot Night: 7:55 PM BST (13:55 UTC) & Catch-up: 8:15 PM BST (14:15 UTC) -> B2B Automation (08:00 PM BST Target)
     - cron: '55 13 * * *'
     - cron: '15 14 * * *'
   
@@ -25,9 +19,7 @@ on:
         type: choice
         options:
           - auto
-          - morning
           - noon
-          - afternoon
           - night
       dry_run:
         description: 'ড্রাই-রান মোড (ফেসবুকে পোস্ট হবে না, শুধু টেস্ট হবে)'
@@ -74,9 +66,7 @@ jobs:
           
           if [ "${{ github.event_name }}" = "schedule" ]; then
             case "${{ github.event.schedule }}" in
-              "55 0 * * *"|"15 1 * * *")  SLOT_PARAM="morning" ;;
               "55 5 * * *"|"15 6 * * *")  SLOT_PARAM="noon" ;;
-              "55 9 * * *"|"15 10 * * *") SLOT_PARAM="afternoon" ;;
               "55 13 * * *"|"15 14 * * *") SLOT_PARAM="night" ;;
               *)                          SLOT_PARAM="auto" ;;
             esac

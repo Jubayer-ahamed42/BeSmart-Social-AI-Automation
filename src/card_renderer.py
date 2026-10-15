@@ -11,47 +11,27 @@ from src.config import BASE_DIR, TEMP_DIR
 
 logger = logging.getLogger(__name__)
 
-# Color themes matching our 4 daily slots
+# Color themes matching our dual daily slots
 SLOT_THEMES = {
-    "morning": {
+    "noon": {
         "badge_border": "rgba(56, 189, 248, 0.65)",
         "badge_bg": "rgba(14, 165, 233, 0.22)",
         "badge_color": "#38bdf8",
         "avatar_border": "#38bdf8",
         "avatar_glow": "rgba(56, 189, 248, 0.6)",
         "brand_border": "rgba(56, 189, 248, 0.4)",
-        "default_category": "Artificial Intelligence",
-        "icon": "🤖"
+        "default_category": "AI Productivity & Hacks",
+        "icon": "⚡"
     },
-    "noon": {
+    "night": {
         "badge_border": "rgba(52, 211, 153, 0.65)",
         "badge_bg": "rgba(16, 185, 129, 0.22)",
         "badge_color": "#34d399",
         "avatar_border": "#34d399",
         "avatar_glow": "rgba(52, 211, 153, 0.6)",
         "brand_border": "rgba(52, 211, 153, 0.4)",
-        "default_category": "Tech & Innovation",
-        "icon": "⚡"
-    },
-    "afternoon": {
-        "badge_border": "rgba(251, 191, 36, 0.65)",
-        "badge_bg": "rgba(245, 158, 11, 0.22)",
-        "badge_color": "#fbbf24",
-        "avatar_border": "#fbbf24",
-        "avatar_glow": "rgba(251, 191, 36, 0.6)",
-        "brand_border": "rgba(251, 191, 36, 0.4)",
-        "default_category": "Cybersecurity & Privacy",
-        "icon": "🛡️"
-    },
-    "night": {
-        "badge_border": "rgba(192, 132, 252, 0.65)",
-        "badge_bg": "rgba(168, 85, 247, 0.22)",
-        "badge_color": "#c084fc",
-        "avatar_border": "#c084fc",
-        "avatar_glow": "rgba(192, 132, 252, 0.6)",
-        "brand_border": "rgba(192, 132, 252, 0.4)",
-        "default_category": "Science & Deep Space",
-        "icon": "🌌"
+        "default_category": "B2B Business Automation",
+        "icon": "🤖"
     }
 }
 
@@ -151,7 +131,7 @@ class PhotoCardRenderer:
         headline: str,
         category: str = "",
         highlight_words: str = "",
-        slot: str = "morning",
+        slot: str = "noon",
         output_path: Optional[Path] = None
     ) -> Path:
         """
@@ -164,7 +144,7 @@ class PhotoCardRenderer:
             logger.warning(f"Base image not found at {base_image_path}")
             return base_image_path
 
-        theme = SLOT_THEMES.get(slot, SLOT_THEMES["morning"])
+        theme = SLOT_THEMES.get(slot, SLOT_THEMES["noon"])
         display_category = category.strip() if category.strip() else theme["default_category"]
         clean_headline = self._clean_card_text(headline)
         formatted_headline = self._apply_highlights(clean_headline, highlight_words)
@@ -420,14 +400,12 @@ class PhotoCardRenderer:
             img = Image.alpha_composite(img, overlay)
             draw = ImageDraw.Draw(img)
 
-            theme = SLOT_THEMES.get(slot, SLOT_THEMES["morning"])
+            theme = SLOT_THEMES.get(slot, SLOT_THEMES["noon"])
             display_category = category.strip() if category.strip() else theme["default_category"]
 
             theme_color_map = {
-                "morning": (56, 189, 248),
-                "noon": (52, 211, 153),
-                "afternoon": (251, 191, 36),
-                "night": (192, 132, 252)
+                "noon": (56, 189, 248),
+                "night": (52, 211, 153)
             }
             accent_rgb = theme_color_map.get(slot, (56, 189, 248))
 

@@ -47,7 +47,7 @@ class ImageGenerator:
         prompt: str,
         title: str = "",
         hero_keywords: Optional[List[str]] = None,
-        slot: str = "morning",
+        slot: str = "noon",
         used_image_sources: Optional[Set[str]] = None
     ) -> Optional[Path]:
         """
@@ -225,10 +225,8 @@ class ImageGenerator:
 
         # Ambient background glow
         theme_colors = {
-            "morning": (14, 165, 233),    # Electric Sky Blue (AI)
-            "noon": (16, 185, 129),       # Emerald Tech (Innovation)
-            "afternoon": (245, 158, 11),  # Amber / Security Gold (Cybersecurity)
-            "night": (168, 85, 247)       # Cosmic Purple (Space)
+            "noon": (14, 165, 233),       # Electric Sky Blue (AI Productivity)
+            "night": (16, 185, 129)       # Emerald Green (B2B Automation)
         }
         accent = theme_colors.get(slot, (14, 165, 233))
 
@@ -250,12 +248,10 @@ class ImageGenerator:
 
         # Category pill badge
         slot_names = {
-            "morning": "ARTIFICIAL INTELLIGENCE",
-            "noon": "TECH & INNOVATION",
-            "afternoon": "CYBERSECURITY & PRIVACY",
-            "night": "SCIENCE & DEEP SPACE"
+            "noon": "AI PRODUCTIVITY & HACKS",
+            "night": "B2B BUSINESS AUTOMATION"
         }
-        badge_text = f"  {slot_names.get(slot, 'SMART TECH')}  "
+        badge_text = f"  {slot_names.get(slot, 'SMART AUTOMATION')}  "
         draw.rectangle([(margin + 40, margin + 40), (margin + 380, margin + 90)], fill=(15, 23, 42), outline=accent, width=2)
         draw.text((margin + 60, margin + 50), badge_text, fill=accent, font=badge_font)
 

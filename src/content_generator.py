@@ -28,7 +28,7 @@ class ContentGenerator:
         Generates Facebook post content and image prompt using Google Gemini API.
         Includes an automatic similarity/duplicate verification loop to guarantee 100% uniqueness.
         """
-        slot_info = SLOTS.get(slot, SLOTS["morning"])
+        slot_info = SLOTS.get(slot, SLOTS["noon"])
         theme = slot_info["theme"]
         description = slot_info["description"]
         focus_areas = slot_info["focus_areas"]
@@ -67,14 +67,19 @@ class ContentGenerator:
    - বর্তমান সাল হচ্ছে {current_year}। কোনোভাবেই ভুল, ব্যাকডেটেড বা অতীত সাল (যেমন ২০২৪ বা ২০২৫) উল্লেখ করবে না।
    - পোস্টের ভেতর অযথা নির্দিষ্ট কোনো সাল লেখার প্রয়োজন নেই। সালের পরিবর্তে "বর্তমানে", "আজকের দিনে", "এই যুগে" বা "আধুনিক প্রযুক্তির সময়ে" লিখবে।
    - যদি একান্তই কোনো সাল উল্লেখ করতে হয়, তবে তা অবশ্যই বর্তমান সাল ({current_year}) হবে।
-৪. হুক লাইন (Hook): প্রথম ১-২ লাইনেই যেন পাঠকের কৌতূহল জেগে ওঠে।
-৫. বডি স্ট্রাকচার:
+৪. হুক লাইন (Hook): প্রথম ১-২ লাইনেই যেন পাঠকের তীব্র কৌতূহল বা পেইন-পয়েন্ট জেগে ওঠে (যাতে 'See More' ক্লিক করতে বাধ্য হয়)।
+৫. অডিয়েন্স ও কনটেন্ট স্ট্রাকচার:
+   - দুপুর ১২:০০ ('noon' স্লট): ছাত্র, চাকরিজীবী ও ফ্রিল্যান্সারদের দৈনন্দিন কাজের সময় বাঁচানো, এক্সেল/স্টাডি হ্যাকস এবং ফ্রি প্রোডাক্টিভিটি টিপস।
+   - রাত ০৮:০০ ('night' স্লট): ব্যবসায়ী, ই-কমার্স ও কো-ফাউন্ডারদের জন্য বি২বি অটোমেশন—খরচ কমানো, রাত ২টার সেলস মিস বন্ধ করা, কুরিয়ার/সিওডি অটোমেশন ও স্কেলিং।
+৬. বডি স্ট্রাকচার:
    - আকর্ষণীয় শিরোনাম (উপযুক্ত ইমোজি সহ)।
-   - সহজ ভাষায় মূল বিষয় বা বিজ্ঞানের আবিষ্কারের ব্যাখ্যা।
-   - ৩ থেকে ৪টি স্পষ্ট বুলেট পয়েন্ট (বুলেট সাইন যেমন 🔹, 🚀, 💡, 🔬 ব্যবহার করবে)।
-   - এটি কীভাবে মানুষের জীবন বা ভবিষ্যৎ বদলে দিচ্ছে তার সংক্ষেপ।
-৬. এনগেজমেন্ট প্রশ্ন: পোস্টের শেষে পাঠকদের মতামত জানতে চেয়ে একটি আকর্ষণীয় উন্মুক্ত প্রশ্ন।
-৭. হ্যাশট্যাগ: পোস্টের একদম শেষে উপযুক্ত ৫-৭টি হ্যাশট্যাগ অন্তর্ভুক্ত করবে (যেমন: {hashtags_list})।
+   - সহজ ভাষায় মূল সমস্যা ও তার এআই সমাধানের রূপরেখা।
+   - ৩ থেকে ৪টি স্পষ্ট বুলেট পয়েন্ট (বুলেট সাইন যেমন 🔹, 🚀, 💡, ⚡ ব্যবহার করবে)।
+   - বাস্তব জীবনে বা ব্যবসায় এর সুনির্দিষ্ট লাভ (ROI / সময় বাঁচানো)।
+৭. কল-টু-অ্যাকশন (CTA):
+   - দুপুর ১২:০০ ('noon' স্লট): পোস্টটি সেভ (Save 📌) করে রাখতে বা কমেন্টে মতামত জানানোর ফ্রেন্ডলি আহ্বান।
+   - রাত ০৮:০০ ('night' স্লট): সরাসরি ব্যবসায়ীদের ইনবাউন্ড মেসেজের আহ্বান (যেমন: "আপনার বিজনেসে এই অটোমেশন সেটআপ করতে কমেন্টে 'AUTOMATE' লিখুন অথবা আমাদের ইনবক্সে সরাসরি মেসেজ পাঠান।")।
+৮. হ্যাশট্যাগ: পোস্টের একদম শেষে উপযুক্ত ৫-৭টি হ্যাশট্যাগ অন্তর্ভুক্ত করবে (যেমন: {hashtags_list})।
 ৮. ইমেজ ভিজ্যুয়াল ও হিরো কি-ওয়ার্ড নির্দেশিকা (সবচেয়ে গুরুত্বপূর্ণ - ১০০% প্রাসঙ্গিকতা বাধ্যতামূলক):
    - পাঠক যেন ছবিটি দেখেই পোস্টের মূল বিষয়বস্তু ও অ্যাকশন তৎক্ষণাৎ অনুমান করতে পারে এবং ক্লিক করতে আগ্রহী হয়।
     - পোস্টের বিষয়ের সাথে ছবির সরাসরি চাক্ষুষ মিল ও স্পর্শযোগ্য হিরো অবজেক্ট (Tangible Hero Object) থাকতে হবে:
@@ -269,35 +274,39 @@ class ContentGenerator:
 
     def _generate_fallback(self, slot: str, focus_area: str) -> Dict[str, Any]:
         """Provides a safe fallback template in case of parsing anomaly."""
-        slot_info = SLOTS.get(slot, SLOTS["morning"])
+        slot_info = SLOTS.get(slot, SLOTS["noon"])
         hashtags = " ".join(slot_info["hashtags"])
-        title = f"🚀 {slot_info['theme']}: নতুন দিগন্ত উন্মোচন"
+        title = f"🚀 {slot_info['theme']}: প্র্যাকটিক্যাল গাইড"
+        
+        if slot == "night":
+            cta_line = "আপনার বিজনেসে এই অটোমেশন সেটআপ করতে কমেন্টে 'AUTOMATE' লিখুন অথবা আমাদের ইনবক্সে সরাসরি মেসেজ পাঠান!"
+        else:
+            cta_line = "আপনার মতামত কমেন্টে জানান এবং বন্ধুদের সাথে শেয়ার করে পোস্টটি সেইভ (Save 📌) রাখুন!"
+
         content = f"""{title}
 
-প্রযুক্তি ও উদ্ভাবনের দুনিয়া প্রতিদিন দ্রুতগতিতে বদলে যাচ্ছে। আজকের বিশেষ আয়োজন: {focus_area}।
+দৈনন্দিন কাজ ও ব্যবসাকে স্মার্ট করতে এআই-এর সঠিক প্রয়োগ জানা অত্যন্ত জরুরি। আজকের বিষয়: {focus_area}।
 
-🔹 আধুনিক গবেষণার মাধ্যমে নতুন সম্ভাবনার দ্বার উন্মোচিত হচ্ছে।
-🔹 বাস্তব জীবনে মানুষের কাজের গতি এবং নির্ভুলতা বাড়াতে এর ভূমিকা অনন্য।
-🔹 ভবিষ্যতে এই প্রযুক্তি আমাদের প্রাত্যহিক জীবনের বড় অংশ হতে চলেছে।
+🔹 পুনরাবৃত্তিমূলক বোরিং ও সময়সাপেক্ষ কাজ দ্রুত শেষ করার স্মার্ট উপায়।
+🔹 বাস্তব জীবনে কাজের গতি এবং নির্ভুলতা বাড়াতে এর ভূমিকা অপরিসীম।
+🔹 স্মার্ট অটোমেশন ব্যবহারের মাধ্যমে আপনি প্রতিদিন ঘণ্টার পর ঘণ্টা সময় বাঁচাতে পারবেন।
 
-বিজ্ঞানের এই রোমাঞ্চকর অগ্রযাত্রা নিয়ে আপনার কী মতামত? কমেন্টে আপনার ভাবনা শেয়ার করুন!
+{cta_line}
 
 {hashtags}"""
 
         slot_names = {
-            "morning": "Artificial Intelligence",
-            "noon": "Tech & Innovation",
-            "afternoon": "Cybersecurity & Privacy",
-            "night": "Science & Deep Space"
+            "noon": "AI Productivity & Hacks",
+            "night": "B2B Business Automation"
         }
 
         return {
             "title": title,
-            "card_category": slot_names.get(slot, "Smart Tech"),
-            "card_headline": f"{focus_area}: নতুন দিগন্ত উন্মোচন",
-            "card_highlight": "নতুন দিগন্ত উন্মোচন",
+            "card_category": slot_names.get(slot, "AI Automation"),
+            "card_headline": f"{focus_area}: স্মার্ট সলিউশন",
+            "card_highlight": "স্মার্ট সলিউশন",
             "content": content,
             "hero_keywords": [focus_area, slot_info['theme']],
-            "image_prompt": f"Realistic editorial photograph of {focus_area}, high detail, 8k resolution, cinematic lighting, photorealistic, no female, no woman, no text.",
+            "image_prompt": f"Realistic editorial photograph representing {focus_area}, high detail, 8k resolution, cinematic lighting, photorealistic, no female, no woman, no text.",
             "topic_summary": f"{slot_info['theme']} - {focus_area}"
         }
