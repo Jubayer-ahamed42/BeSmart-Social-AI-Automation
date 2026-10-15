@@ -20,7 +20,19 @@ if not exist "%PYTHON_EXE%" (
     exit /b 1
 )
 
-:: 2. Execute poster
+:: 2. Self-Healing Dependency Guard (স্বয়ংক্রিয় ডিপেন্ডেন্সি চেক ও রিকভারি)
+"%PYTHON_EXE%" -c "import pytz, dotenv, requests, google.genai, PIL" >nul 2>&1
+if errorlevel 1 (
+    echo [%date% %time%] [WARNING] Missing dependencies detected! Running self-healing auto-repair... >> "%LOG_FILE%"
+    "%PYTHON_EXE%" -m pip install -r "%PROJECT_DIR%\requirements.txt" --quiet >> "%LOG_FILE%" 2>&1
+    if errorlevel 1 (
+        echo [%date% %time%] [ERROR] Self-healing dependency installation failed! >> "%LOG_FILE%"
+    ) else (
+        echo [%date% %time%] [INFO] Self-healing successful! Dependencies restored. >> "%LOG_FILE%"
+    )
+)
+
+:: 3. Execute poster
 "%PYTHON_EXE%" main.py --slot auto >> "%LOG_FILE%" 2>&1
 set EXIT_CODE=%ERRORLEVEL%
 
