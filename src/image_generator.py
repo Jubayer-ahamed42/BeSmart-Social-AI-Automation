@@ -25,8 +25,8 @@ class ImageGenerator:
     content-matching images for social media posts.
     
     Slot-Tailored Priority:
-    - Night Space Topics: NASA 4K Official Archive (Space only) -> AI Generation -> Editorial Poster
-    - All Other Slots (Morning, Noon, Afternoon, Night): 100% Photorealistic AI Generation (Sana/Flux) -> Editorial Poster Fallback
+    - Night Space Topics: NASA 4K Official Archive (Space only) -> FLUX AI Generation -> Editorial Poster
+    - All Other Slots (Morning, Noon, Afternoon, Night): 100% Photorealistic FLUX AI Generation -> Editorial Poster Fallback
     
     Safety & Quality Constraints:
     - 100% guarantee against female depictions.
@@ -78,9 +78,9 @@ class ImageGenerator:
                     return image_path
 
         # =========================================================================
-        # STRATEGY 2: Primary AI Visual Engine (Pollinations Sana/Flux)
+        # STRATEGY 2: Primary AI Visual Engine (FLUX Photorealism)
         # =========================================================================
-        logger.info(f"🎨 [{slot.title()} Slot] Generating custom AI visual for maximum relevance and quality...")
+        logger.info(f"🎨 [{slot.title()} Slot] Generating custom FLUX AI visual for maximum photorealism and quality...")
         ai_source = self._generate_ai_image(prompt, image_path)
         if ai_source:
             logger.info(f"✅ [{slot.title()} AI] High-quality AI image successfully generated.")
@@ -154,7 +154,7 @@ class ImageGenerator:
         return None
 
     def _generate_ai_image(self, prompt: str, output_path: Path) -> Optional[str]:
-        """Calls Pollinations AI with clean prompt and strict negative constraints."""
+        """Calls Pollinations FLUX AI engine with clean prompt and strict negative constraints."""
         clean_prompt = " ".join(prompt.strip().split())
 
         # Programmatically sanitize any female references
@@ -166,21 +166,23 @@ class ImageGenerator:
         clean_prompt = re.sub(r"(strictly\s+)?no\s+(female|woman|girl|women|girls)", "", clean_prompt, flags=re.IGNORECASE)
         clean_prompt = clean_prompt.strip().rstrip(",")
 
-        # Enhance positive aesthetic for photorealism & technology
-        clean_prompt += ", photorealistic, 8k resolution, cinematic studio lighting, sharp focus, 35mm photography, high tech hardware, futuristic technology, computer server, clean render"
+        # Enhance positive aesthetic for photorealism & authentic textures
+        clean_prompt += ", 8k photorealistic photograph, authentic textures, cinematic studio lighting, 35mm lens, sharp focus, master professional editorial photography"
 
-        encoded = urllib.parse.quote(clean_prompt[:450])
+        encoded = urllib.parse.quote(clean_prompt[:600])
         seed = random.randint(100000, 9999999)
-        negative_prompt = urllib.parse.quote("female, woman, girl, lady, women, feminine, abstract orb, glowing sphere, empty dark void, plain blob, lens flare in empty space, deformed, text, watermark, signature, blur")
+        negative_prompt = urllib.parse.quote("female, woman, girl, lady, women, feminine, cartoon, 3d render, anime, cgi, illustration, drawing, sketch, deformed, distorted, bad anatomy, bad hands, blurry, low quality, abstract orb, glowing sphere, empty dark void, plain blob, lens flare in empty space, text, watermark, signature")
 
-        models = ["sana", "flux", "turbo"]
+        models = ["flux", "flux-realism", "turbo"]
         for model in models:
+            logger.info(f"🎨 Generating visual with FLUX engine ({model})...")
             url = f"https://image.pollinations.ai/prompt/{encoded}?width=1080&height=1080&model={model}&nologo=true&seed={seed}&negative={negative_prompt}"
             try:
-                r = requests.get(url, headers=self.headers, timeout=25)
+                r = requests.get(url, headers=self.headers, timeout=40)
                 if r.status_code == 200 and len(r.content) > 8000:
                     success = self._process_image_bytes(r.content, output_path, is_ai_generated=True)
                     if success:
+                        logger.info(f"✨ FLUX visual generated successfully ({model}, {len(r.content)//1024} KB).")
                         return f"ai_pollinations_{model}_{seed}"
             except Exception as e:
                 logger.debug(f"Pollinations {model} failed: {e}")

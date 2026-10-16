@@ -67,7 +67,7 @@ class ContentGenerator:
 Step 1 [High-Signal Problem Isolation]: নির্বাচিত বিষয়ের ({chosen_focus}) সবচেয়ে বড় বাস্তব পেইন-পয়েন্ট বা কাউন্টার-ইনটুইটিভ সত্য চিহ্নিত করো। কোনোরকম সাধারণ তাত্ত্বিক ভূমিকা দেবে না।
 Step 2 [Psychological Hook Engineering]: প্রথম ২ লাইনেই তীব্র কৌতূহল বা পেইন-পয়েন্ট জাগিয়ে তোলো। নম্বর-ফার্স্ট ওপেনার (যেমন: "গত সপ্তাহে ৩টি ই-কমার্স শপের...", "প্রতিদিন মাত্র ২০ মিনিটে...") অথবা কন্ট্রোল্ড কনট্রাস্ট ব্যবহার করো। কখনোই গতানুগতিক প্রশ্ন ("আপনি কি অমুক সমস্যায় ভুগছেন?") দিয়ে শুরু করবে না।
 Step 3 [Audience-Specific Drip Architecture]:
-   - যদি 'noon' স্লট হয় (সাধারণ মানুষ/ছাত্র/চাকরিজীবী): বাস্তব জীবনের কাজের গতি বাড়ানো, এক্সেল/অফিস হ্যাকস বা ফ্রি টুলস ব্যবহারের ৩-৪টি ঝরঝরে বুলেট পয়েন্ট (🔹 বা ⚡) দাও।
+   - যদি 'noon' স্লট হয় (সাধারণ মানুষ/ছাত্র/চাকরিজীবী): বাস্তব জীবনের কাজের গতি বাড়ানো, এক্সেল/অফিস হ্যাকস বা ফ্রি টুলস ব্যবহারের ৩-৪টি ঝরঝরে বুলেট পয়েন্ট (যেমন • বা -) দাও। বুলেট পয়েন্টে কোনো ইমোজি ব্যবহার করবে না।
    - যদি 'night' স্লট হয় (ব্যবসা/কো-ফাউন্ডার/ই-কমার্স): খরচ বাঁচানো, রাত ২টায় কাস্টমার মেসেজ হ্যান্ডল করা, কুরিয়ার রিটার্ন কমানো ও সেলস কনভার্সনের কংক্রিট বিজনেস আরওআই (ROI) দেখাও।
 Step 4 [Frictionless Conversion CTA]:
    - 'noon' স্লটের জন্য: ফ্রেন্ডলি ড্রাইভ—পোস্টটি সেভ (Save 📌) করে রাখা, বন্ধুদের মেনশন দেওয়া অথবা পেজের WhatsApp বাটনে মেসেজ পাঠানোর স্পষ্ট আহ্বান।
@@ -81,10 +81,12 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
 ৪. 🎨 ইমেজ নির্দেশিকা ও স্পর্শযোগ্য হিরো অবজেক্ট (১০০% প্রাসঙ্গিকতা বাধ্যতামূলক):
    - ছবিতে কোনো অন্ধকার শূন্যতায় বিমূর্ত আলোর গোলক, ব্লব বা সাধারণ লেন্স ফ্লেয়ার (Strictly NO abstract glowing orb, NO plain light blob) সম্পূর্ণ নিষিদ্ধ!
    - মহাকাশ ছাড়া সাধারণ পোস্টে তারা বা গ্যালাক্সি দেওয়া সম্পূর্ণ নিষিদ্ধ।
-   - স্পর্শযোগ্য বাস্তব অবজেক্ট থাকতে হবে (যেমন: মেকানিক্যাল আরজিবি কীবোর্ড, টাইটানিয়াম রোবোটিক হ্যান্ড, নিওন ক্রিস্টাল প্রসেসর চিপ, ডিজিটাল সাইবার শিল্ড ইত্যাদি)।
+   - স্পর্শযোগ্য বাস্তব অবজেক্ট থাকতে হবে (যেমন: মেকানিক্যাল আরজিবি কীবোর্ড, আধুনিক ওয়ার্কস্টেশন ডেস্কটপ, নিওন ক্রিস্টাল প্রসেসর চিপ, ডিজিটাল সাইবার শিল্ড ইত্যাদি)।
    - 🚨 কঠোর জেন্ডার ফিল্টার: ছবিতে কোনো নারী বা মহিলার অবয়ব (strictly NO female, no woman, no girl, no lady, no feminine figures) রাখা সম্পূর্ণ নিষিদ্ধ।
-   - ছবির কোয়ালিটি: 8k cinematic photography, editorial quality, strictly no text, no watermark.
-৫. 🏷️ হ্যাশট্যাগ কঠোর নিয়ম (Strict Max 2 Hashtags): পোস্টের একদম শেষে শুধুমাত্র এবং সর্বোচ্চ ২টি হ্যাশট্যাগ ({hashtags_list}) দেবে। কোনো অবস্থাতেই ২টি হ্যাশট্যাগের বেশি দেবে না।
+   - ছবির কোয়ালিটি: 8k photorealistic photograph, authentic textures, cinematic studio lighting, 35mm lens, sharp focus, professional editorial photography. Strictly NO 3D render, no cartoon, no anime, no CGI, no text, no watermark.
+৫. 🏷️ ইমোজি ও হ্যাশট্যাগ কঠোর নিয়ম (Strict Emoji & Hashtags Policy):
+   - ইমোজি: পুরো পোস্টে সর্বোচ্চ ১টি থেকে ২টি মানানসই ইমোজি (Max 1-2 emojis total in entire post). অতিরিক্ত ইমোজি ব্যবহার সম্পূর্ণ নিষিদ্ধ। বুলেট পয়েন্টে কোনো ইমোজি দেবে না।
+   - হ্যাশট্যাগ: পোস্টের একদম শেষে শুধুমাত্র এবং সর্বোচ্চ ২টি হ্যাশট্যাগ ({hashtags_list}) দেবে। কোনো অবস্থাতেই ২টি হ্যাশট্যাগের বেশি দেবে না।
 
 # OUTPUT FORMAT (Strict JSON Only)
 অবশ্যই এবং শুধুমাত্র নিচের ভ্যালিড JSON অবজেক্ট আউটপুট হিসেবে দাও, কোনো প্রিঅ্যাম্বল বা বাড়তি কথা ছাড়া:
@@ -95,7 +97,7 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
   "card_highlight": "হেডলাইনের যে নির্দিষ্ট ১-৩টি শব্দ উজ্জ্বল হলুদ রঙে জ্বলজ্বল করবে (যেমন: ২৪ ঘণ্টা সেলস)",
   "content": "সম্পূর্ণ ফেসবুক পোস্টটি এখানে থাকবে (হুক, গল্প/বাস্তবতা, বুলেট পয়েন্ট, সমাধান, কল-টু-অ্যাকশন এবং হ্যাশট্যাগ সহ সবকিছু সুন্দর লাইন ব্রেক দিয়ে সাজানো)",
   "hero_keywords": ["পোস্টের মূল সাবজেক্টের ইংরেজি কীওয়ার্ড ১", "ইংরেজি কীওয়ার্ড ২"],
-  "image_prompt": "A hyper-realistic 8k photograph visually capturing the exact core action and tangible hero object of this post. Cinematic studio lighting, sharp focus, 35mm photography, strictly NO female, no woman, no people, no text, no watermark.",
+  "image_prompt": "A hyper-realistic 8k photograph visually capturing the exact core action and tangible hero object of this post. Authentic textures, cinematic studio lighting, sharp focus, 35mm lens, professional editorial photography, strictly NO female, no woman, no cartoon, no 3D render, no text, no watermark.",
   "topic_summary": "টপিকটির ১ লাইনের সংক্ষেপ (ভবিষ্যতে ডুপ্লিকেট রোধের জন্য)"
 }}
 """
@@ -133,7 +135,8 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
                 parsed["content"] = humanized["humanized_text"]
                 parsed["humanizer_audit"] = humanized
                 logger.info(f"Hybrid Humanizer Pass Complete: Final {humanized['word_count']} words, "
-                            f"{len(humanized['vocab_cleaned'])} AI markers sanitized.")
+                            f"{len(humanized['vocab_cleaned'])} AI markers sanitized, "
+                            f"{humanized.get('emojis_total', 0)} emojis detected (capped {humanized.get('emojis_capped', 0)}).")
 
             return parsed
 

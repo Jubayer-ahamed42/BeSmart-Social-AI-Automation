@@ -28,7 +28,7 @@ FORENSIC_PATTERNS = [
 REVEAL_BRIDGES = [
     (r"(?im)^The (result|outcome|lesson|catch|truth|kicker)\?\s*", ""),
     (r"(?im)^Plot twist:\s*", ""),
-    (r"(?im)^Here'?s (the thing|what happened|the secret|the takeaway)[:.]\s*", ""),
+    (r"(?im)^Here('?s|\s+is) (the thing|what happened|the secret|the takeaway)[:.]\s*", ""),
     (r"(?im)^The takeaway\?\s*", ""),
     (r"(?im)^ফলাফল কী\?\s*", ""),
     (r"(?im)^আসল ঘটনা কী\?\s*", ""),
@@ -37,6 +37,7 @@ REVEAL_BRIDGES = [
 
 # High-frequency AI cliches and natural replacements
 AI_VOCAB_MAPPINGS = {
+    r"\bin today's fast[- ]paced (digital )?world\b": "today",
     r"\bdelve into\b": "explore",
     r"\bdelve\b": "look into",
     r"\btapestry\b": "mix",
@@ -58,6 +59,23 @@ AI_VOCAB_MAPPINGS = {
     r"আজকের দ্রুত পরিবর্তনশীল বিশ্বে": "বর্তমানে",
     r"ডিজিটাল যুগের এই সময়ে": "আজকের দিনে",
 }
+
+# Unicode emoji regex that covers all standard emoji ranges
+EMOJI_PATTERN = re.compile(
+    r"["
+    r"\U0001F600-\U0001F64F"  # emoticons
+    r"\U0001F300-\U0001F5FF"  # symbols & pictographs
+    r"\U0001F680-\U0001F6FF"  # transport & map symbols
+    r"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+    r"\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
+    r"\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
+    r"\U00002702-\U000027B0"  # Dingbats
+    r"\U000024C2-\U0001F251" 
+    r"\U00002600-\U000026FF"  # Misc symbols
+    r"\U00002B00-\U00002BFF"
+    r"\uFE0F"
+    r"]+"
+)
 
 
 class SocialPostHumanizer:
@@ -119,6 +137,24 @@ class SocialPostHumanizer:
         paragraphs = [p.strip() for p in text.split("\n") if p.strip()]
         return "\n\n".join(paragraphs)
 
+    def cap_emojis(self, text: str, max_allowed: int = 2) -> Tuple[str, int]:
+        """
+        Caps total emojis in the post to maximum allowed (default: 2).
+        Excess emojis are cleanly removed and spacing normalized.
+        Prevents algorithmic spam penalty while keeping authentic human touch.
+        """
+        count = 0
+        def repl(m):
+            nonlocal count
+            count += 1
+            return m.group(0) if count <= max_allowed else ""
+
+        cleaned = EMOJI_PATTERN.sub(repl, text)
+        cleaned = re.sub(r"[ \t]+", " ", cleaned)
+        cleaned = re.sub(r" ([.,!?:;])", r"\1", cleaned)
+        lines = [line.strip() for line in cleaned.split("\n")]
+        return "\n".join(lines), count
+
     def enforce_strict_two_hashtags(self, text: str, default_topic_tag: str = "#BusinessAutomation") -> str:
         """
         Enforces Meta's optimal algorithm policy:
@@ -157,6 +193,7 @@ class SocialPostHumanizer:
         text = self.normalize_punctuation(text)
         text, vocab_cleaned = self.scrub_ai_vocabulary(text)
         text = self.calibrate_em_dashes(text)
+        text, emojis_found = self.cap_emojis(text, max_allowed=2)
         text = self.format_spacing(text)
         text = self.enforce_strict_two_hashtags(text, default_topic_tag=default_topic_tag)
 
@@ -169,6 +206,8 @@ class SocialPostHumanizer:
             "final_length": char_count,
             "word_count": word_count,
             "vocab_cleaned": vocab_cleaned,
+            "emojis_total": emojis_found,
+            "emojis_capped": max(0, emojis_found - 2),
             "is_humanized": True
         }
 
