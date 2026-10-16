@@ -173,9 +173,9 @@ class ImageGenerator:
         seed = random.randint(100000, 9999999)
         negative_prompt = urllib.parse.quote("female, woman, girl, lady, women, feminine, cartoon, 3d render, anime, cgi, illustration, drawing, sketch, deformed, distorted, bad anatomy, bad hands, blurry, low quality, abstract orb, glowing sphere, empty dark void, plain blob, lens flare in empty space, text, watermark, signature")
 
-        models = ["flux", "flux-realism", "turbo"]
+        models = ["sana", "flux", "turbo"]
         for model in models:
-            logger.info(f"🎨 Generating visual with FLUX engine ({model})...")
+            logger.info(f"🎨 Generating visual with AI engine ({model})...")
             url = f"https://image.pollinations.ai/prompt/{encoded}?width=1080&height=1080&model={model}&nologo=true&seed={seed}&negative={negative_prompt}"
             try:
                 r = requests.get(url, headers=self.headers, timeout=40)
