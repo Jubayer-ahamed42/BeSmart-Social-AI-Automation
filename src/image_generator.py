@@ -1,3 +1,5 @@
+import os
+import time
 import logging
 import random
 import re
@@ -40,6 +42,11 @@ class ImageGenerator:
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
         }
+        # Optional Pollen API key from enter.pollinations.ai for unlimited unthrottled FLUX access
+        pollen_key = os.getenv("POLLINATIONS_API_KEY", "").strip() or os.getenv("POLLEN_API_KEY", "").strip()
+        if pollen_key:
+            self.headers["Authorization"] = f"Bearer {pollen_key}"
+            logger.info("🔑 Pollen API key detected: Unlimited high-priority FLUX generation enabled.")
         self.last_image_source: str = ""
 
     def generate_image(
@@ -173,7 +180,9 @@ class ImageGenerator:
         seed = random.randint(100000, 9999999)
         negative_prompt = urllib.parse.quote("female, woman, girl, lady, women, feminine, cartoon, 3d render, anime, cgi, illustration, drawing, sketch, deformed, distorted, bad anatomy, bad hands, blurry, low quality, abstract orb, glowing sphere, empty dark void, plain blob, lens flare in empty space, text, watermark, signature")
 
-        models = ["sana", "flux", "turbo"]
+        # Primary engine is Black Forest Labs FLUX.1 (industry-leading photorealism & prompt fidelity)
+        # Fallbacks: sana (NVLabs high-speed engine) and turbo
+        models = ["flux", "flux-realism", "sana", "turbo"]
         for model in models:
             logger.info(f"🎨 Generating visual with AI engine ({model})...")
             url = f"https://image.pollinations.ai/prompt/{encoded}?width=1080&height=1080&model={model}&nologo=true&seed={seed}&negative={negative_prompt}"
@@ -182,8 +191,11 @@ class ImageGenerator:
                 if r.status_code == 200 and len(r.content) > 8000:
                     success = self._process_image_bytes(r.content, output_path, is_ai_generated=True)
                     if success:
-                        logger.info(f"✨ FLUX visual generated successfully ({model}, {len(r.content)//1024} KB).")
+                        logger.info(f"✨ AI visual generated successfully ({model}, {len(r.content)//1024} KB).")
                         return f"ai_pollinations_{model}_{seed}"
+                elif r.status_code == 402:
+                    logger.warning(f"Pollinations engine '{model}' hit 402 rate limit. Switching to next fallback...")
+                    time.sleep(1)
             except Exception as e:
                 logger.debug(f"Pollinations {model} failed: {e}")
 
