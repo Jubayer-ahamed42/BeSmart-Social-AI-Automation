@@ -5,7 +5,7 @@ import re
 import time
 import requests
 from typing import Dict, Any, List
-from src.config import GEMINI_API_KEY, SLOTS, get_current_bst_time
+from src.config import GEMINI_API_KEY, SLOTS, get_current_bst_time, WHATSAPP_NUMBER
 from src.history_manager import HistoryManager
 from src.humanizer import humanize_post
 
@@ -71,7 +71,7 @@ Step 3 [Audience-Specific Drip Architecture]:
    - যদি 'night' স্লট হয় (ব্যবসা/কো-ফাউন্ডার/ই-কমার্স): খরচ বাঁচানো, রাত ২টায় কাস্টমার মেসেজ হ্যান্ডল করা, কুরিয়ার রিটার্ন কমানো ও সেলস কনভার্সনের কংক্রিট বিজনেস আরওআই (ROI) দেখাও।
 Step 4 [Frictionless Conversion CTA]:
    - 'noon' স্লটের জন্য: ফ্রেন্ডলি ড্রাইভ—পোস্টটি সেভ (Save 📌) করে রাখা, বন্ধুদের মেনশন দেওয়া অথবা পেজের WhatsApp বাটনে মেসেজ পাঠানোর স্পষ্ট আহ্বান।
-   - 'night' স্লটের জন্য: স্পষ্ট ও প্রফেশনাল ইনবাউন্ড লিড ম্যাগনেট—কমেন্টে 'AUTOMATE' লেখা অথবা আমাদের পেজের সরাসরি WhatsApp বাটনে মেসেজ পাঠাতে বলা (কোনো র-লিংক লিখবে না, ইউজার সরাসরি পেজের বাটন ব্যবহার করবে)।
+   - 'night' স্লটের জন্য: স্পষ্ট ও প্রফেশনাল ইনবাউন্ড লিড ম্যাগনেট—কমেন্টে 'AUTOMATE' লেখা অথবা সরাসরি আমাদের WhatsApp-এ মেসেজ পাঠানোর স্পষ্ট আহ্বান (সরাসরি ক্লিকযোগ্য লিংক: https://wa.me/{WHATSAPP_NUMBER})।
 Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্য ১-২ লাইনের হাইপার-ক্লিকেবল বাংলা হেডলাইন, একটি জ্বলজ্বলে হাইলাইট অংশ এবং এআই ইমেজের জন্য একটি স্পষ্ট বাস্তব স্পর্শযোগ্য অবজেক্টের (Tangible Hero Object) হাই-ডিটেইল ইংরেজি প্রম্পট নির্ধারণ করো।
 
 # STRICT CONSTRAINTS & NEGATIVE DIRECTIVES (LinkedIn Humanizer V3 & Anti-Glitch Rules)
@@ -132,7 +132,25 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
             if parsed and parsed.get("content"):
                 default_topic_tag = slot_info["hashtags"][1] if len(slot_info.get("hashtags", [])) > 1 else "#BusinessAutomation"
                 humanized = humanize_post(parsed["content"], default_topic_tag=default_topic_tag)
-                parsed["content"] = humanized["humanized_text"]
+                final_text = humanized["humanized_text"]
+
+                # Guarantee direct 1-click WhatsApp link for night slot (B2B Lead Generation)
+                if slot == "night" and "wa.me" not in final_text:
+                    wa_line = f"💬 সরাসরি WhatsApp-এ কথা বলতে ক্লিক করুন: https://wa.me/{WHATSAPP_NUMBER}"
+                    lines = final_text.splitlines()
+                    hashtag_idx = -1
+                    for idx, line in enumerate(reversed(lines)):
+                        if line.strip().startswith("#"):
+                            hashtag_idx = len(lines) - 1 - idx
+                            break
+                    if hashtag_idx != -1:
+                        lines.insert(hashtag_idx, "")
+                        lines.insert(hashtag_idx, wa_line)
+                        final_text = "\n".join(lines)
+                    else:
+                        final_text = f"{final_text}\n\n{wa_line}"
+
+                parsed["content"] = final_text
                 parsed["humanizer_audit"] = humanized
                 logger.info(f"Hybrid Humanizer Pass Complete: Final {humanized['word_count']} words, "
                             f"{len(humanized['vocab_cleaned'])} AI markers sanitized, "

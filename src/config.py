@@ -21,6 +21,7 @@ FB_PAGE_ACCESS_TOKEN = os.getenv("FB_PAGE_ACCESS_TOKEN", "").strip()
 FB_APP_ID = os.getenv("FB_APP_ID", "").strip()
 FB_APP_SECRET = os.getenv("FB_APP_SECRET", "").strip()
 TIMEZONE_NAME = os.getenv("TIMEZONE", "Asia/Dhaka")
+WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "8801610594042").strip()
 
 # Timezone object
 try:
