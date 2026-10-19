@@ -70,7 +70,8 @@ EMOJI_PATTERN = re.compile(
     r"\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
     r"\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
     r"\U00002702-\U000027B0"  # Dingbats
-    r"\U000024C2-\U0001F251" 
+    r"\U000024C2"
+    r"\U0001F200-\U0001F251"
     r"\U00002600-\U000026FF"  # Misc symbols
     r"\U00002B00-\U00002BFF"
     r"\uFE0F"
@@ -120,6 +121,7 @@ class SocialPostHumanizer:
         text = text.replace("“", '"').replace("”", '"')
         text = text.replace("‘", "'").replace("’", "'")
         text = re.sub(r"\s*--\s*", ", ", text)
+        text = re.sub(r"[ \t]+([\u0964\u0965.,!?:;])", r"\1", text)
         return text
 
     def scrub_ai_vocabulary(self, text: str) -> Tuple[str, List[str]]:
@@ -151,7 +153,7 @@ class SocialPostHumanizer:
 
         cleaned = EMOJI_PATTERN.sub(repl, text)
         cleaned = re.sub(r"[ \t]+", " ", cleaned)
-        cleaned = re.sub(r" ([.,!?:;])", r"\1", cleaned)
+        cleaned = re.sub(r" ([.,!?:;\u0964\u0965])", r"\1", cleaned)
         lines = [line.strip() for line in cleaned.split("\n")]
         return "\n".join(lines), count
 

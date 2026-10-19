@@ -72,18 +72,25 @@ Step 3 [Audience-Specific Drip Architecture]:
 Step 4 [Frictionless Conversion CTA]:
    - 'noon' স্লটের জন্য: ফ্রেন্ডলি ড্রাইভ—পোস্টটি সেভ (Save 📌) করে রাখা, বন্ধুদের মেনশন দেওয়া অথবা পেজের WhatsApp বাটনে মেসেজ পাঠানোর স্পষ্ট আহ্বান।
    - 'night' স্লটের জন্য: স্পষ্ট ও প্রফেশনাল ইনবাউন্ড লিড ম্যাগনেট—কমেন্টে 'AUTOMATE' লেখা অথবা সরাসরি আমাদের WhatsApp-এ মেসেজ পাঠানোর স্পষ্ট আহ্বান (সরাসরি ক্লিকযোগ্য লিংক: https://wa.me/{WHATSAPP_NUMBER})।
-Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্য ১-২ লাইনের হাইপার-ক্লিকেবল বাংলা হেডলাইন, একটি জ্বলজ্বলে হাইলাইট অংশ এবং এআই ইমেজের জন্য একটি স্পষ্ট বাস্তব স্পর্শযোগ্য অবজেক্টের (Tangible Hero Object) হাই-ডিটেইল ইংরেজি প্রম্পট নির্ধারণ করো।
+Step 5 [Storytelling Image Blueprint & Visual Card]:
+   - অত্যন্ত গুরুত্বপূর্ণ: ছবিটি যেন পোস্টের মূল সমস্যা বা সমাধানের একটি জীবন্ত দৃশ্য (Visual Storytelling Scene) তুলে ধরে। কেউ লেখা না পড়লেও ছবি দেখেই যেন বুঝতে পারে পোস্টটি কী নিয়ে (যেমন: কুরিয়ার রিটার্ন হলে পার্সেল/রিটার্ন স্টিকার/ডেলিভারি ম্যান/অ্যাড্রেস চেকার স্ক্রিন; এক্সেল অটোমেশন হলে স্প্রেডশীট এরর বনাম এআই সাইডবার স্ক্রিন; কাস্টমার সাপোর্ট হলে হোয়াটসঅ্যাপ বা মেসেঞ্জার অমনিচ্যানেল চ্যাট ড্যাশবোর্ড)।
+   - কোনো বিমূর্ত অন্ধকার, ভাসমান বল বা জেনেরিক ব্যাকগ্রাউন্ড হবে না। সম্পূর্ণ বাস্তব দৃশ্যপট (উজ্জ্বল দিনের আলো, আধুনিক অফিস, ওয়্যারহাউস, প্যাকিং ডেস্ক, ল্যাপটপ/ট্যাবলেট স্ক্রিন)।
+   - ফটোকার্ডের জন্য ১-২ লাইনের হাইপার-ক্লিকেবল বাংলা হেডলাইন ও গোল্ডেন হাইলাইট অংশ নির্ধারণ করো।
 
 # STRICT CONSTRAINTS & NEGATIVE DIRECTIVES (LinkedIn Humanizer V3 & Anti-Glitch Rules)
 ১. 🚫 নিষিদ্ধ রোবোটিক শব্দ (Forbidden AI Cliches): "In today's fast-paced digital world", "Delve into", "Revolutionize", "Tapestry", "Game changer", "Furthermore", "It is important to note", "ডিজিটাল যুগের এই সময়ে" ইত্যাদি ক্লিশে সম্পূর্ণ নিষিদ্ধ।
 ২. 🚫 রিভিল ব্রিজ নিষিদ্ধ: "The result?", "The outcome?", "Plot twist:", "Here's what happened:", "ফলাফল কী?", "আসল ঘটনা কী?" জাতীয় মেকানিকাল লাইন লিখবে না। সরাসরি গল্প ও তথ্য বলবে।
 ৩. 📱 মোবাইল ড্রিপ রিডাবিলিটি: কোনো বড় প্যারাগ্রাফ লিখবে না। ১ থেকে সর্বোচ্চ ২ লাইনের পর ডাবল লাইন ব্রেক দেবে।
-৪. 🎨 ইমেজ নির্দেশিকা ও স্পর্শযোগ্য হিরো অবজেক্ট (১০০% প্রাসঙ্গিকতা বাধ্যতামূলক):
-   - ছবিতে কোনো অন্ধকার শূন্যতায় বিমূর্ত আলোর গোলক, ব্লব বা সাধারণ লেন্স ফ্লেয়ার (Strictly NO abstract glowing orb, NO plain light blob) সম্পূর্ণ নিষিদ্ধ!
-   - মহাকাশ ছাড়া সাধারণ পোস্টে তারা বা গ্যালাক্সি দেওয়া সম্পূর্ণ নিষিদ্ধ।
-   - স্পর্শযোগ্য বাস্তব অবজেক্ট থাকতে হবে (যেমন: মেকানিক্যাল আরজিবি কীবোর্ড, আধুনিক ওয়ার্কস্টেশন ডেস্কটপ, নিওন ক্রিস্টাল প্রসেসর চিপ, ডিজিটাল সাইবার শিল্ড ইত্যাদি)।
-   - 🚨 কঠোর জেন্ডার ফিল্টার: ছবিতে কোনো নারী বা মহিলার অবয়ব (strictly NO female, no woman, no girl, no lady, no feminine figures) রাখা সম্পূর্ণ নিষিদ্ধ।
-   - ছবির কোয়ালিটি: 8k photorealistic photograph, authentic textures, cinematic studio lighting, 35mm lens, sharp focus, professional editorial photography. Strictly NO 3D render, no cartoon, no anime, no CGI, no text, no watermark.
+৪. 🎨 ভিজ্যুয়াল স্টোরিটেলিং ইমেজ ডিরেক্টিভ (Strict Visual Relevance & Context Matching):
+   - 🚨 চরম প্রাসঙ্গিকতা: ছবিটি অবশ্যই পোস্টের বাস্তব দৃশ্যপটকে সরাসরি দৃশ্যমান করবে। দর্শক ছবি দেখেই যেন বিষয়বস্তু বুঝতে পারে।
+     * কুরিয়ার/ডেলিভারি সমস্যা: পার্সেল বক্সের স্তূপ, লাল রিটার্ন লেবেল, ডেলিভারি এজেন্টের হাতে স্মার্টফোনে অ্যাড্রেস এরর ম্যাপ, অথবা মার্চেন্টের টেবিলে ল্যাপটপে অর্ডার ভ্যালিডেশন স্ক্রিন।
+     * এক্সেল/অফিস অটোমেশন: ওয়ার্কস্টেশন মনিটরে জটিল স্প্রেডশীট এরর বনাম এআই সাইডবার অটোমেশন স্ক্রিন, কফি মগ, প্রফেশনাল টেক ডেস্কটপ।
+     * কাস্টমার সাপোর্ট/চ্যাটবট: আধুনিক ডেস্কে মাল্টি-চ্যানেল লাইভ চ্যাট ড্যাশবোর্ড (WhatsApp, Messenger), স্বয়ংক্রিয়ভাবে ইনকোয়ারি সলভ হওয়ার ইন্টারফেস।
+     * মিটিং সামারি/ট্রান্সক্রিপশন: কনফারেন্স রুমে ল্যাপটপে লাইভ বুলেট সামারি তৈরি হওয়ার স্ক্রিন।
+     * রেজ্যুমে/সিভি অপ্টিমাইজেশন: স্ক্রিনে জব ডেসক্রিপশন বনাম এআই সিভি ম্যাচিং অ্যানালাইসিস।
+   - 🚫 কঠোর নিয়ম: ছবিতে মানুষ থাকলে অবশ্যই পুরুষ প্রফেশনাল (male founder, male engineer, male courier agent) অথবা সরাসরি ওয়ার্কস্পেস/হার্ডওয়্যার/স্ক্রিন ক্লোজ-আপ।
+   - ⚠️ নির্দেশ: image_prompt এর ভেতরে শুধু কী কী দৃশ্যমান থাকবে তা পজিটিভ ভাষায় ইংরেজিতে লিখবে। কোনো 'no female' বা 'no text' টাইপের নেগেটিভ বাক্য ভেতরে লিখবে না (তা সিস্টেম স্বয়ংক্রিয়ভাবে ফিল্টার করে)।
+   - ছবির কোয়ালিটি: 8k award-winning editorial documentary photograph, natural daylight, bright modern environment, authentic tactile materials, natural depth of field, 35mm lens, sharp focus.
 ৫. 🏷️ ইমোজি ও হ্যাশট্যাগ কঠোর নিয়ম (Strict Emoji & Hashtags Policy):
    - ইমোজি: পুরো পোস্টে সর্বোচ্চ ১টি থেকে ২টি মানানসই ইমোজি (Max 1-2 emojis total in entire post). অতিরিক্ত ইমোজি ব্যবহার সম্পূর্ণ নিষিদ্ধ। বুলেট পয়েন্টে কোনো ইমোজি দেবে না।
    - হ্যাশট্যাগ: পোস্টের একদম শেষে শুধুমাত্র এবং সর্বোচ্চ ২টি হ্যাশট্যাগ ({hashtags_list}) দেবে। কোনো অবস্থাতেই ২টি হ্যাশট্যাগের বেশি দেবে না।
@@ -96,8 +103,8 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
   "card_headline": "ছবির ফটোকার্ডে লেখার মতো ১-২ লাইনের অত্যন্ত আকর্ষণীয় বাংলা হেডলাইন (যেমন: ম্যানুয়াল রিপ্লাই বন্ধ করুন: যেভাবে এআই ২৪ ঘণ্টা সেলস আনে)",
   "card_highlight": "হেডলাইনের যে নির্দিষ্ট ১-৩টি শব্দ উজ্জ্বল হলুদ রঙে জ্বলজ্বল করবে (যেমন: ২৪ ঘণ্টা সেলস)",
   "content": "সম্পূর্ণ ফেসবুক পোস্টটি এখানে থাকবে (হুক, গল্প/বাস্তবতা, বুলেট পয়েন্ট, সমাধান, কল-টু-অ্যাকশন এবং হ্যাশট্যাগ সহ সবকিছু সুন্দর লাইন ব্রেক দিয়ে সাজানো)",
-  "hero_keywords": ["পোস্টের মূল সাবজেক্টের ইংরেজি কীওয়ার্ড ১", "ইংরেজি কীওয়ার্ড ২"],
-  "image_prompt": "A hyper-realistic 8k photograph visually capturing the exact core action and tangible hero object of this post. Authentic textures, cinematic studio lighting, sharp focus, 35mm lens, professional editorial photography, strictly NO female, no woman, no cartoon, no 3D render, no text, no watermark.",
+  "hero_keywords": ["Specific concrete visual subject 1", "Specific concrete visual subject 2"],
+  "image_prompt": "An award-winning hyper-realistic 8k editorial photograph vividly depicting the exact real-world scenario of this post in bright natural daylight or well-lit modern workspace: [Describe detailed concrete physical scene, specific objects, screens with visible UI, male professional or worker if a person is present, authentic textures, 35mm photography, sharp focus. Positive visual description ONLY]",
   "topic_summary": "টপিকটির ১ লাইনের সংক্ষেপ (ভবিষ্যতে ডুপ্লিকেট রোধের জন্য)"
 }}
 """
@@ -107,14 +114,16 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
                 raw_response = self._call_gemini_api(prompt)
                 parsed = self._parse_json_response(raw_response)
             except Exception as api_err:
-                logger.warning(f"Gemini generation attempt {attempt} failed: {api_err}")
-                if attempt == max_attempts:
-                    logger.warning("All Gemini API attempts exhausted. Activating built-in structured generator.")
-                    parsed = self._generate_fallback(slot, chosen_focus)
+                logger.warning(f"Gemini generation attempt {attempt}/{max_attempts} failed: {api_err}")
 
             if not parsed or not parsed.get("content"):
-                logger.warning("Parsing failed to find content. Generating structured fallback.")
-                parsed = self._generate_fallback(slot, chosen_focus)
+                if attempt < max_attempts:
+                    logger.warning(f"Attempt {attempt}/{max_attempts} did not produce valid content. Retrying next attempt...")
+                    time.sleep(2)
+                    continue
+                else:
+                    logger.warning("All Gemini API attempts exhausted. Activating built-in structured generator.")
+                    parsed = self._generate_fallback(slot, chosen_focus)
 
             title = parsed.get("title", "")
             summary = parsed.get("topic_summary", "")
@@ -124,9 +133,13 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
                 is_dup, matched_title = history_mgr.check_similarity(title, summary)
                 if is_dup:
                     logger.warning(f"Rejecting generated topic on attempt {attempt}: Too close to '{matched_title}'. Regenerating...")
-                    extra_warning = f"🚨 কঠোর সতর্কতা: তোমার পূর্বের চেষ্টাটি '{matched_title}' পোস্টের সাথে বেশি মিলে গেছে! দয়া করে সম্পূর্ণ ভিন্ন কোনো টুল, খবর বা আবিষ্কার বেছে নাও।"
-                    chosen_focus = random.choice(focus_areas)
-                    continue
+                    if attempt < max_attempts:
+                        extra_warning = f"🚨 কঠোর সতর্কতা: তোমার পূর্বের চেষ্টাটি '{matched_title}' পোস্টের সাথে বেশি মিলে গেছে! দয়া করে সম্পূর্ণ ভিন্ন কোনো টুল, খবর বা আবিষ্কার বেছে নাও।"
+                        chosen_focus = random.choice(focus_areas)
+                        continue
+                    else:
+                        logger.warning("Max attempts reached after duplicate rejections. Using structured fallback.")
+                        parsed = self._generate_fallback(slot, chosen_focus)
 
             # Passed uniqueness check - Apply LinkedIn Humanizer V3 & Fabric zero-fluff post-processing
             if parsed and parsed.get("content"):
@@ -322,6 +335,20 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
         default_topic_tag = slot_info["hashtags"][1] if len(slot_info.get("hashtags", [])) > 1 else "#BusinessAutomation"
         humanized = humanize_post(content, default_topic_tag=default_topic_tag)
 
+        # Context-rich concrete fallback image prompt
+        if slot == "night":
+            fallback_img_prompt = (
+                f"Authentic editorial documentary photograph of a modern tech business office desk, "
+                f"showing a clean computer monitor with active business automation workflow interface for {focus_area}, "
+                f"coffee cup, tactile mechanical keyboard, ambient modern office lighting, 35mm lens, sharp focus"
+            )
+        else:
+            fallback_img_prompt = (
+                f"Crisp photorealistic 8k editorial photograph of a modern productive workstation desk, "
+                f"laptop screen clearly displaying an organized digital dashboard and spreadsheet for {focus_area}, "
+                f"notebook with pen, natural daylight, professional studio photography"
+            )
+
         return {
             "title": title,
             "card_category": slot_names.get(slot, "AI Automation"),
@@ -330,6 +357,6 @@ Step 5 [Visual Card & Image Blueprint]: ফটোকার্ডের জন্
             "content": humanized["humanized_text"],
             "humanizer_audit": humanized,
             "hero_keywords": [focus_area, slot_info['theme']],
-            "image_prompt": f"Realistic editorial photograph representing {focus_area}, high detail, 8k resolution, cinematic lighting, photorealistic, strictly no female, no woman, no people, no text.",
+            "image_prompt": fallback_img_prompt,
             "topic_summary": f"{slot_info['theme']} - {focus_area}"
         }

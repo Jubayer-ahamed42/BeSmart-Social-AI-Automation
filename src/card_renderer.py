@@ -223,10 +223,10 @@ class PhotoCardRenderer:
     top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(
       180deg, 
-      rgba(7, 11, 20, 0.96) 0%, 
-      rgba(7, 11, 20, 0.88) 35%, 
-      rgba(7, 11, 20, 0.38) 64%, 
-      rgba(7, 11, 20, 0.05) 100%
+      rgba(7, 11, 20, 0.90) 0%, 
+      rgba(7, 11, 20, 0.76) 28%, 
+      rgba(7, 11, 20, 0.20) 52%, 
+      rgba(7, 11, 20, 0.0) 72%
     );
     z-index: 2;
   }}

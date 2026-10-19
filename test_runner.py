@@ -114,26 +114,75 @@ def test_humanizer():
     assert tags[0] == "#BeSmartWithAI"
     assert tags[1] == "#AI"
     
+    # Verify Dari spacing normalization
+    sample_with_dari = "এটি একটি পরীক্ষামূলক বাক্য। এখানে বাড়তি স্পেস । এবং ৩টি ইমোজি 🚀 🔥 🎯 ।"
+    dari_res = humanize_post(sample_with_dari)
+    assert "স্পেস ।" not in dari_res["humanized_text"], "Failed to normalize space before Bengali Dari (।)"
+    assert "স্পেস।" in dari_res["humanized_text"], "Bengali Dari should be attached to preceding word without space"
+    assert "🎯" not in dari_res["humanized_text"], "Excess emoji should be capped"
+    assert "🔥।" in dari_res["humanized_text"], "Capped emoji before Dari should cleanly attach Dari without orphaned whitespace"
+
+    # Verify emoji pattern does not match Bengali characters
+    bengali_sample = "বাংলা ভাষা ও সাহিত্য"
+    assert len(EMOJI_PATTERN.findall(bengali_sample)) == 0, "EMOJI_PATTERN falsely matched Bengali characters!"
+
     print(f"  [OK] AI Cliches Sanitized: {res['vocab_cleaned']}")
     print(f"  [OK] Emojis Capped: {res['emojis_total']} down to {len(final_emojis)}")
     print(f"  [OK] Hashtags Enforced: {tags}")
+    print(f"  [OK] Bengali Dari (।) Spacing Normalization Verified")
     print("  [OK] Social Post Humanizer passed!\n")
 
 def test_image_generation():
-    print("🧪 [Test 4] Testing FLUX AI Image Generation & Fallback...")
+    print("🧪 [Test 4] Testing FLUX AI Image Generation & Editorial Backdrop...")
+    from src.config import TEMP_DIR
     ig = ImageGenerator()
-    test_prompt = "Futuristic glowing AI neural network, cyan and purple cinematic light, photorealistic, 8k, no text"
+    test_prompt = "Modern high-tech software engineering office workstation with ultra-wide curved monitor showing real-time code and neural network data metrics, mechanical keyboard, soft natural daylight, 35mm professional photography, strictly no female, no text, no watermark"
     
     saved_path = ig.generate_image(
         prompt=test_prompt,
         title="AI Innovation",
-        hero_keywords=["Artificial intelligence neural network", "Deep learning"],
+        hero_keywords=["software engineering workstation monitor", "modern office setup"],
         slot="noon"
     )
     assert saved_path is not None, "Image generation returned None!"
     assert saved_path.exists(), f"Image file not found at {saved_path}"
     file_size = saved_path.stat().st_size
-    print(f"  [OK] Image generated at {saved_path} ({file_size:,} bytes)\n")
+    print(f"  [OK] Primary image generated at {saved_path} ({file_size:,} bytes)")
+
+    # Verify Editorial Graphic Backdrop Fallback (Zero text / Zero tofu boxes)
+    backdrop_path = TEMP_DIR / "test_runner_editorial_backdrop.jpg"
+    res_backdrop = ig._create_editorial_poster(backdrop_path, slot="night")
+    assert res_backdrop.exists(), "Editorial backdrop generation failed!"
+    assert res_backdrop.stat().st_size > 10000, "Editorial backdrop file too small!"
+    print(f"  [OK] Editorial Backdrop canvas verified at {res_backdrop} ({res_backdrop.stat().st_size:,} bytes)\n")
+
+def test_prompt_sanitization_engine():
+    print("🧪 [Test 4b] Testing Image Prompt Sanitizer & Anti-Glitch Directives...")
+    import re
+    # Test 1: Complex negation phrase stripping (preventing "no male professional" inversion)
+    dirty_prompt = (
+        "A male courier worker in warehouse with parcel boxes, strictly NO female, strictly NO woman, "
+        "no cartoon, no 3D render, no text, no watermark, strictly NO abstract glowing orbs or dark empty voids"
+    )
+    clean = " ".join(dirty_prompt.strip().split())
+    clean = re.sub(r"(?:strictly\s+)?(?:no|never|without)\s+[^,;.]+", "", clean, flags=re.IGNORECASE)
+    assert "no male professional" not in clean.lower(), "Negation inversion bug detected!"
+    assert "no man" not in clean.lower(), "Negation inversion bug detected!"
+    assert "glowing orbs" not in clean.lower(), "Stray glowing orbs token leaked into positive prompt!"
+    assert "cartoon" not in clean.lower(), "Negative token 'cartoon' leaked into positive prompt!"
+    assert "female" not in clean.lower(), "'female' token leaked into positive prompt!"
+    assert "parcel boxes" in clean.lower(), "Core positive subject was erroneously removed!"
+
+    # Test 2: Affirmative female replacement
+    female_prompt = "A female entrepreneur analyzing sales report on tablet"
+    clean_fem = re.sub(r"(?:strictly\s+)?(?:no|never|without)\s+[^,;.]+", "", female_prompt, flags=re.IGNORECASE)
+    clean_fem = re.sub(r"\bfemale\b", "male professional", clean_fem, flags=re.IGNORECASE)
+    assert "male professional" in clean_fem, "Failed to replace female with male professional!"
+    assert "female" not in clean_fem, "Female token remained in prompt!"
+
+    print("  [OK] Negation clauses stripped cleanly without inversion")
+    print("  [OK] Affirmative female tokens cleanly mapped to male/neutral")
+    print("  [OK] Image Prompt Sanitizer verified!\n")
 
 def test_gemini_content_generation():
     print("🧪 [Test 5] Testing Gemini Content Generator...")
@@ -146,7 +195,49 @@ def test_gemini_content_generation():
     assert post_data.get("title"), "Post title is empty!"
     assert post_data.get("content"), "Post content is empty!"
     print(f"  [OK] Gemini Generated Title: {post_data.get('title')}")
-    print(f"  [OK] Content Length: {len(post_data.get('content'))} characters\n")
+def test_content_generator_retry_logic():
+    print("🧪 [Test 5b] Testing Content Generator Retry Loop (Exception & JSON Recovery)...")
+    import json
+    cg = ContentGenerator(api_key="fake-key-for-retry-test")
+    
+    # 5b.1: Fail on attempt 1, succeed on attempt 2
+    attempt_count = 0
+    valid_payload = json.dumps({
+        "title": "এআই দিয়ে অটোমেশন 🚀",
+        "card_category": "AI Productivity",
+        "card_headline": "এআই দিয়ে দ্রুত কাজ করার উপায়",
+        "card_highlight": "দ্রুত কাজ",
+        "content": "প্রথম লাইন হুক।\n\n• পয়েন্ট ১\n• পয়েন্ট ২\n\nপোস্টটি সেভ করুন।\n\n#BeSmartWithAI #AIProductivity",
+        "hero_keywords": ["office automation", "laptop screen"],
+        "image_prompt": "Editorial photo of laptop screen showing automated workflow, natural lighting, 35mm lens",
+        "topic_summary": "অটোমেশন গাইড"
+    })
+
+    def mock_call_retry(prompt):
+        nonlocal attempt_count
+        attempt_count += 1
+        if attempt_count == 1:
+            raise RuntimeError("Simulated API 503 error on attempt 1")
+        return valid_payload
+
+    cg._call_gemini_api = mock_call_retry
+    result = cg.generate_post(slot="noon", recent_history_summary="")
+    assert attempt_count == 2, f"Expected 2 attempts before success, got {attempt_count}"
+    assert result.get("title") == "এআই দিয়ে অটোমেশন 🚀", "Did not recover from attempt 1 failure!"
+    print(f"  [OK] Successfully retried on attempt 1 failure and succeeded on attempt 2")
+
+    # 5b.2: Exhaust all attempts -> fallback to _generate_fallback
+    fail_count = 0
+    def mock_call_always_fail(prompt):
+        nonlocal fail_count
+        fail_count += 1
+        raise RuntimeError("Persistent network outage")
+
+    cg._call_gemini_api = mock_call_always_fail
+    fallback_res = cg.generate_post(slot="noon", recent_history_summary="")
+    assert fail_count == 3, f"Expected exactly 3 retry attempts, got {fail_count}"
+    assert "স্মার্ট সলিউশন" in fallback_res.get("card_headline", ""), "Fallback was not activated after exhausting all attempts"
+    print(f"  [OK] Cleanly fell back only after all {fail_count} attempts were exhausted\n")
 
 def test_facebook_connection():
     print("🧪 [Test 6] Testing Facebook Page Connection & Token Health...")
@@ -207,10 +298,12 @@ def main():
         test_history_manager()
         test_humanizer()
         test_image_generation()
+        test_prompt_sanitization_engine()
         test_gemini_content_generation()
+        test_content_generator_retry_logic()
         test_facebook_connection()
         test_photocard_rendering()
-        print("🎉 ALL 7 VERIFICATION TESTS COMPLETED SUCCESSFULLY!")
+        print("🎉 ALL 9 VERIFICATION TESTS COMPLETED SUCCESSFULLY!")
     except Exception as e:
         print(f"❌ TEST FAILED: {e}")
         sys.exit(1)

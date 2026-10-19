@@ -7,7 +7,7 @@ import urllib.parse
 from pathlib import Path
 from typing import Optional, List, Set
 import requests
-from PIL import Image, ImageDraw, ImageOps, ImageFont, ImageFile
+from PIL import Image, ImageDraw, ImageOps, ImageFile
 from src.config import BASE_DIR, TEMP_DIR
 
 # Allow loading truncated images to prevent crash on slow or interrupted network streams
@@ -15,26 +15,19 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 logger = logging.getLogger(__name__)
 
-# Strict regex with word boundaries to only detect genuine astronomy & cosmos topics
-SPACE_TOPIC_REGEX = re.compile(
-    r"\b(space|astronomy|telescope|webb|jwst|nebula|black hole|galaxy|nasa|exoplanet|supernova|cosmos|interstellar|orbit|mars|jupiter|saturn|moon|apollo|hubble)\b",
-    re.IGNORECASE
-)
 
 class ImageGenerator:
     """
     Intelligent Visual Engine that delivers captivating, hyper-realistic, 
     content-matching images for social media posts.
     
-    Slot-Tailored Priority:
-    - Night Space Topics: NASA 4K Official Archive (Space only) -> FLUX AI Generation -> Editorial Poster
-    - All Other Slots (Morning, Noon, Afternoon, Night): 100% Photorealistic FLUX AI Generation -> Editorial Poster Fallback
-    
-    Safety & Quality Constraints:
-    - 100% guarantee against female depictions.
-    - Zero image repeats (deduplication check against history).
-    - NASA API strictly scoped to night space topics (never triggered for daytime slots).
-    - Watermark removal for AI-generated images.
+    Generation Pipeline:
+    - Primary: 100% Photorealistic FLUX AI Generation with context-rich visual prompts.
+    - Rate Limit: Intelligent 45s cooldown handling for HTTP 402/429 instead of instant burn.
+    - Safety & Quality: Strictly NO female depictions (male professionals / workers / tactile setups only),
+      zero abstract glowing orbs/voids, clean watermark removal.
+    - Fallback: Sleek modern dark editorial backdrop with zero font text or tofu boxes,
+      designed as a pristine canvas for PhotoCardRenderer.
     """
     def __init__(self, output_dir: Path = TEMP_DIR):
         self.output_dir = output_dir
@@ -58,34 +51,14 @@ class ImageGenerator:
         used_image_sources: Optional[Set[str]] = None
     ) -> Optional[Path]:
         """
-        Generates or fetches an authentic, highly captivating, 1080x1080 image 
+        Generates or formats an authentic, highly captivating, 1080x1080 image 
         directly matching the post's core subject without repeating past images.
         """
         image_path = self.output_dir / "latest_post_image.jpg"
-        keywords = hero_keywords or []
-        used_sources = used_image_sources or set()
         self.last_image_source = ""
-        
-        # Clean up keyword list
-        search_queries = [q.strip() for q in keywords if q and len(q.strip()) > 2]
-        
-        # Check if topic is genuine deep space / astronomy
-        is_space_topic = bool(SPACE_TOPIC_REGEX.search(" ".join(search_queries) + " " + title))
 
         # =========================================================================
-        # STRATEGY 1: Night Slot & Space Topics (NASA Official Archive)
-        # =========================================================================
-        if slot == "night" and is_space_topic:
-            logger.info("🔭 [Night Space] Checking NASA Official Archive for authentic space photography...")
-            for query in search_queries[:3]:
-                img_url = self._fetch_nasa_image(query, used_sources)
-                if img_url and self._download_and_format_image(img_url, image_path):
-                    logger.info(f"✅ [NASA Archive] Space photograph processed: {query}")
-                    self.last_image_source = img_url
-                    return image_path
-
-        # =========================================================================
-        # STRATEGY 2: Primary AI Visual Engine (FLUX Photorealism)
+        # STRATEGY 1: Primary AI Visual Engine (FLUX Photorealism)
         # =========================================================================
         logger.info(f"🎨 [{slot.title()} Slot] Generating custom FLUX AI visual for maximum photorealism and quality...")
         ai_source = self._generate_ai_image(prompt, image_path)
@@ -95,9 +68,9 @@ class ImageGenerator:
             return image_path
 
         # =========================================================================
-        # TIER 3: Editorial Graphic Poster Fallback (Zero-Error Local Card)
+        # STRATEGY 2: Editorial Graphic Backdrop Fallback (Zero-Error Local Canvas)
         # =========================================================================
-        logger.info("🏷️ [Tier 3 Fallback] Creating branded editorial poster card...")
+        logger.info("🏷️ [Tier 2 Fallback] Creating branded editorial backdrop canvas...")
         try:
             self.last_image_source = f"editorial_poster_{slot}"
             return self._create_editorial_poster(image_path, title, slot)
@@ -105,84 +78,57 @@ class ImageGenerator:
             logger.error(f"Failed to create editorial fallback: {e}")
             return None
 
-    def _fetch_nasa_image(self, query: str, used_sources: Set[str]) -> Optional[str]:
-        """Queries NASA's open image library API for authentic 4K space photography."""
-        try:
-            url = f"https://images-api.nasa.gov/search?q={urllib.parse.quote(query)}&media_type=image"
-            r = requests.get(url, timeout=12)
-            if r.status_code == 200:
-                items = r.json().get('collection', {}).get('items', [])
-                # Cycle through candidates to avoid repeats
-                for item in items[:10]:
-                    links = item.get('links', [])
-                    for link in links:
-                        href = link.get('href')
-                        if href and (href.endswith('.jpg') or href.endswith('.png')):
-                            img_url = href.replace('~thumb.jpg', '~medium.jpg').replace('~small.jpg', '~medium.jpg')
-                            if img_url not in used_sources:
-                                return img_url
-        except Exception as e:
-            logger.debug(f"NASA search error for '{query}': {e}")
-        return None
-
-    def _fetch_wiki_image(self, query: str, used_sources: Set[str]) -> Optional[str]:
-        """Queries Wikipedia API for high-resolution article hero photographs."""
-        try:
-            url = 'https://en.wikipedia.org/w/api.php'
-            params = {
-                'action': 'query',
-                'generator': 'search',
-                'gsrsearch': query,
-                'gsrlimit': 5,
-                'prop': 'pageimages',
-                'pithumbsize': 1280,
-                'format': 'json'
-            }
-            r = requests.get(url, params=params, headers=self.headers, timeout=10)
-            if r.status_code == 200:
-                pages = r.json().get('query', {}).get('pages', {})
-                for pid, pdata in pages.items():
-                    page_title = pdata.get('title', '').lower()
-                    # Filter out any female portraits
-                    female_markers = ['woman', 'female', 'girl', 'actress', 'lady', 'queen', 'mother', 'sister', 'she']
-                    if any(w in page_title for w in female_markers):
-                        continue
-                    if 'thumbnail' in pdata:
-                        thumb = pdata['thumbnail']
-                        src = thumb.get('source', '')
-                        lower_src = src.lower()
-                        # Exclude diagrams, flowcharts, schemas, icons
-                        bad_markers = ['.svg', 'diagram', 'schema', 'chart', 'flowchart', 'graph', 'model-archit', 'unsupervised', 'drawing', 'woman', 'female', 'girl']
-                        if src and not any(m in lower_src for m in bad_markers) and thumb.get('width', 0) >= 380:
-                            if src not in used_sources:
-                                return src
-        except Exception as e:
-            logger.debug(f"Wiki search error for '{query}': {e}")
-        return None
-
     def _generate_ai_image(self, prompt: str, output_path: Path) -> Optional[str]:
-        """Calls Pollinations FLUX AI engine with clean prompt and strict negative constraints."""
+        """
+        Calls Pollinations FLUX AI engine with clean storytelling prompt,
+        strict negative constraints, and intelligent 45s cooldown handling for HTTP 402/429.
+        """
         clean_prompt = " ".join(prompt.strip().split())
 
-        # Programmatically sanitize any female references
-        female_words = [r"\bfemale\b", r"\bwoman\b", r"\bwomen\b", r"\bgirl\b", r"\bgirls\b", r"\blady\b", r"\bladies\b"]
-        for word in female_words:
-            clean_prompt = re.sub(word, "scientist", clean_prompt, flags=re.IGNORECASE)
+        # 1. First cleanly remove all negation clauses (e.g. 'strictly no female', 'no cartoon', 'without text')
+        # to prevent inversion bugs (e.g. 'no female' -> 'no male professional') and stray tokens
+        clean_prompt = re.sub(
+            r"(?:strictly\s+)?(?:no|never|without)\s+[^,;.]+",
+            "",
+            clean_prompt,
+            flags=re.IGNORECASE
+        )
 
-        # Remove negative phrases from positive prompt to avoid CLIP latching
-        clean_prompt = re.sub(r"(strictly\s+)?no\s+(female|woman|girl|women|girls)", "", clean_prompt, flags=re.IGNORECASE)
-        clean_prompt = clean_prompt.strip().rstrip(",")
+        # 2. Programmatically convert any remaining affirmative female references to male/neutral
+        female_words = [
+            (r"\bfemale\b", "male professional"),
+            (r"\bwoman\b", "man"),
+            (r"\bwomen\b", "men"),
+            (r"\bgirl\b", "young man"),
+            (r"\bgirls\b", "men"),
+            (r"\blady\b", "gentleman"),
+            (r"\bladies\b", "gentlemen"),
+            (r"\bfeminine\b", "masculine"),
+        ]
+        for pattern, replacement in female_words:
+            clean_prompt = re.sub(pattern, replacement, clean_prompt, flags=re.IGNORECASE)
 
-        # Enhance positive aesthetic for photorealism & authentic textures
-        clean_prompt += ", 8k photorealistic photograph, authentic textures, cinematic studio lighting, 35mm lens, sharp focus, master professional editorial photography"
+        # 3. Clean up commas and whitespace
+        clean_prompt = re.sub(r"\s*,\s*", ", ", clean_prompt)
+        clean_prompt = re.sub(r"\s+", " ", clean_prompt).strip(" ,.-")
 
-        encoded = urllib.parse.quote(clean_prompt[:600])
+        # 4. Enhance positive aesthetic for photorealism & authentic textures in well-lit environments
+        if not any(token in clean_prompt.lower() for token in ["photorealistic", "photograph", "editorial"]):
+            clean_prompt += ", 8k photorealistic editorial documentary photograph, natural daylight, bright modern environment, authentic tactile textures, 35mm lens, sharp focus"
+
+        encoded = urllib.parse.quote(clean_prompt[:800])
         seed = random.randint(100000, 9999999)
-        negative_prompt = urllib.parse.quote("female, woman, girl, lady, women, feminine, cartoon, 3d render, anime, cgi, illustration, drawing, sketch, deformed, distorted, bad anatomy, bad hands, blurry, low quality, abstract orb, glowing sphere, empty dark void, plain blob, lens flare in empty space, text, watermark, signature")
+        negative_prompt = urllib.parse.quote(
+            "female, woman, girl, lady, women, feminine, "
+            "cartoon, 3d render, anime, cgi, illustration, drawing, painting, sketch, "
+            "abstract orb, glowing sphere, dark empty void, plain blob, floating balls, lens flare in empty space, "
+            "dark dim room, turned off screen, blank black monitor, deformed, distorted, bad anatomy, bad hands, blurry, low quality, "
+            "text, watermark, signature, logo"
+        )
 
-        # Primary engine is Black Forest Labs FLUX.1 (industry-leading photorealism & prompt fidelity)
-        # Fallbacks: sana (NVLabs high-speed engine) and turbo
-        models = ["flux", "flux-realism", "sana", "turbo"]
+        models = ["flux", "turbo", "sana"]
+        cooldown_handled = False
+
         for model in models:
             logger.info(f"🎨 Generating visual with AI engine ({model})...")
             url = f"https://image.pollinations.ai/prompt/{encoded}?width=1080&height=1080&model={model}&nologo=true&seed={seed}&negative={negative_prompt}"
@@ -193,23 +139,51 @@ class ImageGenerator:
                     if success:
                         logger.info(f"✨ AI visual generated successfully ({model}, {len(r.content)//1024} KB).")
                         return f"ai_pollinations_{model}_{seed}"
-                elif r.status_code == 402:
-                    logger.warning(f"Pollinations engine '{model}' hit 402 rate limit. Switching to next fallback...")
-                    time.sleep(1)
+                elif r.status_code in [402, 429, 503]:
+                    # Extract wait time from error message or header
+                    # e.g. "Free limit reached: 1 image every 45 seconds per IP. Retry after 39s"
+                    # or 503: "The Classic API is at its limit right now. Retry after 10s"
+                    retry_match = re.search(r"Retry after (\d+)\s*s", r.text, re.IGNORECASE)
+                    if retry_match:
+                        cooldown = int(retry_match.group(1)) + 1
+                    else:
+                        retry_after = r.headers.get("Retry-After")
+                        default_wait = 12 if r.status_code == 503 else 45
+                        cooldown = int(retry_after) if (retry_after and retry_after.isdigit()) else default_wait
+
+                    cooldown = max(5, min(cooldown, 50))
+
+                    if not cooldown_handled:
+                        reason = "overload" if r.status_code == 503 else "free limit"
+                        logger.warning(
+                            f"Pollinations engine '{model}' hit HTTP {r.status_code} ({reason}). "
+                            f"Waiting {cooldown}s cooldown before retrying..."
+                        )
+                        time.sleep(cooldown)
+                        cooldown_handled = True
+
+                        # Retry the current model once after cooldown
+                        try:
+                            logger.info(f"Retrying AI engine ({model}) post-cooldown...")
+                            r_retry = requests.get(url, headers=self.headers, timeout=45)
+                            if r_retry.status_code == 200 and len(r_retry.content) > 8000:
+                                if self._process_image_bytes(r_retry.content, output_path, is_ai_generated=True):
+                                    logger.info(f"✨ AI visual generated successfully after cooldown ({model}, {len(r_retry.content)//1024} KB).")
+                                    return f"ai_pollinations_{model}_{seed}"
+                            else:
+                                logger.warning(f"Pollinations retry for '{model}' returned HTTP {r_retry.status_code}. Trying next engine...")
+                        except Exception as retry_err:
+                            logger.warning(f"Pollinations retry after cooldown failed: {retry_err}. Trying next engine...")
+                    else:
+                        logger.warning(f"Pollinations engine '{model}' hit HTTP {r.status_code}. Trying next engine...")
+                        time.sleep(3)
+                else:
+                    logger.warning(f"Pollinations engine '{model}' returned HTTP {r.status_code}. Trying next model...")
+                    time.sleep(2)
             except Exception as e:
                 logger.debug(f"Pollinations {model} failed: {e}")
 
         return None
-
-    def _download_and_format_image(self, url: str, output_path: Path) -> bool:
-        """Downloads an image from URL and formats it into a crisp 1080x1080 square."""
-        try:
-            r = requests.get(url, headers=self.headers, timeout=20)
-            if r.status_code == 200 and len(r.content) > 5000:
-                return self._process_image_bytes(r.content, output_path, is_ai_generated=False)
-        except Exception as e:
-            logger.warning(f"Error downloading image from {url}: {e}")
-        return False
 
     def _process_image_bytes(self, data: bytes, output_path: Path, is_ai_generated: bool = False) -> bool:
         """Loads image data, crops watermark if AI generated, fits into centered 1080x1080, and saves as JPEG."""
@@ -218,9 +192,10 @@ class ImageGenerator:
             img = Image.open(io.BytesIO(data))
             if is_ai_generated:
                 w, h = img.size
-                # Crop bottom 45px to eliminate watermark cleanly
+                # Crop bottom watermark cleanly (at least 55px or 6.5% of height)
+                crop_px = max(55, int(h * 0.065))
                 if h > 100:
-                    img = img.crop((0, 0, w, h - 45))
+                    img = img.crop((0, 0, w, h - crop_px))
             fitted = ImageOps.fit(img, (1080, 1080), method=Image.Resampling.LANCZOS)
             fitted.convert("RGB").save(output_path, "JPEG", quality=95)
             return True
@@ -228,58 +203,68 @@ class ImageGenerator:
             logger.error(f"Image formatting error: {e}")
             return False
 
-    def _create_editorial_poster(self, output_path: Path, title: str, slot: str) -> Path:
+    def _create_editorial_poster(self, output_path: Path, title: str = "", slot: str = "noon") -> Path:
         """
-        Creates an ultra-sleek, modern editorial graphic poster in dark mode 
+        Creates an ultra-sleek, modern editorial graphic backdrop in dark mode 
         when no external image source is accessible.
+        
+        Guaranteed: Does NOT render any title text, badge text, or tofu boxes.
+        Zero abstract glowing orbs or floating blobs.
+        Acts as a pristine 1080x1080 canvas for PhotoCardRenderer.
         """
         width, height = 1080, 1080
-        image = Image.new("RGB", (width, height), color=(10, 15, 29))  # Deep slate obsidian
+        # Deep slate obsidian base
+        image = Image.new("RGB", (width, height), color=(10, 15, 29))
         draw = ImageDraw.Draw(image)
 
-        # Ambient background glow
         theme_colors = {
-            "noon": (14, 165, 233),       # Electric Sky Blue (AI Productivity)
-            "night": (16, 185, 129)       # Emerald Green (B2B Automation)
+            "noon": ((14, 165, 233), (56, 189, 248)),    # Electric Sky Blue (AI Productivity)
+            "night": ((16, 185, 129), (52, 211, 153))    # Emerald Green (B2B Automation)
         }
-        accent = theme_colors.get(slot, (14, 165, 233))
+        primary_accent, secondary_accent = theme_colors.get(slot, theme_colors["noon"])
 
-        for r in range(450, 0, -25):
-            alpha = int(20 * (r / 450))
-            box = [(width//2 - r, 380 - r), (width//2 + r, 380 + r)]
-            draw.ellipse(box, outline=(accent[0], accent[1], accent[2], alpha), width=3)
+        # Modern deep slate vertical gradient
+        for i in range(height):
+            ratio = i / height
+            r = int(10 + 6 * ratio)
+            g = int(15 + 12 * ratio)
+            b = int(29 + 25 * ratio)
+            draw.line([(0, i), (width, i)], fill=(r, g, b))
 
-        # Sleek glassmorphism borders
-        margin = 45
-        draw.rectangle([(margin, margin), (width - margin, height - margin)], outline=(30, 41, 59), width=3)
-        draw.line([(margin, margin), (width - margin, margin)], fill=accent, width=6)
+        # Precision tech blueprint grid lines (very subtle)
+        grid_step = 60
+        for x in range(0, width, grid_step):
+            draw.line([(x, 0), (x, height)], fill=(20, 28, 48), width=1)
+        for y in range(0, height, grid_step):
+            draw.line([(0, y), (width, y)], fill=(20, 28, 48), width=1)
 
-        # Load TrueType font for clean Bengali & English rendering
-        font_path = BASE_DIR / "assets" / "fonts" / "HindSiliguri-Bold.ttf"
-        title_font = ImageFont.truetype(str(font_path), 38) if font_path.exists() else None
-        badge_font = ImageFont.truetype(str(font_path), 22) if font_path.exists() else None
-        brand_font = ImageFont.truetype(str(font_path), 20) if font_path.exists() else None
+        # High-tech diagonal circuit / data bus accent traces in lower-right corner
+        for offset in [0, 20, 40]:
+            draw.line([(width - 320 + offset, height), (width, height - 320 + offset)], fill=(25, 40, 68), width=2)
 
-        # Category pill badge
-        slot_names = {
-            "noon": "AI PRODUCTIVITY & HACKS",
-            "night": "B2B BUSINESS AUTOMATION"
-        }
-        badge_text = f"  {slot_names.get(slot, 'SMART AUTOMATION')}  "
-        draw.rectangle([(margin + 40, margin + 40), (margin + 380, margin + 90)], fill=(15, 23, 42), outline=accent, width=2)
-        draw.text((margin + 60, margin + 50), badge_text, fill=accent, font=badge_font)
+        # Sleek modern glassmorphic frame border
+        margin = 40
+        draw.rectangle([(margin, margin), (width - margin, height - margin)], outline=(30, 45, 75), width=2)
 
-        # Center Tech Emblem Badge
-        draw.rounded_rectangle([(width//2 - 130, height//2 - 120), (width//2 + 130, height//2 - 60)], radius=18, fill=(15, 23, 42), outline=accent, width=2)
-        draw.text((width//2, height//2 - 88), "TECH INSIGHT", fill=accent, anchor="mm", font=badge_font)
+        # Accent corner brackets
+        corner_len = 45
+        # Top-left
+        draw.line([(margin, margin), (margin + corner_len, margin)], fill=secondary_accent, width=4)
+        draw.line([(margin, margin), (margin, margin + corner_len)], fill=secondary_accent, width=4)
+        # Top-right
+        draw.line([(width - margin, margin), (width - margin - corner_len, margin)], fill=secondary_accent, width=4)
+        draw.line([(width - margin, margin), (width - margin, margin + corner_len)], fill=secondary_accent, width=4)
+        # Bottom-left
+        draw.line([(margin, height - margin), (margin + corner_len, height - margin)], fill=secondary_accent, width=4)
+        draw.line([(margin, height - margin), (margin, height - margin - corner_len)], fill=secondary_accent, width=4)
+        # Bottom-right
+        draw.line([(width - margin, height - margin), (width - margin - corner_len, height - margin)], fill=secondary_accent, width=4)
+        draw.line([(width - margin, height - margin), (width - margin, height - margin - corner_len)], fill=secondary_accent, width=4)
 
-        # Title formatting (truncate cleanly if needed)
-        clean_title = title if len(title) <= 55 else title[:52] + "..."
-        draw.text((width//2, height//2 + 30), clean_title, fill=(248, 250, 252), anchor="mm", font=title_font)
-
-        # Bottom branding line
-        draw.text((width//2, height - margin - 50), "BE SMART WITH AI • DAILY DISCOVERY", fill=(148, 163, 184), anchor="mm", font=brand_font)
+        # Subtle decorative tech horizontal beam
+        draw.line([(margin, 380), (width - margin, 380)], fill=(25, 36, 56), width=1)
+        draw.line([(margin + 80, 380), (margin + 200, 380)], fill=primary_accent, width=2)
 
         image.save(output_path, "JPEG", quality=95)
-        logger.info(f"Editorial fallback poster created at {output_path}")
+        logger.info(f"Sleek editorial fallback backdrop created at {output_path} (zero font text, pristine card canvas)")
         return output_path
