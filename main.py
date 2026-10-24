@@ -2,6 +2,7 @@ import argparse
 import logging
 import sys
 import io
+import json
 
 # Ensure UTF-8 output on Windows terminal
 if sys.platform == "win32":
@@ -168,16 +169,33 @@ def run_poster(slot: str = "auto", dry_run: bool = False, skip_image: bool = Fal
         post_id = fb_client.publish_post(message=content, image_path=image_path)
         logger.info(f"🎉 পোস্ট সফলভাবে ফেসবুকে প্রকাশিত হয়েছে! পোস্ট আইডি: {post_id}")
 
+        # Immediate emergency save so retries never duplicate post even if history_mgr errors out
+        try:
+            emergency_file = Path("temp") / "emergency_last_post.json"
+            emergency_file.parent.mkdir(exist_ok=True)
+            with open(emergency_file, "w", encoding="utf-8") as ef:
+                json.dump({
+                    "slot": slot,
+                    "timestamp": get_current_bst_time().strftime("%Y-%m-%d %H:%M:%S BST"),
+                    "post_id": str(post_id),
+                    "title": title
+                }, ef, ensure_ascii=False, indent=2)
+        except Exception as e_err:
+            logger.warning(f"Could not write emergency cache: {e_err}")
+
         # 7. হিস্ট্রি আপডেট
-        history_mgr.record_post(
-            slot=slot,
-            theme=slot_info["theme"],
-            title=title,
-            summary=topic_summary,
-            post_id=str(post_id),
-            image_source=image_src
-        )
-        logger.info("💾 হিস্ট্রি আপডেট করা হয়েছে। পরবর্তী পোস্টে এই বিষয় ও ছবি পুনরাবৃত্তি হবে না।")
+        try:
+            history_mgr.record_post(
+                slot=slot,
+                theme=slot_info["theme"],
+                title=title,
+                summary=topic_summary,
+                post_id=str(post_id),
+                image_source=image_src
+            )
+            logger.info("💾 হিস্ট্রি আপডেট করা হয়েছে। পরবর্তী পোস্টে এই বিষয় ও ছবি পুনরাবৃত্তি হবে না।")
+        except Exception as h_err:
+            logger.error(f"⚠️ হিস্ট্রি ফাইলে সংরক্ষণে ত্রুটি: {h_err} (পোস্ট আইডি: {post_id})")
 
     except Exception as e:
         logger.error(f"❌ ফেসবুকে পোস্ট করতে ত্রুটি ঘটেছে: {e}")

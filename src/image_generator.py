@@ -126,7 +126,7 @@ class ImageGenerator:
             "text, watermark, signature, logo"
         )
 
-        models = ["flux", "turbo", "sana"]
+        models = ["flux", "flux-realism", "sana", "turbo"]
         cooldown_handled = False
 
         for model in models:
@@ -181,7 +181,7 @@ class ImageGenerator:
                     logger.warning(f"Pollinations engine '{model}' returned HTTP {r.status_code}. Trying next model...")
                     time.sleep(2)
             except Exception as e:
-                logger.debug(f"Pollinations {model} failed: {e}")
+                logger.warning(f"Pollinations {model} network error/timeout: {e}")
 
         return None
 

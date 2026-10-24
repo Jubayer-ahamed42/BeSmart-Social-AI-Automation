@@ -49,17 +49,29 @@ class FacebookClient:
                 "access_token": self.access_token
             }, timeout=15)
             debug_data = debug_res.json().get("data", {})
-            expires_at = debug_data.get("expires_at")
+            expires_at = debug_data.get("expires_at", 0)
+            data_access_expires_at = debug_data.get("data_access_expires_at", 0)
+
             if expires_at and expires_at > 0:
                 exp_dt = datetime.datetime.fromtimestamp(expires_at)
                 days_left = (exp_dt - datetime.datetime.now()).days
                 data["expires_at"] = exp_dt.strftime("%Y-%m-%d %H:%M:%S")
                 data["days_remaining"] = days_left
-                logger.info(f"টোকেন মেয়াদ: {days_left} দিন বাকি (মেয়াদ শেষ: {data['expires_at']})")
+                logger.info(f"টোকেন অথেনটিকেশন মেয়াদ: {days_left} দিন বাকি (মেয়াদ শেষ: {data['expires_at']})")
             else:
                 data["expires_at"] = "Never (স্থায়ী টোকেন)"
                 data["days_remaining"] = 9999
-                logger.info("টোকেন মেয়াদ: আজীবন স্থায়ী (Never Expires)")
+                logger.info("টোকেন অথেনটিকেশন মেয়াদ: আজীবন স্থায়ী (Never Expires)")
+
+            if data_access_expires_at and data_access_expires_at > 0:
+                da_dt = datetime.datetime.fromtimestamp(data_access_expires_at)
+                da_days = (da_dt - datetime.datetime.now()).days
+                data["data_access_expires_at"] = da_dt.strftime("%Y-%m-%d %H:%M:%S")
+                data["data_access_days_remaining"] = da_days
+                if da_days <= 15:
+                    logger.warning(f"⚠️ মেটা ডেটা এক্সেস পারমিশনের মেয়াদ সন্নিকটে: {da_days} দিন বাকি (নবায়ন: {data['data_access_expires_at']})")
+                else:
+                    logger.info(f"মেটা ডেটা এক্সেস পারমিশন উইন্ডো: {da_days} দিন বাকি ({data['data_access_expires_at']})")
         except Exception as e:
             logger.warning(f"Could not fetch token expiration details: {e}")
 

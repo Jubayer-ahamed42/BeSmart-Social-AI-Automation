@@ -114,7 +114,7 @@ def determine_current_slot() -> str:
     now = get_current_bst_time()
     hour = now.hour
 
-    if 5 <= hour < 16:
+    if 5 <= hour < 17:
         return "noon"
     else:
         return "night"
@@ -123,7 +123,7 @@ SLOT_WINDOWS = {
     "noon": {
         "target_str": "12:00 PM",
         "valid_start": (11, 0),
-        "valid_end": (16, 59)
+        "valid_end": (17, 30)
     },
     "night": {
         "target_str": "08:00 PM",

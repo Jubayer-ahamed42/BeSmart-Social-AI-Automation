@@ -193,6 +193,10 @@ Step 5 [Storytelling Image Blueprint & Visual Card]:
                         response = client.models.generate_content(
                             model=model_name,
                             contents=prompt,
+                            config={
+                                "response_mime_type": "application/json",
+                                "temperature": 0.7,
+                            }
                         )
                         if response and response.text:
                             return response.text
@@ -272,7 +276,7 @@ Step 5 [Storytelling Image Blueprint & Visual Card]:
             if title_m:
                 extracted["title"] = title_m.group(1).replace('\\"', '"')
 
-            content_m = re.search(r'"content"\s*:\s*"(.*?)"(?:\s*,\s*"\w+"\s*:)', cleaned, re.DOTALL)
+            content_m = re.search(r'"content"\s*:\s*"(.*?)"(?:\s*,\s*"\w+"\s*:|\s*\})', cleaned, re.DOTALL)
             if content_m:
                 extracted["content"] = content_m.group(1).replace('\\n', '\n').replace('\\"', '"')
 
@@ -313,15 +317,15 @@ Step 5 [Storytelling Image Blueprint & Visual Card]:
         if slot == "night":
             cta_line = "আপনার বিজনেসে এই ফুল-অটোমেটেড সিস্টেম সেটআপ করতে কমেন্টে 'AUTOMATE' লিখুন অথবা আমাদের পেজের WhatsApp বাটনে সরাসরি মেসেজ পাঠান!"
         else:
-            cta_line = "আপনার মতামত কমেন্টে জানান, বন্ধুদের সাথে শেয়ার করে পোস্টটি সেইভ (Save 📌) রাখুন অথবা পেজের WhatsApp বাটনে আমাদের সাথে কানেক্ট হন!"
+            cta_line = "আপনার মতামত কমেন্টে জানান, বন্ধুদের সাথে শেয়ার করে পোস্টটি সেইভ (Save) রাখুন অথবা আমাদের সাথে কানেক্ট হন!"
 
         content = f"""{title}
 
 দৈনন্দিন কাজ ও ব্যবসাকে স্মার্ট করতে এআই-এর সঠিক প্রয়োগ জানা অত্যন্ত জরুরি। আজকের বিষয়: {focus_area}।
 
-🔹 পুনরাবৃত্তিমূলক বোরিং ও সময়সাপেক্ষ কাজ দ্রুত শেষ করার স্মার্ট উপায়।
-🔹 বাস্তব জীবনে কাজের গতি এবং নির্ভুলতা বাড়াতে এর ভূমিকা অপরিসীম।
-🔹 স্মার্ট অটোমেশন ব্যবহারের মাধ্যমে আপনি প্রতিদিন ঘণ্টার পর ঘণ্টা সময় বাঁচাতে পারবেন।
+• পুনরাবৃত্তিমূলক বোরিং ও সময়সাপেক্ষ কাজ দ্রুত শেষ করার স্মার্ট উপায়।
+• বাস্তব জীবনে কাজের গতি এবং নির্ভুলতা বাড়াতে এর ভূমিকা অপরিসীম।
+• স্মার্ট অটোমেশন ব্যবহারের মাধ্যমে আপনি প্রতিদিন ঘণ্টার পর ঘণ্টা সময় বাঁচাতে পারবেন।
 
 {cta_line}
 

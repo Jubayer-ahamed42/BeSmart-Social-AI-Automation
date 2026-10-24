@@ -142,9 +142,12 @@ class SocialPostHumanizer:
     def cap_emojis(self, text: str, max_allowed: int = 2) -> Tuple[str, int]:
         """
         Caps total emojis in the post to maximum allowed (default: 2).
-        Excess emojis are cleanly removed and spacing normalized.
-        Prevents algorithmic spam penalty while keeping authentic human touch.
+        Preserves list bullets (🔹, 🔸, ▪) by transforming them to clean typographic bullets (•).
+        Excess decorative emojis are cleanly removed and spacing normalized.
         """
+        # Convert bullet-like emojis to clean bullets before counting to preserve structure
+        text = re.sub(r"(?m)^[\t ]*[🔹🔸▪▫▶⭐]\s*", "• ", text)
+
         count = 0
         def repl(m):
             nonlocal count
@@ -154,8 +157,8 @@ class SocialPostHumanizer:
         cleaned = EMOJI_PATTERN.sub(repl, text)
         cleaned = re.sub(r"[ \t]+", " ", cleaned)
         cleaned = re.sub(r" ([.,!?:;\u0964\u0965])", r"\1", cleaned)
-        lines = [line.strip() for line in cleaned.split("\n")]
-        return "\n".join(lines), count
+        res_lines = [line.strip() for line in cleaned.split("\n")]
+        return "\n".join(res_lines), count
 
     def enforce_strict_two_hashtags(self, text: str, default_topic_tag: str = "#BusinessAutomation") -> str:
         """
@@ -163,15 +166,9 @@ class SocialPostHumanizer:
         Strictly maximum 2 hashtags:
         - 1st: #BeSmartWithAI
         - 2nd: Topic hashtag (extracted from post or default_topic_tag)
-        Strips away any 3rd, 4th, 5th+ hashtags to protect organic reach.
+        Strips all inline and trailing hashtags to prevent duplicates or hashtag spam.
         """
         tags = re.findall(r"#[A-Za-z0-9_\u0980-\u09FF]+", text)
-
-        # Remove trailing empty lines and trailing hashtag lines safely
-        lines = text.strip().splitlines()
-        while lines and (not lines[-1].strip() or lines[-1].strip().startswith("#")):
-            lines.pop()
-        clean_body = "\n".join(lines).strip()
 
         primary_tag = "#BeSmartWithAI"
         secondary_tag = default_topic_tag
@@ -181,6 +178,13 @@ class SocialPostHumanizer:
             if tag.lower() != primary_tag.lower():
                 secondary_tag = tag
                 break
+
+        # Strip all hashtags completely from the body to prevent duplicates anywhere
+        body_without_tags = re.sub(r"#[A-Za-z0-9_\u0980-\u09FF]+", "", text)
+        body_lines = [l.rstrip() for l in body_without_tags.splitlines()]
+        while body_lines and not body_lines[-1].strip():
+            body_lines.pop()
+        clean_body = "\n".join(body_lines).strip()
 
         return f"{clean_body}\n\n{primary_tag} {secondary_tag}"
 

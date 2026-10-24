@@ -13,25 +13,70 @@ class HistoryManager:
         self.history_file = history_file
 
     def load_history(self) -> List[Dict[str, Any]]:
-        """Loads previous posts history."""
+        """Loads previous posts history safely, with backup recovery to prevent data erasure."""
         if not self.history_file.exists():
             return []
         try:
             with open(self.history_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                return data if isinstance(data, list) else []
+                if isinstance(data, list) and data:
+                    return data
+                elif isinstance(data, list) and not data:
+                    # Empty list - check if a backup exists
+                    bak_file = self.history_file.with_suffix(".bak")
+                    if bak_file.exists():
+                        try:
+                            with open(bak_file, "r", encoding="utf-8") as bf:
+                                bak_data = json.load(bf)
+                                if isinstance(bak_data, list) and bak_data:
+                                    logger.warning("Empty history detected. Recovered from .bak file.")
+                                    return bak_data
+                        except Exception:
+                            pass
+                    return []
+                return []
         except Exception as e:
-            logger.warning(f"Failed to read history file: {e}. Starting fresh.")
-            return []
+            logger.error(f"Failed to read history file: {e}. Attempting backup recovery...")
+            bak_file = self.history_file.with_suffix(".bak")
+            if bak_file.exists():
+                try:
+                    with open(bak_file, "r", encoding="utf-8") as bf:
+                        bak_data = json.load(bf)
+                        if isinstance(bak_data, list) and bak_data:
+                            logger.info(f"Successfully recovered {len(bak_data)} history records from .bak!")
+                            return bak_data
+                except Exception as bak_err:
+                    logger.error(f"Backup recovery also failed: {bak_err}")
+            # If both fail, raise RuntimeError rather than silently returning [] to prevent overwriting past data
+            raise RuntimeError(f"Critical history file corruption for {self.history_file}: {e}")
 
     def save_history(self, history: List[Dict[str, Any]]) -> None:
-        """Saves history with a maximum limit of recent 250 entries atomically to prevent corruption."""
+        """Saves history with backup and maximum limit of recent 250 entries atomically."""
         try:
             self.history_file.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Guard against accidental catastrophic truncation
+            if self.history_file.exists() and self.history_file.stat().st_size > 500:
+                if len(history) < 5:
+                    logger.critical(f"Attempted to overwrite history with suspiciously small list ({len(history)} items). Aborting save to protect data.")
+                    return
+
             trimmed = history[-250:]
             temp_file = self.history_file.with_suffix(".tmp")
+            bak_file = self.history_file.with_suffix(".bak")
+
+            # Write to temp file first
             with open(temp_file, "w", encoding="utf-8") as f:
                 json.dump(trimmed, f, ensure_ascii=False, indent=2)
+
+            # Update backup before replacing main file
+            if self.history_file.exists():
+                try:
+                    import shutil
+                    shutil.copy2(self.history_file, bak_file)
+                except Exception as b_err:
+                    logger.warning(f"Could not update history .bak: {b_err}")
+
             temp_file.replace(self.history_file)
         except Exception as e:
             logger.error(f"Failed to write history file: {e}")
@@ -143,8 +188,8 @@ class HistoryManager:
         words = clean.split()
         # Filter out common stop words and small particles
         stop_words = {
-            "এই", "সেই", "কি", "কী", "কেন", "করে", "করা", "হবে", "হলে", "থেকে", "দিয়ে", "জন্য", "একটি", "দুটি",
-            "and", "the", "for", "with", "this", "that", "from", "into", "best", "top"
+            "এই", "সেই", "কি", "কী", "কেন", "করে", "করা", "হবে", "হলে", "থেকে", "দিয়ে", "জন্য", "একটি", "দুটি", "এআই",
+            "and", "the", "for", "with", "this", "that", "from", "into", "best", "top", "ai"
         }
         return {w for w in words if len(w) >= 3 and w not in stop_words}
 
@@ -188,5 +233,17 @@ class HistoryManager:
                 ts_str = item.get("timestamp", "")
                 if ts_str.startswith(today_prefix):
                     return True, ts_str
+
+        # Emergency check: if history manager didn't find it, check the local emergency cache
+        emergency_file = self.history_file.parent / "temp" / "emergency_last_post.json"
+        if emergency_file.exists():
+            try:
+                with open(emergency_file, "r", encoding="utf-8") as ef:
+                    e_data = json.load(ef)
+                    if e_data.get("slot") == slot and e_data.get("timestamp", "").startswith(today_prefix):
+                        return True, e_data.get("timestamp", "")
+            except Exception:
+                pass
+
         return False, ""
 

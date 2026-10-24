@@ -2,7 +2,13 @@
 setlocal
 
 set "PROJECT_DIR=C:\MY PROJECT\2. FACEBOOK AUTO POSTER AGENT (Be Smart With AI)"
-set "PYTHON_EXE=C:\Users\ASSDI\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
+
+if exist "C:\Users\ASSDI\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" (
+    set "PYTHON_EXE=C:\Users\ASSDI\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
+) else (
+    set "PYTHON_EXE=python"
+)
+
 set "PATH=%PATH%;C:\Users\ASSDI\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd;C:\Users\ASSDI\AppData\Local\Microsoft\WinGet\Packages\GitHub.cli_Microsoft.Winget.Source_8wekyb3d8bbwe\bin"
 
 cd /d "%PROJECT_DIR%"
@@ -14,13 +20,8 @@ echo [%date% %time%] Auto Poster Scheduled Execution Starting... >> %LOG_FILE%
 REM 1. Sync latest state from GitHub so we never duplicate a post made by cloud runner
 git pull --rebase origin main >> %LOG_FILE% 2>&1
 
-if not exist "%PYTHON_EXE%" (
-    echo [%date% %time%] [ERROR] Python executable not found at: %PYTHON_EXE% >> %LOG_FILE%
-    exit /b 1
-)
-
 REM 2. Self-Healing Dependency Guard
-"%PYTHON_EXE%" -c "import pytz, dotenv, requests, google.genai, PIL" >nul 2>&1
+"%PYTHON_EXE%" -c "import pytz, dotenv, requests, PIL" >nul 2>&1
 if errorlevel 1 (
     echo [%date% %time%] [WARNING] Missing dependencies detected! Running self-healing auto-repair... >> %LOG_FILE%
     "%PYTHON_EXE%" -m pip install -r requirements.txt --quiet >> %LOG_FILE% 2>&1
