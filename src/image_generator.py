@@ -127,7 +127,7 @@ class ImageGenerator:
         )
 
         models = ["flux", "flux-realism", "sana", "turbo"]
-        cooldown_handled = False
+        ip_rate_limit_handled = False
 
         for model in models:
             logger.info(f"🎨 Generating visual with AI engine ({model})...")
@@ -139,44 +139,47 @@ class ImageGenerator:
                     if success:
                         logger.info(f"✨ AI visual generated successfully ({model}, {len(r.content)//1024} KB).")
                         return f"ai_pollinations_{model}_{seed}"
-                elif r.status_code in [402, 429, 503]:
-                    # Extract wait time from error message or header
-                    # e.g. "Free limit reached: 1 image every 45 seconds per IP. Retry after 39s"
-                    # or 503: "The Classic API is at its limit right now. Retry after 10s"
+
+                # Case 1: IP Rate Limit (402 Payment Required or 429 Too Many Requests)
+                elif r.status_code in [402, 429]:
                     retry_match = re.search(r"Retry after (\d+)\s*s", r.text, re.IGNORECASE)
                     if retry_match:
                         cooldown = int(retry_match.group(1)) + 1
                     else:
                         retry_after = r.headers.get("Retry-After")
-                        default_wait = 12 if r.status_code == 503 else 45
-                        cooldown = int(retry_after) if (retry_after and retry_after.isdigit()) else default_wait
+                        cooldown = int(retry_after) if (retry_after and retry_after.isdigit()) else 45
 
-                    cooldown = max(5, min(cooldown, 50))
+                    cooldown = max(5, min(cooldown, 55))
 
-                    if not cooldown_handled:
-                        reason = "overload" if r.status_code == 503 else "free limit"
+                    if not ip_rate_limit_handled:
                         logger.warning(
-                            f"Pollinations engine '{model}' hit HTTP {r.status_code} ({reason}). "
-                            f"Waiting {cooldown}s cooldown before retrying..."
+                            f"Pollinations IP rate limit hit ({r.status_code}). "
+                            f"Waiting {cooldown}s cooldown for IP lock to clear before retrying..."
                         )
                         time.sleep(cooldown)
-                        cooldown_handled = True
+                        ip_rate_limit_handled = True
 
-                        # Retry the current model once after cooldown
+                        # Retry current model once the IP lock clears
                         try:
-                            logger.info(f"Retrying AI engine ({model}) post-cooldown...")
+                            logger.info(f"Retrying AI engine ({model}) after IP cooldown...")
                             r_retry = requests.get(url, headers=self.headers, timeout=45)
                             if r_retry.status_code == 200 and len(r_retry.content) > 8000:
                                 if self._process_image_bytes(r_retry.content, output_path, is_ai_generated=True):
-                                    logger.info(f"✨ AI visual generated successfully after cooldown ({model}, {len(r_retry.content)//1024} KB).")
+                                    logger.info(f"✨ AI visual generated successfully post-cooldown ({model}, {len(r_retry.content)//1024} KB).")
                                     return f"ai_pollinations_{model}_{seed}"
                             else:
-                                logger.warning(f"Pollinations retry for '{model}' returned HTTP {r_retry.status_code}. Trying next engine...")
+                                logger.warning(f"Pollinations retry for '{model}' returned HTTP {r_retry.status_code}.")
                         except Exception as retry_err:
-                            logger.warning(f"Pollinations retry after cooldown failed: {retry_err}. Trying next engine...")
+                            logger.warning(f"Pollinations retry after cooldown failed: {retry_err}")
                     else:
-                        logger.warning(f"Pollinations engine '{model}' hit HTTP {r.status_code}. Trying next engine...")
-                        time.sleep(3)
+                        logger.warning(f"Pollinations IP rate limit still active on '{model}' ({r.status_code}). Aborting multi-model burn to allow editorial fallback.")
+                        break
+
+                # Case 2: Server Overload (503 Service Unavailable)
+                elif r.status_code == 503:
+                    logger.warning(f"Pollinations server overloaded for '{model}' (HTTP 503). Waiting 8s before trying alternative model...")
+                    time.sleep(8)
+
                 else:
                     logger.warning(f"Pollinations engine '{model}' returned HTTP {r.status_code}. Trying next model...")
                     time.sleep(2)

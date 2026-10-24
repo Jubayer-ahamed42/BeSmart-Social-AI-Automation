@@ -1,5 +1,7 @@
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
+chcp 65001 >nul
+set "PYTHONIOENCODING=utf-8"
 
 set "PROJECT_DIR=C:\MY PROJECT\2. FACEBOOK AUTO POSTER AGENT (Be Smart With AI)"
 
@@ -31,12 +33,20 @@ REM 3. Execute poster
 "%PYTHON_EXE%" main.py --slot auto >> %LOG_FILE% 2>&1
 set EXIT_CODE=%ERRORLEVEL%
 
-REM 4. If local posted, sync history to GitHub
+REM 4. If local posted, sync history to GitHub with rebase-retry resilience
 git add post_history.json >> %LOG_FILE% 2>&1
 git diff --cached --quiet
 if errorlevel 1 (
     git commit -m "chore(local): update post history [skip ci]" >> %LOG_FILE% 2>&1
-    git push origin main >> %LOG_FILE% 2>&1
+    set "PUSHED=0"
+    for /l %%i in (1,1,3) do (
+        if not "!PUSHED!"=="1" (
+            git pull --rebase origin main >> %LOG_FILE% 2>&1
+            git push origin main >> %LOG_FILE% 2>&1
+            if not errorlevel 1 set "PUSHED=1"
+            if not "!PUSHED!"=="1" timeout /t 3 /nobreak >nul
+        )
+    )
 )
 
 echo [%date% %time%] Run completed with exit code: %EXIT_CODE% >> %LOG_FILE%

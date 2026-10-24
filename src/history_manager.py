@@ -220,7 +220,7 @@ class HistoryManager:
     def is_slot_posted_today(self, slot: str, target_date: Optional[str] = None) -> Tuple[bool, str]:
         """
         Checks if a post for this slot has already been published today (in Bangladesh time).
-        Guarantees that each slot (morning, noon, afternoon, night) is posted at most once per calendar day.
+        Guarantees that each slot (noon, night) is posted at most once per calendar day.
         Returns (is_posted_today: bool, last_timestamp: str).
         """
         history = self.load_history()

@@ -22,6 +22,7 @@ FB_APP_ID = os.getenv("FB_APP_ID", "").strip()
 FB_APP_SECRET = os.getenv("FB_APP_SECRET", "").strip()
 TIMEZONE_NAME = os.getenv("TIMEZONE", "Asia/Dhaka")
 WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "8801610594042").strip()
+POLLINATIONS_API_KEY = os.getenv("POLLINATIONS_API_KEY", "").strip()
 
 # Timezone object
 try:
@@ -108,8 +109,8 @@ def get_current_bst_time():
 def determine_current_slot() -> str:
     """
     Determines the slot (noon, night) based on current hour in Bangladesh.
-    - 05:00 - 15:59 => noon (12:00 PM target)
-    - 16:00 - 04:59 => night (08:00 PM target)
+    - 05:00 - 16:59 => noon (12:00 PM target)
+    - 17:00 - 04:59 => night (08:00 PM target)
     """
     now = get_current_bst_time()
     hour = now.hour
