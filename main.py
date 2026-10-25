@@ -21,7 +21,9 @@ from src.config import (
     get_current_bst_time,
     GEMINI_API_KEY,
     FB_PAGE_ID,
-    FB_PAGE_ACCESS_TOKEN
+    FB_PAGE_ACCESS_TOKEN,
+    WHATSAPP_NUMBER,
+    TEMP_DIR
 )
 from src.history_manager import HistoryManager
 from src.content_generator import ContentGenerator
@@ -94,10 +96,11 @@ def run_poster(slot: str = "auto", dry_run: bool = False, skip_image: bool = Fal
                 
                 # হিস্ট্রি ও ইমার্জেন্সি ক্যাশে সিঙ্ক করা (যদি পূর্বে রেকর্ড না থাকে)
                 post_id = str(live_post.get("id", ""))
+                msg = live_post.get("message", "")
+                title_sync = msg.split("\n")[0][:100] if msg else f"{slot.capitalize()} Post from Facebook Page"
+
                 existing_history = history_mgr.load_history()
                 if not any(item.get("post_id") == post_id for item in existing_history):
-                    msg = live_post.get("message", "")
-                    title_sync = msg.split("\n")[0][:100] if msg else f"{slot.capitalize()} Post from Facebook Page"
                     try:
                         history_mgr.record_post(
                             slot=slot,
@@ -109,6 +112,21 @@ def run_poster(slot: str = "auto", dry_run: bool = False, skip_image: bool = Fal
                         logger.info(f"💾 লাইভ পোস্টটি লোকাল হিস্ট্রিতে রেকর্ড ও সিঙ্ক করা হয়েছে (Post ID: {post_id})।")
                     except Exception as rec_err:
                         logger.warning(f"Could not sync live post to history: {rec_err}")
+
+                # ইমার্জেন্সি ক্যাশ আপডেট যাতে কোনো কারণে লোকাল হিস্ট্রি ফাইলে সমস্যা হলেও ডাবল পোস্ট না হয়
+                try:
+                    emergency_file = TEMP_DIR / "emergency_last_post.json"
+                    emergency_file.parent.mkdir(parents=True, exist_ok=True)
+                    with open(emergency_file, "w", encoding="utf-8") as ef:
+                        json.dump({
+                            "slot": slot,
+                            "timestamp": get_current_bst_time().strftime("%Y-%m-%d %H:%M:%S BST"),
+                            "post_id": post_id,
+                            "title": title_sync
+                        }, ef, ensure_ascii=False, indent=2)
+                except Exception as ef_err:
+                    logger.warning(f"Could not update emergency cache on live sync: {ef_err}")
+
                 return
         except Exception as fb_err:
             logger.warning(f"লাইভ ফেসবুক ফিড চেক করার সময় ত্রুটি (স্কিপ করে পরবর্তী ধাপে যাওয়া হচ্ছে): {fb_err}")
@@ -205,8 +223,8 @@ def run_poster(slot: str = "auto", dry_run: bool = False, skip_image: bool = Fal
 
         # Immediate emergency save so retries never duplicate post even if history_mgr errors out
         try:
-            emergency_file = Path("temp") / "emergency_last_post.json"
-            emergency_file.parent.mkdir(exist_ok=True)
+            emergency_file = TEMP_DIR / "emergency_last_post.json"
+            emergency_file.parent.mkdir(parents=True, exist_ok=True)
             with open(emergency_file, "w", encoding="utf-8") as ef:
                 json.dump({
                     "slot": slot,
@@ -263,8 +281,19 @@ def verify_credentials() -> None:
             fb = FacebookClient(page_id=FB_PAGE_ID, access_token=FB_PAGE_ACCESS_TOKEN)
             info = fb.verify_credentials()
             print(f"  ✅ ফেসবুক পেজ সফলভাবে সংযুক্ত: {info.get('name')} (ID: {info.get('id')})")
+            
+            # Live Feed Guard check
+            print("  📡 লাইভ পেজ ফিড ও কনকারেন্সি গার্ড টেস্ট করা হচ্ছে...")
+            recent = fb.get_recent_posts(limit=3)
+            print(f"  ✅ লাইভ ফিড থেকে সাম্প্রতিক {len(recent)}টি পোস্ট পাওয়া গেছে।")
+            already_posted, _, reason = fb.check_already_posted(slot="noon")
+            print(f"  ✅ রিয়েল-টাইম গার্ড স্থিতি: already_posted={already_posted} ({reason or 'No conflicting post today'})")
         except Exception as e:
             print(f"  ❌ ফেসবুক কানেকশন ত্রুটি: {e}")
+
+    # 3. WhatsApp Contact
+    print("\n[৩] WhatsApp Business Contact চেক:")
+    print(f"  📱 WHATSAPP_NUMBER: {WHATSAPP_NUMBER} (অ্যাক্টিভ)")
 
     print("\n")
 

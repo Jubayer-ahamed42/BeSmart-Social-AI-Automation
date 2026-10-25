@@ -102,7 +102,8 @@ class FacebookClient:
                 res = requests.get(url, params=params, timeout=15)
                 if res.status_code == 200:
                     data = res.json().get("data", [])
-                    return data
+                    if data:
+                        return data
                 else:
                     logger.debug(f"Feed check on {url} returned status {res.status_code}: {res.text[:120]}")
             except Exception as e:
@@ -125,36 +126,47 @@ class FacebookClient:
         if not posts:
             return False, None, ""
 
-        from src.config import TZ, is_within_slot_window, get_current_bst_time
-        now_bst = now_dt or get_current_bst_time()
+        import pytz
+        from src.config import TZ, is_within_slot_window, determine_current_slot, get_current_bst_time
+
+        if now_dt is None:
+            now_bst = get_current_bst_time()
+        elif hasattr(now_dt, "tzinfo") and now_dt.tzinfo is not None:
+            now_bst = now_dt.astimezone(TZ)
+        else:
+            now_bst = TZ.localize(now_dt)
 
         for post in posts:
             ct_str = post.get("created_time", "")
             if not ct_str:
                 continue
             try:
-                # Handle ISO timestamps from Graph API (e.g. 2026-10-25T05:30:00+0000)
-                if "+0000" in ct_str:
-                    ct_str = ct_str.replace("+0000", "+00:00")
-                post_dt = datetime.datetime.fromisoformat(ct_str)
-                # Ensure aware in BST
+                # Handle ISO timestamps from Graph API (e.g. 2026-10-25T05:30:00+0000 or 2026-10-25T05:30:00Z)
+                clean_ts = ct_str.replace("Z", "+00:00")
+                if "+0000" in clean_ts:
+                    clean_ts = clean_ts.replace("+0000", "+00:00")
+                post_dt = datetime.datetime.fromisoformat(clean_ts)
+                if post_dt.tzinfo is None:
+                    post_dt = pytz.utc.localize(post_dt)
                 post_bst = post_dt.astimezone(TZ)
             except Exception as parse_err:
                 logger.debug(f"Could not parse post created_time '{ct_str}': {parse_err}")
                 continue
 
-            # Check 1: Was it published within the last `within_hours`?
+            # Check 1: Was it published recently (allowing -0.1h / ~6 mins server clock skew)?
             time_diff_hours = (now_bst - post_bst).total_seconds() / 3600.0
-            if 0 <= time_diff_hours < within_hours:
+            if -0.1 <= time_diff_hours < within_hours:
                 post_time_str = post_bst.strftime('%Y-%m-%d %I:%M %p BST')
+                diff_display = max(0.0, time_diff_hours)
                 return (
                     True,
                     post,
-                    f"Post {post.get('id')} was published recently on Facebook Page ({time_diff_hours:.1f}h ago at {post_time_str}, within {within_hours}h guard)"
+                    f"Post {post.get('id')} was published recently on Facebook Page ({diff_display:.1f}h ago at {post_time_str}, within {within_hours}h guard)"
                 )
 
-            # Check 2: Was it published today in Bangladesh date matching the slot window?
-            if post_bst.date() == now_bst.date() and is_within_slot_window(slot, post_bst):
+            # Check 2: Was it published today in Bangladesh date matching the slot?
+            post_slot = determine_current_slot(post_bst)
+            if post_bst.date() == now_bst.date() and (post_slot == slot or is_within_slot_window(slot, post_bst)):
                 post_time_str = post_bst.strftime('%Y-%m-%d %I:%M %p BST')
                 return (
                     True,

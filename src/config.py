@@ -106,15 +106,20 @@ def get_current_bst_time():
     """Returns the current datetime in Bangladesh Standard Time."""
     return datetime.now(TZ)
 
-def determine_current_slot() -> str:
+def determine_current_slot(now_dt=None) -> str:
     """
     Determines the slot (noon, night) based on current hour in Bangladesh.
     - 05:00 - 16:59 => noon (12:00 PM target)
     - 17:00 - 04:59 => night (08:00 PM target)
     """
-    now = get_current_bst_time()
-    hour = now.hour
+    if now_dt is None:
+        now = get_current_bst_time()
+    elif hasattr(now_dt, "tzinfo") and now_dt.tzinfo is not None:
+        now = now_dt.astimezone(TZ)
+    else:
+        now = TZ.localize(now_dt)
 
+    hour = now.hour
     if 5 <= hour < 17:
         return "noon"
     else:
@@ -135,7 +140,13 @@ SLOT_WINDOWS = {
 
 def is_within_slot_window(slot: str, now_dt=None) -> bool:
     """Checks if current time in Bangladesh is within the allowed window for the slot."""
-    now = now_dt or get_current_bst_time()
+    if now_dt is None:
+        now = get_current_bst_time()
+    elif hasattr(now_dt, "tzinfo") and now_dt.tzinfo is not None:
+        now = now_dt.astimezone(TZ)
+    else:
+        now = TZ.localize(now_dt)
+
     window = SLOT_WINDOWS.get(slot)
     if not window:
         return True

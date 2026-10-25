@@ -40,6 +40,28 @@ def test_config_and_time():
     assert SLOT_WINDOWS["noon"]["valid_start"] == (11, 0) and SLOT_WINDOWS["noon"]["valid_end"] == (14, 0), "Incorrect noon window!"
     assert SLOT_WINDOWS["night"]["valid_start"] == (19, 0) and SLOT_WINDOWS["night"]["valid_end"] == (22, 0), "Incorrect night window!"
     
+    # Test slot window boundaries
+    import datetime, pytz
+    from src.config import TZ
+    test_1100 = datetime.datetime(2026, 10, 25, 11, 0, tzinfo=TZ)
+    test_1400 = datetime.datetime(2026, 10, 25, 14, 0, tzinfo=TZ)
+    test_1401 = datetime.datetime(2026, 10, 25, 14, 1, tzinfo=TZ)
+    test_1900 = datetime.datetime(2026, 10, 25, 19, 0, tzinfo=TZ)
+    test_2200 = datetime.datetime(2026, 10, 25, 22, 0, tzinfo=TZ)
+    test_2201 = datetime.datetime(2026, 10, 25, 22, 1, tzinfo=TZ)
+    
+    assert is_within_slot_window("noon", test_1100) is True, "11:00 BST should be within noon window!"
+    assert is_within_slot_window("noon", test_1400) is True, "14:00 BST should be within noon window!"
+    assert is_within_slot_window("noon", test_1401) is False, "14:01 BST should be outside noon window!"
+    assert is_within_slot_window("night", test_1900) is True, "19:00 BST should be within night window!"
+    assert is_within_slot_window("night", test_2200) is True, "22:00 BST should be within night window!"
+    assert is_within_slot_window("night", test_2201) is False, "22:01 BST should be outside night window!"
+
+    # Test UTC datetime normalization in is_within_slot_window
+    utc_1200_bst = datetime.datetime(2026, 10, 25, 6, 0, tzinfo=datetime.timezone.utc)
+    assert is_within_slot_window("noon", utc_1200_bst) is True, "UTC datetime matching 12:00 BST should normalize to BST!"
+    assert determine_current_slot(utc_1200_bst) == "noon"
+
     # Test WHATSAPP_NUMBER fallback
     assert WHATSAPP_NUMBER == "8801610594042", f"WHATSAPP_NUMBER unexpected: {WHATSAPP_NUMBER}"
     # Verify empty string fallback logic
@@ -266,7 +288,44 @@ def test_facebook_connection():
     print(f"  [OK] Live Feed Query: Retrieved {len(recent_posts)} recent post(s)")
     assert isinstance(recent_posts, list)
     already_posted, matched_p, reason = fb.check_already_posted(slot="noon")
-    print(f"  [OK] Concurrency Guard Live Check: already_posted={already_posted} (Reason: {reason or 'None'})\n")
+    print(f"  [OK] Concurrency Guard Live Check: already_posted={already_posted} (Reason: {reason or 'None'})")
+
+    # 6c. Edge Case Test: Clock Skew (Server clock 15s ahead of client)
+    import datetime, pytz
+    from src.config import TZ
+    mock_now = datetime.datetime(2026, 10, 25, 12, 0, 0, tzinfo=TZ)
+    # Post created 15 seconds "ahead"
+    post_clock_skew = {"id": "test_skew", "created_time": "2026-10-25T12:00:15+06:00"}
+    fb.get_recent_posts = lambda limit=3: [post_clock_skew]
+    is_caught, _, skew_reason = fb.check_already_posted(slot="noon", now_dt=mock_now)
+    assert is_caught is True, f"Clock skew (+15s) post was not caught! Reason: {skew_reason}"
+    print("  [OK] Edge Case: Server-to-client clock drift (+15s) successfully caught!")
+
+    # 6d. Edge Case Test: Post 30 minutes ago
+    post_30m_ago = {"id": "test_30m", "created_time": "2026-10-25T11:30:00+06:00"}
+    fb.get_recent_posts = lambda limit=3: [post_30m_ago]
+    is_caught, _, _ = fb.check_already_posted(slot="noon", now_dt=mock_now)
+    assert is_caught is True, "Post from 30 minutes ago was not caught!"
+    print("  [OK] Edge Case: Post published 30 minutes ago successfully caught!")
+
+    # 6e. Edge Case Test: Post made today at 10:50 AM BST (>2 hours ago, outside 11:00-14:00 window)
+    mock_at_1300 = datetime.datetime(2026, 10, 25, 13, 0, 0, tzinfo=TZ)
+    post_1050am = {"id": "test_1050", "created_time": "2026-10-25T10:50:00+06:00"}
+    fb.get_recent_posts = lambda limit=3: [post_1050am]
+    # For noon slot, this daytime post MUST be caught as already posted today for noon
+    is_caught_noon, _, noon_reason = fb.check_already_posted(slot="noon", now_dt=mock_at_1300)
+    assert is_caught_noon is True, f"Earlier 10:50 AM post was not caught for noon slot! Reason: {noon_reason}"
+    # For night slot, this daytime post MUST NOT block the night slot
+    is_caught_night, _, _ = fb.check_already_posted(slot="night", now_dt=mock_at_1300)
+    assert is_caught_night is False, "Earlier 10:50 AM noon post falsely blocked the night slot!"
+    print("  [OK] Edge Case: 10:50 AM post caught for noon slot and correctly permitted for night slot!")
+
+    # 6f. Edge Case Test: Post made yesterday at 12:00 PM BST (>24 hours ago)
+    post_yesterday = {"id": "test_yest", "created_time": "2026-10-24T12:00:00+06:00"}
+    fb.get_recent_posts = lambda limit=3: [post_yesterday]
+    is_caught_yest, _, _ = fb.check_already_posted(slot="noon", now_dt=mock_now)
+    assert is_caught_yest is False, "Yesterday's post was falsely identified as today's post!"
+    print("  [OK] Edge Case: Yesterday's post correctly ignored for today's slot!\n")
 
 def test_photocard_rendering():
     print("🧪 [Test 7] Testing Editorial Photo Card Composition (Browser & Pristine Base Image Fail-Safe)...")
