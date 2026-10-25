@@ -47,7 +47,7 @@ class PhotoCardRenderer:
     - Two-tone punchy typography (White + Golden Yellow highlight).
     - Category pill badge & page branding.
     - 1080x1080 Instagram/Facebook square resolution.
-    - Second-tier Pillow Fail-Safe Engine ensuring branding is never omitted.
+    - Clean base image fallback to avoid Bengali conjunct/character distortion when headless browser is unavailable.
     """
 
     def __init__(self, font_path: Optional[Path] = None, avatar_path: Optional[Path] = None):
@@ -61,7 +61,7 @@ class PhotoCardRenderer:
         if self.browser_bin:
             logger.info(f"📸 Headless browser located for PhotoCard rendering: {self.browser_bin}")
         else:
-            logger.warning("⚠️ No headless browser found. PhotoCards will use Pillow fail-safe engine.")
+            logger.warning("⚠️ No headless browser found. PhotoCards will fall back to pristine base image to avoid Bengali text distortion.")
 
     def _locate_browser(self) -> Optional[str]:
         """Finds Chrome, Chromium, or Edge binary on Windows or Linux."""
@@ -136,7 +136,8 @@ class PhotoCardRenderer:
     ) -> Path:
         """
         Composes a high-impact editorial Photo Card from the base image and headline text.
-        Guaranteed: Never falls back to unbranded raw image. Uses Pillow fail-safe if browser fails.
+        Guaranteed: If headless browser is unavailable or fails, cleanly falls back
+        to the pristine base image without corrupt text overlays to avoid Bengali conjunct distortion.
         """
         target_path = output_path or base_image_path.with_name(f"{base_image_path.stem}_card.jpg")
 
@@ -144,22 +145,15 @@ class PhotoCardRenderer:
             logger.warning(f"Base image not found at {base_image_path}")
             return base_image_path
 
+        # If no headless browser is available, fall back cleanly to pristine base image
+        if not self.browser_bin:
+            logger.info("Headless browser not detected. Cleanly falling back to pristine base image without corrupt text overlays.")
+            return base_image_path
+
         theme = SLOT_THEMES.get(slot, SLOT_THEMES["noon"])
         display_category = category.strip() if category.strip() else theme["default_category"]
         clean_headline = self._clean_card_text(headline)
         formatted_headline = self._apply_highlights(clean_headline, highlight_words)
-
-        # If no headless browser is available, use Pillow fail-safe immediately
-        if not self.browser_bin:
-            logger.info("Headless browser not detected. Using Pillow Fail-Safe Engine directly.")
-            return self._render_pillow_fallback(
-                base_image_path=base_image_path,
-                headline=clean_headline,
-                category=display_category,
-                highlight_words=highlight_words,
-                slot=slot,
-                output_path=target_path
-            )
 
         try:
             # Encode background image
@@ -352,26 +346,12 @@ class PhotoCardRenderer:
                 logger.info(f"🎉 PhotoCard successfully rendered at {target_path} ({target_path.stat().st_size:,} bytes)")
                 return target_path
             else:
-                logger.warning(f"Browser rendering returned non-zero code ({res.returncode}): {res.stderr}. Switching to Pillow fail-safe engine...")
-                return self._render_pillow_fallback(
-                    base_image_path=base_image_path,
-                    headline=clean_headline,
-                    category=display_category,
-                    highlight_words=highlight_words,
-                    slot=slot,
-                    output_path=target_path
-                )
+                logger.warning(f"Browser rendering returned non-zero code ({res.returncode}): {res.stderr}. Cleanly falling back to pristine base image without corrupt text overlays.")
+                return base_image_path
 
         except Exception as e:
-            logger.error(f"Error rendering PhotoCard via browser: {e}. Switching to Pillow fail-safe engine...")
-            return self._render_pillow_fallback(
-                base_image_path=base_image_path,
-                headline=clean_headline,
-                category=display_category,
-                highlight_words=highlight_words,
-                slot=slot,
-                output_path=target_path
-            )
+            logger.error(f"Error rendering PhotoCard via browser: {e}. Cleanly falling back to pristine base image without corrupt text overlays.")
+            return base_image_path
 
     def _render_pillow_fallback(
         self,

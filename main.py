@@ -79,6 +79,40 @@ def run_poster(slot: str = "auto", dry_run: bool = False, skip_image: bool = Fal
             logger.info("🛡️ অসময়ে পোস্ট হওয়া ঠেকাতে এই বিলম্বিত রানটি স্কিপ করা হলো (ফোর্স করতে --force ব্যবহার করুন)।")
             return
 
+        # 2.3 Real-Time Live Facebook Page Feed Guard
+        # (রেস কন্ডিশন প্রতিরোধ: লোকাল উইন্ডোজ টাস্ক শিডিউলার ও গিটহাব অ্যাকশন্সের মধ্যে রিয়েল-টাইম কনকারেন্সি গার্ড)
+        try:
+            fb_guard = FacebookClient(page_id=FB_PAGE_ID, access_token=FB_PAGE_ACCESS_TOKEN)
+            has_live_post, live_post, live_reason = fb_guard.check_already_posted(
+                slot=slot,
+                within_hours=2.0,
+                now_dt=now_bst
+            )
+            if has_live_post and live_post:
+                logger.warning(f"⚠️ লাইভ ফেসবুক ফিড গার্ড: {live_reason}")
+                logger.info("🛡️ ফেসবুক পেজে ইতিমধ্যে পোস্ট বিদ্যমান। ডাবল রান প্রতিরোধে পোস্ট স্কিপ করা হলো।")
+                
+                # হিস্ট্রি ও ইমার্জেন্সি ক্যাশে সিঙ্ক করা (যদি পূর্বে রেকর্ড না থাকে)
+                post_id = str(live_post.get("id", ""))
+                existing_history = history_mgr.load_history()
+                if not any(item.get("post_id") == post_id for item in existing_history):
+                    msg = live_post.get("message", "")
+                    title_sync = msg.split("\n")[0][:100] if msg else f"{slot.capitalize()} Post from Facebook Page"
+                    try:
+                        history_mgr.record_post(
+                            slot=slot,
+                            theme=slot_info["theme"],
+                            title=title_sync,
+                            summary="Live Facebook Page feed synchronization",
+                            post_id=post_id
+                        )
+                        logger.info(f"💾 লাইভ পোস্টটি লোকাল হিস্ট্রিতে রেকর্ড ও সিঙ্ক করা হয়েছে (Post ID: {post_id})।")
+                    except Exception as rec_err:
+                        logger.warning(f"Could not sync live post to history: {rec_err}")
+                return
+        except Exception as fb_err:
+            logger.warning(f"লাইভ ফেসবুক ফিড চেক করার সময় ত্রুটি (স্কিপ করে পরবর্তী ধাপে যাওয়া হচ্ছে): {fb_err}")
+
     recent_summary = history_mgr.get_recent_topics_summary(slot=slot, limit=30)
     logger.info(f"📚 পূর্ববর্তী পোস্টের ইতিহাস লোড হয়েছে। ডুপ্লিকেট টপিক প্রতিরোধ সক্রিয়।")
 

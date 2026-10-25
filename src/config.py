@@ -21,7 +21,7 @@ FB_PAGE_ACCESS_TOKEN = os.getenv("FB_PAGE_ACCESS_TOKEN", "").strip()
 FB_APP_ID = os.getenv("FB_APP_ID", "").strip()
 FB_APP_SECRET = os.getenv("FB_APP_SECRET", "").strip()
 TIMEZONE_NAME = os.getenv("TIMEZONE", "Asia/Dhaka")
-WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "8801610594042").strip()
+WHATSAPP_NUMBER = (os.getenv("WHATSAPP_NUMBER", "").strip() or "8801610594042")
 POLLINATIONS_API_KEY = os.getenv("POLLINATIONS_API_KEY", "").strip()
 
 # Timezone object
@@ -124,12 +124,12 @@ SLOT_WINDOWS = {
     "noon": {
         "target_str": "12:00 PM",
         "valid_start": (11, 0),
-        "valid_end": (17, 30)
+        "valid_end": (14, 0)
     },
     "night": {
         "target_str": "08:00 PM",
         "valid_start": (19, 0),
-        "valid_end": (23, 59)
+        "valid_end": (22, 0)
     }
 }
 

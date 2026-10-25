@@ -2,7 +2,7 @@ import datetime
 import logging
 import time
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Tuple, List
 import requests
 from src.config import FB_PAGE_ID, FB_PAGE_ACCESS_TOKEN
 
@@ -76,6 +76,93 @@ class FacebookClient:
             logger.warning(f"Could not fetch token expiration details: {e}")
 
         return data
+
+    def get_recent_posts(self, limit: int = 3) -> List[Dict[str, Any]]:
+        """
+        Queries Facebook Page feed (GET /{page_id}/feed?limit=3) to fetch recent posts.
+        Falls back to /{page_id}/published_posts or /{page_id}/posts if /feed requires extra permissions.
+        Returns a list of post dicts with 'id', 'created_time', and optionally 'message'.
+        """
+        if not self.page_id or not self.access_token:
+            return []
+
+        endpoints = [
+            f"{GRAPH_BASE_URL}/{self.page_id}/feed",
+            f"{GRAPH_BASE_URL}/{self.page_id}/published_posts",
+            f"{GRAPH_BASE_URL}/{self.page_id}/posts"
+        ]
+        params = {
+            "fields": "id,created_time,message",
+            "limit": limit,
+            "access_token": self.access_token
+        }
+
+        for url in endpoints:
+            try:
+                res = requests.get(url, params=params, timeout=15)
+                if res.status_code == 200:
+                    data = res.json().get("data", [])
+                    return data
+                else:
+                    logger.debug(f"Feed check on {url} returned status {res.status_code}: {res.text[:120]}")
+            except Exception as e:
+                logger.debug(f"Feed check error on {url}: {e}")
+
+        return []
+
+    def check_already_posted(
+        self,
+        slot: str,
+        within_hours: float = 2.0,
+        now_dt: Optional[datetime.datetime] = None
+    ) -> Tuple[bool, Optional[Dict[str, Any]], str]:
+        """
+        Checks real-time live Facebook Page feed to see if a post was already
+        published on the Facebook Page today (matching the current slot) or within the last `within_hours`.
+        Returns (already_posted: bool, matched_post: Optional[Dict], reason: str).
+        """
+        posts = self.get_recent_posts(limit=3)
+        if not posts:
+            return False, None, ""
+
+        from src.config import TZ, is_within_slot_window, get_current_bst_time
+        now_bst = now_dt or get_current_bst_time()
+
+        for post in posts:
+            ct_str = post.get("created_time", "")
+            if not ct_str:
+                continue
+            try:
+                # Handle ISO timestamps from Graph API (e.g. 2026-10-25T05:30:00+0000)
+                if "+0000" in ct_str:
+                    ct_str = ct_str.replace("+0000", "+00:00")
+                post_dt = datetime.datetime.fromisoformat(ct_str)
+                # Ensure aware in BST
+                post_bst = post_dt.astimezone(TZ)
+            except Exception as parse_err:
+                logger.debug(f"Could not parse post created_time '{ct_str}': {parse_err}")
+                continue
+
+            # Check 1: Was it published within the last `within_hours`?
+            time_diff_hours = (now_bst - post_bst).total_seconds() / 3600.0
+            if 0 <= time_diff_hours < within_hours:
+                post_time_str = post_bst.strftime('%Y-%m-%d %I:%M %p BST')
+                return (
+                    True,
+                    post,
+                    f"Post {post.get('id')} was published recently on Facebook Page ({time_diff_hours:.1f}h ago at {post_time_str}, within {within_hours}h guard)"
+                )
+
+            # Check 2: Was it published today in Bangladesh date matching the slot window?
+            if post_bst.date() == now_bst.date() and is_within_slot_window(slot, post_bst):
+                post_time_str = post_bst.strftime('%Y-%m-%d %I:%M %p BST')
+                return (
+                    True,
+                    post,
+                    f"Post {post.get('id')} was already published on Facebook Page today for slot '{slot}' at {post_time_str}"
+                )
+
+        return False, None, ""
 
     def publish_post(self, message: str, image_path: Optional[Path] = None) -> str:
         """

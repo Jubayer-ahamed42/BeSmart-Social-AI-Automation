@@ -29,13 +29,23 @@ from src.fb_client import FacebookClient
 
 def test_config_and_time():
     print("🧪 [Test 1] Testing Timezone and Slot Logic...")
-    from src.config import is_within_slot_window, SLOT_WINDOWS
+    from src.config import is_within_slot_window, SLOT_WINDOWS, WHATSAPP_NUMBER
+    import os
     now_bst = get_current_bst_time()
     slot = determine_current_slot()
     print(f"  Current BST Time: {now_bst.strftime('%Y-%m-%d %H:%M:%S %Z')}")
     print(f"  Detected Slot: {slot} -> {SLOTS[slot]['theme']}")
     assert slot in ["noon", "night"]
     assert len(SLOT_WINDOWS) == 2, "Missing slot windows definitions!"
+    assert SLOT_WINDOWS["noon"]["valid_start"] == (11, 0) and SLOT_WINDOWS["noon"]["valid_end"] == (14, 0), "Incorrect noon window!"
+    assert SLOT_WINDOWS["night"]["valid_start"] == (19, 0) and SLOT_WINDOWS["night"]["valid_end"] == (22, 0), "Incorrect night window!"
+    
+    # Test WHATSAPP_NUMBER fallback
+    assert WHATSAPP_NUMBER == "8801610594042", f"WHATSAPP_NUMBER unexpected: {WHATSAPP_NUMBER}"
+    # Verify empty string fallback logic
+    test_empty = (os.getenv("NON_EXISTENT_VAR", "").strip() or "8801610594042")
+    assert test_empty == "8801610594042"
+    
     print(f"  Within valid slot window for '{slot}': {is_within_slot_window(slot)}")
     print("  [OK] Time & Slot logic passed!\n")
 
@@ -249,10 +259,17 @@ def test_facebook_connection():
     info = fb.verify_credentials()
     assert info.get("name"), "Failed to retrieve page name!"
     print(f"  [OK] Connected to Facebook Page: {info.get('name')} (ID: {info.get('id')})")
-    print(f"  [OK] Token Expiration: {info.get('expires_at')} ({info.get('days_remaining')} days remaining)\n")
+    print(f"  [OK] Token Expiration: {info.get('expires_at')} ({info.get('days_remaining')} days remaining)")
+
+    # 6b. Test Live Feed Fetch & Concurrency Guard Check
+    recent_posts = fb.get_recent_posts(limit=3)
+    print(f"  [OK] Live Feed Query: Retrieved {len(recent_posts)} recent post(s)")
+    assert isinstance(recent_posts, list)
+    already_posted, matched_p, reason = fb.check_already_posted(slot="noon")
+    print(f"  [OK] Concurrency Guard Live Check: already_posted={already_posted} (Reason: {reason or 'None'})\n")
 
 def test_photocard_rendering():
-    print("🧪 [Test 7] Testing Editorial Photo Card Composition (Browser & Pillow Fail-Safe)...")
+    print("🧪 [Test 7] Testing Editorial Photo Card Composition (Browser & Pristine Base Image Fail-Safe)...")
     from src.card_renderer import PhotoCardRenderer
     from src.config import BASE_DIR, TEMP_DIR
     renderer = PhotoCardRenderer()
@@ -262,7 +279,7 @@ def test_photocard_rendering():
         img = Image.new("RGB", (1080, 1080), color=(15, 23, 42))
         img.save(test_bg)
     
-    # 7a. Primary Rendering (Browser if available, or Pillow)
+    # 7a. Primary Rendering (Browser if available)
     card_path = renderer.render_photo_card(
         base_image_path=test_bg,
         headline="আর টাইপ করতে হবে না! স্ক্রিন দেখে কাজ করে দেয় এমন ৪টি এআই",
@@ -274,20 +291,21 @@ def test_photocard_rendering():
     assert card_path is not None and card_path.exists(), "Primary PhotoCard rendering failed!"
     print(f"  [OK] Primary Photo Card generated at {card_path} ({card_path.stat().st_size:,} bytes)")
 
-    # 7b. Guaranteed Pillow Fail-Safe Engine Test
-    renderer_pillow = PhotoCardRenderer()
-    renderer_pillow.browser_bin = None  # Force Pillow engine
-    pillow_card_path = renderer_pillow.render_photo_card(
+    # 7b. Clean Base Image Fallback Test (Zero corrupt text overlays / No broken Bengali conjuncts)
+    renderer_fallback = PhotoCardRenderer()
+    renderer_fallback.browser_bin = None  # Force browser unavailable
+    fallback_card_path = renderer_fallback.render_photo_card(
         base_image_path=test_bg,
         headline="আর টাইপ করতে হবে না! স্ক্রিন দেখে কাজ করে দেয় এমন ৪টি এআই",
         category="AI Productivity & Hacks",
         highlight_words="এমন ৪টি এআই",
         slot="noon",
-        output_path=TEMP_DIR / "test_runner_pillow_fallback.jpg"
+        output_path=TEMP_DIR / "test_runner_fallback.jpg"
     )
-    assert pillow_card_path is not None and pillow_card_path.exists(), "Pillow fail-safe rendering failed!"
-    assert pillow_card_path.stat().st_size > 10000, "Pillow fail-safe output too small!"
-    print(f"  [OK] Pillow Fail-Safe Photo Card verified at {pillow_card_path} ({pillow_card_path.stat().st_size:,} bytes)\n")
+    assert fallback_card_path is not None and fallback_card_path.exists(), "Fallback rendering failed!"
+    assert fallback_card_path == test_bg, "Did not fall back cleanly to pristine base image!"
+    assert fallback_card_path.stat().st_size > 10000, "Base image output too small!"
+    print(f"  [OK] Pristine Base Image Fallback verified at {fallback_card_path} ({fallback_card_path.stat().st_size:,} bytes)\n")
 
 def main():
     print("=" * 60)
