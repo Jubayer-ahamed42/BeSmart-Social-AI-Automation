@@ -70,7 +70,7 @@ Step 3 [Audience-Specific Drip Architecture]:
    - যদি 'noon' স্লট হয় (সাধারণ মানুষ/ছাত্র/চাকরিজীবী): বাস্তব জীবনের কাজের গতি বাড়ানো, এক্সেল/অফিস হ্যাকস বা ফ্রি টুলস ব্যবহারের ৩-৪টি ঝরঝরে বুলেট পয়েন্ট (যেমন • বা -) দাও। বুলেট পয়েন্টে কোনো ইমোজি ব্যবহার করবে না।
    - যদি 'night' স্লট হয় (ব্যবসা/কো-ফাউন্ডার/ই-কমার্স): খরচ বাঁচানো, রাত ২টায় কাস্টমার মেসেজ হ্যান্ডল করা, কুরিয়ার রিটার্ন কমানো ও সেলস কনভার্সনের কংক্রিট বিজনেস আরওআই (ROI) দেখাও।
 Step 4 [Frictionless Conversion CTA]:
-   - 'noon' স্লটের জন্য: ফ্রেন্ডলি ড্রাইভ—পোস্টটি সেভ (Save 📌) করে রাখা, বন্ধুদের মেনশন দেওয়া অথবা পেজের WhatsApp বাটনে মেসেজ পাঠানোর স্পষ্ট আহ্বান।
+   - 'noon' স্লটের জন্য: ফ্রেন্ডলি ড্রাইভ—পোস্টটি সেভ (Save [Pin]) করে রাখা, বন্ধুদের মেনশন দেওয়া অথবা পেজের WhatsApp বাটনে মেসেজ পাঠানোর স্পষ্ট আহ্বান।
    - 'night' স্লটের জন্য: স্পষ্ট ও প্রফেশনাল ইনবাউন্ড লিড ম্যাগনেট—কমেন্টে 'AUTOMATE' লেখা অথবা সরাসরি আমাদের WhatsApp-এ মেসেজ পাঠানোর স্পষ্ট আহ্বান (সরাসরি ক্লিকযোগ্য লিংক: https://wa.me/{WHATSAPP_NUMBER})।
 Step 5 [Storytelling Image Blueprint & Visual Card]:
    - অত্যন্ত গুরুত্বপূর্ণ: ছবিটি যেন পোস্টের মূল সমস্যা বা সমাধানের একটি জীবন্ত দৃশ্য (Visual Storytelling Scene) তুলে ধরে। কেউ লেখা না পড়লেও ছবি দেখেই যেন বুঝতে পারে পোস্টটি কী নিয়ে (যেমন: কুরিয়ার রিটার্ন হলে পার্সেল/রিটার্ন স্টিকার/ডেলিভারি ম্যান/অ্যাড্রেস চেকার স্ক্রিন; এক্সেল অটোমেশন হলে স্প্রেডশীট এরর বনাম এআই সাইডবার স্ক্রিন; কাস্টমার সাপোর্ট হলে হোয়াটসঅ্যাপ বা মেসেঞ্জার অমনিচ্যানেল চ্যাট ড্যাশবোর্ড)।
@@ -78,20 +78,20 @@ Step 5 [Storytelling Image Blueprint & Visual Card]:
    - ফটোকার্ডের জন্য ১-২ লাইনের হাইপার-ক্লিকেবল বাংলা হেডলাইন ও গোল্ডেন হাইলাইট অংশ নির্ধারণ করো।
 
 # STRICT CONSTRAINTS & NEGATIVE DIRECTIVES (LinkedIn Humanizer V3 & Anti-Glitch Rules)
-১. 🚫 নিষিদ্ধ রোবোটিক শব্দ (Forbidden AI Cliches): "In today's fast-paced digital world", "Delve into", "Revolutionize", "Tapestry", "Game changer", "Furthermore", "It is important to note", "ডিজিটাল যুগের এই সময়ে" ইত্যাদি ক্লিশে সম্পূর্ণ নিষিদ্ধ।
-২. 🚫 রিভিল ব্রিজ নিষিদ্ধ: "The result?", "The outcome?", "Plot twist:", "Here's what happened:", "ফলাফল কী?", "আসল ঘটনা কী?" জাতীয় মেকানিকাল লাইন লিখবে না। সরাসরি গল্প ও তথ্য বলবে।
-৩. 📱 মোবাইল ড্রিপ রিডাবিলিটি: কোনো বড় প্যারাগ্রাফ লিখবে না। ১ থেকে সর্বোচ্চ ২ লাইনের পর ডাবল লাইন ব্রেক দেবে।
-৪. 🎨 ভিজ্যুয়াল স্টোরিটেলিং ইমেজ ডিরেক্টিভ (Strict Visual Relevance & Context Matching):
-   - 🚨 চরম প্রাসঙ্গিকতা: ছবিটি অবশ্যই পোস্টের বাস্তব দৃশ্যপটকে সরাসরি দৃশ্যমান করবে। দর্শক ছবি দেখেই যেন বিষয়বস্তু বুঝতে পারে।
+১. নিষিদ্ধ রোবোটিক শব্দ (Forbidden AI Cliches): "In today's fast-paced digital world", "Delve into", "Revolutionize", "Tapestry", "Game changer", "Furthermore", "It is important to note", "ডিজিটাল যুগের এই সময়ে" ইত্যাদি ক্লিশে সম্পূর্ণ নিষিদ্ধ।
+২. রিভিল ব্রিজ নিষিদ্ধ: "The result?", "The outcome?", "Plot twist:", "Here's what happened:", "ফলাফল কী?", "আসল ঘটনা কী?" জাতীয় মেকানিকাল লাইন লিখবে না। সরাসরি গল্প ও তথ্য বলবে।
+৩. [Mobile] মোবাইল ড্রিপ রিডাবিলিটি: কোনো বড় প্যারাগ্রাফ লিখবে না। ১ থেকে সর্বোচ্চ ২ লাইনের পর ডাবল লাইন ব্রেক দেবে।
+৪. [Design] ভিজ্যুয়াল স্টোরিটেলিং ইমেজ ডিরেক্টিভ (Strict Visual Relevance & Context Matching):
+   - চরম প্রাসঙ্গিকতা: ছবিটি অবশ্যই পোস্টের বাস্তব দৃশ্যপটকে সরাসরি দৃশ্যমান করবে। দর্শক ছবি দেখেই যেন বিষয়বস্তু বুঝতে পারে।
      * কুরিয়ার/ডেলিভারি সমস্যা: পার্সেল বক্সের স্তূপ, লাল রিটার্ন লেবেল, ডেলিভারি এজেন্টের হাতে স্মার্টফোনে অ্যাড্রেস এরর ম্যাপ, অথবা মার্চেন্টের টেবিলে ল্যাপটপে অর্ডার ভ্যালিডেশন স্ক্রিন।
      * এক্সেল/অফিস অটোমেশন: ওয়ার্কস্টেশন মনিটরে জটিল স্প্রেডশীট এরর বনাম এআই সাইডবার অটোমেশন স্ক্রিন, কফি মগ, প্রফেশনাল টেক ডেস্কটপ।
      * কাস্টমার সাপোর্ট/চ্যাটবট: আধুনিক ডেস্কে মাল্টি-চ্যানেল লাইভ চ্যাট ড্যাশবোর্ড (WhatsApp, Messenger), স্বয়ংক্রিয়ভাবে ইনকোয়ারি সলভ হওয়ার ইন্টারফেস।
      * মিটিং সামারি/ট্রান্সক্রিপশন: কনফারেন্স রুমে ল্যাপটপে লাইভ বুলেট সামারি তৈরি হওয়ার স্ক্রিন।
      * রেজ্যুমে/সিভি অপ্টিমাইজেশন: স্ক্রিনে জব ডেসক্রিপশন বনাম এআই সিভি ম্যাচিং অ্যানালাইসিস।
-   - 🚫 কঠোর নিয়ম: ছবিতে মানুষ থাকলে অবশ্যই পুরুষ প্রফেশনাল (male founder, male engineer, male courier agent) অথবা সরাসরি ওয়ার্কস্পেস/হার্ডওয়্যার/স্ক্রিন ক্লোজ-আপ।
-   - ⚠️ নির্দেশ: image_prompt এর ভেতরে শুধু কী কী দৃশ্যমান থাকবে তা পজিটিভ ভাষায় ইংরেজিতে লিখবে। কোনো 'no female' বা 'no text' টাইপের নেগেটিভ বাক্য ভেতরে লিখবে না (তা সিস্টেম স্বয়ংক্রিয়ভাবে ফিল্টার করে)।
+   - কঠোর নিয়ম: ছবিতে মানুষ থাকলে অবশ্যই পুরুষ প্রফেশনাল (male founder, male engineer, male courier agent) অথবা সরাসরি ওয়ার্কস্পেস/হার্ডওয়্যার/স্ক্রিন ক্লোজ-আপ।
+   - [!] নির্দেশ: image_prompt এর ভেতরে শুধু কী কী দৃশ্যমান থাকবে তা পজিটিভ ভাষায় ইংরেজিতে লিখবে। কোনো 'no female' বা 'no text' টাইপের নেগেটিভ বাক্য ভেতরে লিখবে না (তা সিস্টেম স্বয়ংক্রিয়ভাবে ফিল্টার করে)।
    - ছবির কোয়ালিটি: 8k award-winning editorial documentary photograph, natural daylight, bright modern environment, authentic tactile materials, natural depth of field, 35mm lens, sharp focus.
-৫. 🏷️ ইমোজি ও হ্যাশট্যাগ কঠোর নিয়ম (Strict Emoji & Hashtags Policy):
+৫. [Tag] ইমোজি ও হ্যাশট্যাগ কঠোর নিয়ম (Strict Emoji & Hashtags Policy):
    - ইমোজি: পুরো পোস্টে সর্বোচ্চ ১টি থেকে ২টি মানানসই ইমোজি (Max 1-2 emojis total in entire post). অতিরিক্ত ইমোজি ব্যবহার সম্পূর্ণ নিষিদ্ধ। বুলেট পয়েন্টে কোনো ইমোজি দেবে না।
    - হ্যাশট্যাগ: পোস্টের একদম শেষে শুধুমাত্র এবং সর্বোচ্চ ২টি হ্যাশট্যাগ ({hashtags_list}) দেবে। কোনো অবস্থাতেই ২টি হ্যাশট্যাগের বেশি দেবে না।
 
@@ -134,7 +134,7 @@ Step 5 [Storytelling Image Blueprint & Visual Card]:
                 if is_dup:
                     logger.warning(f"Rejecting generated topic on attempt {attempt}: Too close to '{matched_title}'. Regenerating...")
                     if attempt < max_attempts:
-                        extra_warning = f"🚨 কঠোর সতর্কতা: তোমার পূর্বের চেষ্টাটি '{matched_title}' পোস্টের সাথে বেশি মিলে গেছে! দয়া করে সম্পূর্ণ ভিন্ন কোনো টুল, খবর বা আবিষ্কার বেছে নাও।"
+                        extra_warning = f"[ALERT] কঠোর সতর্কতা: তোমার পূর্বের চেষ্টাটি '{matched_title}' পোস্টের সাথে বেশি মিলে গেছে! দয়া করে সম্পূর্ণ ভিন্ন কোনো টুল, খবর বা আবিষ্কার বেছে নাও।"
                         chosen_focus = random.choice(focus_areas)
                         continue
                     else:
@@ -149,7 +149,7 @@ Step 5 [Storytelling Image Blueprint & Visual Card]:
 
                 # Guarantee direct 1-click WhatsApp link for night slot (B2B Lead Generation)
                 if slot == "night" and "wa.me" not in final_text:
-                    wa_line = f"💬 সরাসরি WhatsApp-এ কথা বলতে ক্লিক করুন: https://wa.me/{WHATSAPP_NUMBER}"
+                    wa_line = f"[Chat] সরাসরি WhatsApp-এ কথা বলতে ক্লিক করুন: https://wa.me/{WHATSAPP_NUMBER}"
                     lines = final_text.splitlines()
                     hashtag_idx = -1
                     for idx, line in enumerate(reversed(lines)):
@@ -312,7 +312,7 @@ Step 5 [Storytelling Image Blueprint & Visual Card]:
         """Provides a safe fallback template in case of parsing anomaly."""
         slot_info = SLOTS.get(slot, SLOTS["noon"])
         hashtags = " ".join(slot_info["hashtags"])
-        title = f"🚀 {slot_info['theme']}: প্র্যাকটিক্যাল গাইড"
+        title = f"[Launch] {slot_info['theme']}: প্র্যাকটিক্যাল গাইড"
         
         if slot == "night":
             cta_line = "আপনার বিজনেসে এই ফুল-অটোমেটেড সিস্টেম সেটআপ করতে কমেন্টে 'AUTOMATE' লিখুন অথবা আমাদের পেজের WhatsApp বাটনে সরাসরি মেসেজ পাঠান!"

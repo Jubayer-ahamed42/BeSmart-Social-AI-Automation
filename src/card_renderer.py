@@ -21,7 +21,7 @@ SLOT_THEMES = {
         "avatar_glow": "rgba(56, 189, 248, 0.6)",
         "brand_border": "rgba(56, 189, 248, 0.4)",
         "default_category": "AI Productivity & Hacks",
-        "icon": "⚡"
+        "icon": "[Fast]"
     },
     "night": {
         "badge_border": "rgba(52, 211, 153, 0.65)",
@@ -31,7 +31,7 @@ SLOT_THEMES = {
         "avatar_glow": "rgba(52, 211, 153, 0.6)",
         "brand_border": "rgba(52, 211, 153, 0.4)",
         "default_category": "B2B Business Automation",
-        "icon": "🤖"
+        "icon": "[AI]"
     }
 }
 
@@ -59,9 +59,9 @@ class PhotoCardRenderer:
         self._avatar_b64 = None
         self.browser_bin = self._locate_browser()
         if self.browser_bin:
-            logger.info(f"📸 Headless browser located for PhotoCard rendering: {self.browser_bin}")
+            logger.info(f"[Photo] Headless browser located for PhotoCard rendering: {self.browser_bin}")
         else:
-            logger.warning("⚠️ No headless browser found. PhotoCards will fall back to pristine base image to avoid Bengali text distortion.")
+            logger.warning("[!] No headless browser found. PhotoCards will fall back to pristine base image to avoid Bengali text distortion.")
 
     def _locate_browser(self) -> Optional[str]:
         """Finds Chrome, Chromium, or Edge binary on Windows or Linux."""
@@ -343,7 +343,7 @@ class PhotoCardRenderer:
             logger.info("Executing headless browser to render editorial PhotoCard (100% offline)...")
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
             if res.returncode == 0 and target_path.exists() and target_path.stat().st_size > 5000:
-                logger.info(f"🎉 PhotoCard successfully rendered at {target_path} ({target_path.stat().st_size:,} bytes)")
+                logger.info(f" PhotoCard successfully rendered at {target_path} ({target_path.stat().st_size:,} bytes)")
                 return target_path
             else:
                 logger.warning(f"Browser rendering returned non-zero code ({res.returncode}): {res.stderr}. Cleanly falling back to pristine base image without corrupt text overlays.")
@@ -367,7 +367,7 @@ class PhotoCardRenderer:
         even if headless Chrome is unavailable or times out.
         """
         try:
-            logger.info("🎨 Activating Pillow Fail-Safe Engine for PhotoCard composition...")
+            logger.info("[Design] Activating Pillow Fail-Safe Engine for PhotoCard composition...")
             img = Image.open(base_image_path).convert("RGBA")
             img = ImageOps.fit(img, (1080, 1080), method=Image.Resampling.LANCZOS)
 
@@ -438,7 +438,7 @@ class PhotoCardRenderer:
             # Save JPEG
             final_img = img.convert("RGB")
             final_img.save(output_path, "JPEG", quality=95)
-            logger.info(f"🛡️ Pillow fail-safe PhotoCard saved successfully to {output_path} ({output_path.stat().st_size:,} bytes)")
+            logger.info(f"[Shield] Pillow fail-safe PhotoCard saved successfully to {output_path} ({output_path.stat().st_size:,} bytes)")
             return output_path
 
         except Exception as p_err:

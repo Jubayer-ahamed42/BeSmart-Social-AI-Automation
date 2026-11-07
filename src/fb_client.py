@@ -69,7 +69,7 @@ class FacebookClient:
                 data["data_access_expires_at"] = da_dt.strftime("%Y-%m-%d %H:%M:%S")
                 data["data_access_days_remaining"] = da_days
                 if da_days <= 15:
-                    logger.warning(f"⚠️ মেটা ডেটা এক্সেস পারমিশনের মেয়াদ সন্নিকটে: {da_days} দিন বাকি (নবায়ন: {data['data_access_expires_at']})")
+                    logger.warning(f"[!] মেটা ডেটা এক্সেস পারমিশনের মেয়াদ সন্নিকটে: {da_days} দিন বাকি (নবায়ন: {data['data_access_expires_at']})")
                 else:
                     logger.info(f"মেটা ডেটা এক্সেস পারমিশন উইন্ডো: {da_days} দিন বাকি ({data['data_access_expires_at']})")
         except Exception as e:

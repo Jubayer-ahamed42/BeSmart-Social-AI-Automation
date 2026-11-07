@@ -39,7 +39,7 @@ class ImageGenerator:
         pollen_key = os.getenv("POLLINATIONS_API_KEY", "").strip() or os.getenv("POLLEN_API_KEY", "").strip()
         if pollen_key:
             self.headers["Authorization"] = f"Bearer {pollen_key}"
-            logger.info("🔑 Pollen API key detected: Unlimited high-priority FLUX generation enabled.")
+            logger.info("[Key] Pollen API key detected: Unlimited high-priority FLUX generation enabled.")
         self.last_image_source: str = ""
 
     def generate_image(
@@ -60,17 +60,17 @@ class ImageGenerator:
         # =========================================================================
         # STRATEGY 1: Primary AI Visual Engine (FLUX Photorealism)
         # =========================================================================
-        logger.info(f"🎨 [{slot.title()} Slot] Generating custom FLUX AI visual for maximum photorealism and quality...")
+        logger.info(f"[Design] [{slot.title()} Slot] Generating custom FLUX AI visual for maximum photorealism and quality...")
         ai_source = self._generate_ai_image(prompt, image_path)
         if ai_source:
-            logger.info(f"✅ [{slot.title()} AI] High-quality AI image successfully generated.")
+            logger.info(f"[OK] [{slot.title()} AI] High-quality AI image successfully generated.")
             self.last_image_source = ai_source
             return image_path
 
         # =========================================================================
         # STRATEGY 2: Editorial Graphic Backdrop Fallback (Zero-Error Local Canvas)
         # =========================================================================
-        logger.info("🏷️ [Tier 2 Fallback] Creating branded editorial backdrop canvas...")
+        logger.info("[Tag] [Tier 2 Fallback] Creating branded editorial backdrop canvas...")
         try:
             self.last_image_source = f"editorial_poster_{slot}"
             return self._create_editorial_poster(image_path, title, slot)
@@ -130,14 +130,14 @@ class ImageGenerator:
         ip_rate_limit_handled = False
 
         for model in models:
-            logger.info(f"🎨 Generating visual with AI engine ({model})...")
+            logger.info(f"[Design] Generating visual with AI engine ({model})...")
             url = f"https://image.pollinations.ai/prompt/{encoded}?width=1080&height=1080&model={model}&nologo=true&seed={seed}&negative={negative_prompt}"
             try:
                 r = requests.get(url, headers=self.headers, timeout=40)
                 if r.status_code == 200 and len(r.content) > 8000:
                     success = self._process_image_bytes(r.content, output_path, is_ai_generated=True)
                     if success:
-                        logger.info(f"✨ AI visual generated successfully ({model}, {len(r.content)//1024} KB).")
+                        logger.info(f" AI visual generated successfully ({model}, {len(r.content)//1024} KB).")
                         return f"ai_pollinations_{model}_{seed}"
 
                 # Case 1: IP Rate Limit (402 Payment Required or 429 Too Many Requests)
@@ -165,7 +165,7 @@ class ImageGenerator:
                             r_retry = requests.get(url, headers=self.headers, timeout=45)
                             if r_retry.status_code == 200 and len(r_retry.content) > 8000:
                                 if self._process_image_bytes(r_retry.content, output_path, is_ai_generated=True):
-                                    logger.info(f"✨ AI visual generated successfully post-cooldown ({model}, {len(r_retry.content)//1024} KB).")
+                                    logger.info(f" AI visual generated successfully post-cooldown ({model}, {len(r_retry.content)//1024} KB).")
                                     return f"ai_pollinations_{model}_{seed}"
                             else:
                                 logger.warning(f"Pollinations retry for '{model}' returned HTTP {r_retry.status_code}.")
@@ -221,8 +221,8 @@ class ImageGenerator:
         draw = ImageDraw.Draw(image)
 
         theme_colors = {
-            "noon": ((14, 165, 233), (56, 189, 248)),    # Electric Sky Blue (AI Productivity)
-            "night": ((16, 185, 129), (52, 211, 153))    # Emerald Green (B2B Automation)
+            "noon": ((14, 165, 233), (56, 189, 248)), # Electric Sky Blue (AI Productivity)
+            "night": ((16, 185, 129), (52, 211, 153)) # Emerald Green (B2B Automation)
         }
         primary_accent, secondary_accent = theme_colors.get(slot, theme_colors["noon"])
 

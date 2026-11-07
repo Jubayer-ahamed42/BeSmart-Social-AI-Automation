@@ -63,16 +63,16 @@ AI_VOCAB_MAPPINGS = {
 # Unicode emoji regex that covers all standard emoji ranges
 EMOJI_PATTERN = re.compile(
     r"["
-    r"\U0001F600-\U0001F64F"  # emoticons
-    r"\U0001F300-\U0001F5FF"  # symbols & pictographs
-    r"\U0001F680-\U0001F6FF"  # transport & map symbols
-    r"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-    r"\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
-    r"\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
-    r"\U00002702-\U000027B0"  # Dingbats
+    r"\U0001F600-\U0001F64F" # emoticons
+    r"\U0001F300-\U0001F5FF" # symbols & pictographs
+    r"\U0001F680-\U0001F6FF" # transport & map symbols
+    r"\U0001F1E0-\U0001F1FF" # flags (iOS)
+    r"\U0001F900-\U0001F9FF" # Supplemental Symbols and Pictographs
+    r"\U0001FA70-\U0001FAFF" # Symbols and Pictographs Extended-A
+    r"\U00002702-\U000027B0" # Dingbats
     r"\U000024C2"
     r"\U0001F200-\U0001F251"
-    r"\U00002600-\U000026FF"  # Misc symbols
+    r"\U00002600-\U000026FF" # Misc symbols
     r"\U00002B00-\U00002BFF"
     r"\uFE0F"
     r"]+"
@@ -142,11 +142,11 @@ class SocialPostHumanizer:
     def cap_emojis(self, text: str, max_allowed: int = 2) -> Tuple[str, int]:
         """
         Caps total emojis in the post to maximum allowed (default: 2).
-        Preserves list bullets (🔹, 🔸, ▪) by transforming them to clean typographic bullets (•).
+        Preserves list bullets (-, -, ) by transforming them to clean typographic bullets (•).
         Excess decorative emojis are cleanly removed and spacing normalized.
         """
         # Convert bullet-like emojis to clean bullets before counting to preserve structure
-        text = re.sub(r"(?m)^[\t ]*[🔹🔸▪▫▶⭐]\s*", "• ", text)
+        text = re.sub(r"(?m)^[\t ]*[--*]\s*", "• ", text)
 
         count = 0
         def repl(m):
